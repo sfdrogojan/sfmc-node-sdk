@@ -27,7 +27,10 @@ const querystring = require ('querystring');
 * @alias module:ApiClient
 * @class
 */
-module.exports = class ApiClient {
+
+const OAuth = require('./Auth/OAuth')
+
+class ApiClient {
     constructor() {
         /**
          * The base URL against which to resolve every API call's (relative) path.
@@ -41,6 +44,7 @@ module.exports = class ApiClient {
          * @type {Array.<String>}
          */
         this.authentications = {
+            'oauth2' : new OAuth()
         }
 
         /**
@@ -573,3 +577,5 @@ module.exports = class ApiClient {
 * The default API client implementation.
 * @type {module:ApiClient}
 */
+
+module.exports = ApiClient;

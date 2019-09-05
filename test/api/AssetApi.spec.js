@@ -25,10 +25,23 @@
 }(this, function(expect, SalesforceMarketingCloud) {
   'use strict';
 
-  var instance;
+  let instance;
+  let oauth2ApiClient;
+  let authService;
+  let clientConfiguration;
+  let apiClient;
 
-  beforeEach(function() {
-    instance = new SalesforceMarketingCloud.AssetApi();
+  const OAuth2ApiClient = require('../../src/OAuth2ApiClient');
+  const AuthService = require('../../src/Auth/AuthService');
+  const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
+  const ApiClient = require('../../src/ApiClient');
+
+  beforeEach(()=>{
+    clientConfiguration = new ClientConfiguration('authBasePath', 'clientId', 'clientSecret', 'accountId', 'scope');
+    apiClient = new ApiClient();
+    authService = new AuthService(clientConfiguration, apiClient);
+    oauth2ApiClient = new OAuth2ApiClient(authService);
+    instance = new SalesforceMarketingCloud.AssetApi(oauth2ApiClient);
   });
 
   var getProperty = function(object, getter, property) {
@@ -50,11 +63,16 @@
   describe('AssetApi', function() {
     describe('createAsset', function() {
       it('should call createAsset successfully', function(done) {
-        //uncomment below and update the code to test createAsset
-        //instance.createAsset(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
+
+        instance.createAsset(function(error) {
+         if (error) throw error;
+        expect().to.be();
+        });
+
+
+
+
+
         done();
       });
     });
