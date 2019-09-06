@@ -28,10 +28,12 @@ const querystring = require ('querystring');
 * @class
 */
 
-const OAuth = require('./Auth/OAuth')
+const OAuth = require('./Auth/OAuth');
+const RuntimeInformationProvider = require('./RuntimeInformationProvider');
 
 class ApiClient {
-    constructor() {
+    constructor(runtimeInformationProvider) {
+        this.runtimeInformationProvider = runtimeInformationProvider;
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
@@ -87,7 +89,7 @@ class ApiClient {
         /*
          * Allow user to override superagent agent
          */
-         this.requestAgent = null;
+         this.requestAgent = this.runtimeInformationProvider.getUserAgentString();
 
     }
 

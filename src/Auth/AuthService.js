@@ -3,25 +3,25 @@ class AuthService{
         this.clientConfig = clientConfig;
         this.apiClient = apiClient;
         //TODO - add cacheService to constructor
-        // this.cacheService = cacheService;
     }
 
-    getCacheKey() {
-        return this.clientConfig.clientId + "-" + this.clientConfig.accountId;
-    }
+    //TODO
+    // getCacheKey() {
+    //     return this.clientConfig.clientId + "-" + this.clientConfig.accountId;
+    // }
 
     getTokenResponse(){
 
         //TODO - implement cache logic
-        //TODO - let cacheKey = this.getCacheKey();
-        //TODO - let cachedTokenResponse = this.cacheService.get(cacheKey);
 
         let cachedTokenResponse = undefined; // for testing purposes
 
-        if (!cachedTokenResponse){
+        if (cachedTokenResponse) {
+            return cachedTokenResponse;
+        } else {
             this.apiClient.basePath = this.clientConfig.authBasePath;
 
-            let reponse = this.apiClient.callApi('v2/token',
+            this.apiClient.callApi('v2/token',
                 'POST',
                 {},
                 {},
@@ -29,14 +29,14 @@ class AuthService{
                 {},
                 this.getTokenRequestPayload(),
                 ['oauth2'],
-                ['application/json'],
-                ['application/json'],
+                [],
+                [],
                 []
-                )
-        }
-        else
-        {
-            return cachedTokenResponse;
+            ).then(function (result) {
+                return result;
+            }, function (err) {
+                return err;
+            });
         }
     }
 
@@ -52,6 +52,7 @@ class AuthService{
         if (this.clientConfig.scope) {
             tokenRequestPayload['scope'] = this.clientConfig.scope;
         }
+        return tokenRequestPayload;
     }
 }
 

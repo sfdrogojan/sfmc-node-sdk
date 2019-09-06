@@ -11,27 +11,23 @@
  *
  */
 
+//TODO update imports in mustache file
 
-const ApiClient = require('../ApiClient'); 
 const ApiError = require ('../Model/ApiError');
 const Asset = require ('../Model/Asset');
+const BaseApi = require('./BaseApi');
 
 /**
 * Asset service.
 * @module Api/AssetApi
 * @version 1.0.0
 */
-module.exports = class AssetApi {
+module.exports = class AssetApi extends BaseApi{
 
-    /**
-    * Constructs a new AssetApi. 
-    * @alias module:Api/AssetApi
-    * @class
-    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
-    * default to {@link module:ApiClient#instance} if unspecified.
-    */
-    constructor(apiClient) {
-        this.apiClient = apiClient || ApiClient.instance;
+    //TODO - create documentation for the new constructor in the mustache file
+
+    constructor(authBasePath, clientId, clientSecret, accountId, scope) {
+        super(authBasePath, clientId, clientSecret, accountId, scope);
     }
 
 

@@ -11,6 +11,8 @@
  *
  */
 
+const ApiSutFactory = require('./ApiSutFactory');
+
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD.
@@ -26,22 +28,12 @@
   'use strict';
 
   let instance;
-  let oauth2ApiClient;
-  let authService;
-  let clientConfiguration;
-  let apiClient;
-
-  const OAuth2ApiClient = require('../../src/OAuth2ApiClient');
-  const AuthService = require('../../src/Auth/AuthService');
-  const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
-  const ApiClient = require('../../src/ApiClient');
+  let apiSutFactory;
 
   beforeEach(()=>{
-    clientConfiguration = new ClientConfiguration('authBasePath', 'clientId', 'clientSecret', 'accountId', 'scope');
-    apiClient = new ApiClient();
-    authService = new AuthService(clientConfiguration, apiClient);
-    oauth2ApiClient = new OAuth2ApiClient(authService);
-    instance = new SalesforceMarketingCloud.AssetApi(oauth2ApiClient);
+    apiSutFactory = new ApiSutFactory();
+    apiSutFactory.type = SalesforceMarketingCloud.AssetApi.prototype.constructor;
+    instance = apiSutFactory.getApiSut();
   });
 
   var getProperty = function(object, getter, property) {

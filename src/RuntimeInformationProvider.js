@@ -1,9 +1,17 @@
-class ConfigProvider{
-    static configProvider = {
-        osPlatform: process.platform,
-        osArchitecture: process.arch,
-        nodeVersion: process.version
-    };
+const packageLock = require('../package-lock');
+
+class RuntimeInformationProvider{
+    constructor(){
+        this._osPlatform = process.platform;
+        this._osArchitecture = process.arch;
+        this._nodeVersion = process.version;
+    }
+    getUserAgentString(){
+        return `MCSDK/NODE/SDK.VERSION=${this.getSdkVersion()}/NODE.VERSION=${this._nodeVersion}/OS.NAME=${this._osPlatform}/OS.ARCH=${this._osArchitecture}`;
+    }
+    getSdkVersion(){
+        return packageLock['version'];
+    }
 }
 
-module.exports = ConfigProvider;
+module.exports = RuntimeInformationProvider;
