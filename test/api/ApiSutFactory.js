@@ -1,13 +1,10 @@
 const ConfigProvider = require('../ConfigProvider');
 
 class ApiSutFactory{
-    constructor(){
-        this._type = undefined;
+    constructor(type){
+        this._type = type;
     }
-    set type(value) {
-        this._type = value;
-    }
-    getApiSut(){
+    create(){
         let configProvider = new ConfigProvider();
 
         let authBasePath = configProvider['authBasePath'];

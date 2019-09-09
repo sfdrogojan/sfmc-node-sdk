@@ -31,9 +31,8 @@ const ApiSutFactory = require('./ApiSutFactory');
   let apiSutFactory;
 
   beforeEach(()=>{
-    apiSutFactory = new ApiSutFactory();
-    apiSutFactory.type = SalesforceMarketingCloud.AssetApi.prototype.constructor;
-    instance = apiSutFactory.getApiSut();
+    apiSutFactory = new ApiSutFactory(SalesforceMarketingCloud.AssetApi.prototype.constructor);
+    instance = apiSutFactory.create();
   });
 
   var getProperty = function(object, getter, property) {
@@ -58,7 +57,7 @@ const ApiSutFactory = require('./ApiSutFactory');
 
         let opts = {
           'body' : new SalesforceMarketingCloud.Asset()
-        }
+        };
 
         instance.createAsset(opts).then(function (data) {
           console.log('Returned data: ' + data);

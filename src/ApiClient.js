@@ -29,7 +29,6 @@ const querystring = require ('querystring');
 */
 
 const OAuth = require('./Auth/OAuth');
-const RuntimeInformationProvider = require('./RuntimeInformationProvider');
 
 class ApiClient {
     constructor(runtimeInformationProvider) {
