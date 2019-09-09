@@ -7,9 +7,9 @@ class RuntimeInformationProvider{
         this._nodeVersion = process.version;
     }
     getUserAgentString(){
-        return `MCSDK/NODE/SDK.VERSION=${this.getSdkVersion()}/NODE.VERSION=${this._nodeVersion}/OS.NAME=${this._osPlatform}/OS.ARCH=${this._osArchitecture}`;
+        return `MCSDK/NODE/SDK.VERSION=${RuntimeInformationProvider.getSdkVersion()}/NODE.VERSION=${this._nodeVersion}/OS.NAME=${this._osPlatform}/OS.ARCH=${this._osArchitecture}`;
     }
-    getSdkVersion(){
+    static getSdkVersion(){
         return packageLock['version'];
     }
 }

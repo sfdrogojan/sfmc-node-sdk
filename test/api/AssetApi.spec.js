@@ -56,15 +56,15 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('createAsset', function() {
       it('should call createAsset successfully', function(done) {
 
-        instance.createAsset(function(error) {
-         if (error) throw error;
-        expect().to.be();
+q        let opts = {
+          'body' : new SalesforceMarketingCloud.Asset()
+        }
+
+        instance.createAsset(opts).then(function (data) {
+          console.log('Returned data: ' + data);
+        }, function (error) {
+          console.log(error);
         });
-
-
-
-
-
         done();
       });
     });

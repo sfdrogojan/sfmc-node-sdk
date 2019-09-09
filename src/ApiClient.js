@@ -54,7 +54,9 @@ class ApiClient {
          * @type {Array.<String>}
          * @default {}
          */
-        this.defaultHeaders = {};
+        this.defaultHeaders = {
+            'User-Agent' : this.runtimeInformationProvider.getUserAgentString()
+        };
 
         /**
          * The default HTTP timeout for all API calls.
@@ -89,7 +91,7 @@ class ApiClient {
         /*
          * Allow user to override superagent agent
          */
-         this.requestAgent = this.runtimeInformationProvider.getUserAgentString();
+         this.requestAgent = null;
 
     }
 

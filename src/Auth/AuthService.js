@@ -21,7 +21,7 @@ class AuthService{
         } else {
             this.apiClient.basePath = this.clientConfig.authBasePath;
 
-            this.apiClient.callApi('v2/token',
+            let authCallResult = this.apiClient.callApi('v2/token',
                 'POST',
                 {},
                 {},
@@ -32,11 +32,15 @@ class AuthService{
                 [],
                 [],
                 []
-            ).then(function (result) {
-                return result;
-            }, function (err) {
-                return err;
-            });
+            );
+
+            authCallResult.then((data)=>{
+                console.log(data);
+                },
+                (error)=>{
+                console.error(error);
+                }
+            )
         }
     }
 

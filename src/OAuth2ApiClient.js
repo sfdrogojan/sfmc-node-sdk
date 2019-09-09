@@ -8,7 +8,7 @@ class OAuth2ApiClient extends ApiClient{
 
     callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
 
-        let result = this.authService.getTokenResponse();
+        this.authService.getTokenResponse();
 
         //TODO - set the new basePath to the client REST TSE
         //TODO - set the accessToken, cache logic
