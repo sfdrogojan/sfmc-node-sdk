@@ -56,7 +56,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('createAsset', function() {
       it('should call createAsset successfully', function(done) {
 
-q        let opts = {
+        let opts = {
           'body' : new SalesforceMarketingCloud.Asset()
         }
 
