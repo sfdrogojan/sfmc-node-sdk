@@ -1,4 +1,5 @@
 const ApiClient = require('./ApiClient');
+const TokenResponse = require('../src/Auth/TokenResponse');
 
 class OAuth2ApiClient extends ApiClient{
     constructor(authService, runtimeInformationProvider){
@@ -6,14 +7,15 @@ class OAuth2ApiClient extends ApiClient{
         this.authService = authService;
     }
 
-    callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
+    async callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType) {
 
-        this.authService.getTokenResponse();
+        let getTokenResponseResult = await this.authService.getTokenResponse();
+        let tokenResponse = new TokenResponse(getTokenResponseResult.data);
 
-        //TODO - set the new basePath to the client REST TSE
-        //TODO - set the accessToken, cache logic
+        this.basePath = tokenResponse.restInstaceUrl;
+        this.authentications['oauth2'].accessToken = tokenResponse.accessToken;
 
-        return super.callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts, returnType);
+        return super.callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, ['oauth2'], contentTypes, accepts, returnType);
     }
 }
 

@@ -1,3 +1,6 @@
+const RuntimeInformationProvider = require('../RuntimeInformationProvider');
+const TokenResponse = require('./TokenResponse');
+
 class AuthService{
     constructor(clientConfig, apiClient){
         this.clientConfig = clientConfig;
@@ -10,7 +13,7 @@ class AuthService{
     //     return this.clientConfig.clientId + "-" + this.clientConfig.accountId;
     // }
 
-    getTokenResponse(){
+    async getTokenResponse() {
 
         //TODO - implement cache logic
 
@@ -21,18 +24,22 @@ class AuthService{
         } else {
             this.apiClient.basePath = this.clientConfig.authBasePath;
 
-            return this.apiClient.callApi('v2/token',
+            let runtimeInformationProvider = new RuntimeInformationProvider();
+
+            let authPromise = await this.apiClient.callApi('v2/token',
                 'POST',
                 {},
                 {},
-                {},
+                {'User-Agent': runtimeInformationProvider.getUserAgentString()},
                 {},
                 this.getTokenRequestPayload(),
                 ['oauth2'],
                 [],
                 [],
-                []
+                typeof TokenResponse
             );
+
+            return authPromise;
         }
     }
 

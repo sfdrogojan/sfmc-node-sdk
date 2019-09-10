@@ -27,6 +27,8 @@ const ApiSutFactory = require('./ApiSutFactory');
 }(this, function(expect, SalesforceMarketingCloud) {
   'use strict';
 
+  const HTML_EMAIL_ASSET_TYPE_ID = 208;
+
   let instance;
   let apiSutFactory;
 
@@ -55,8 +57,9 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('createAsset', function() {
       it('should call createAsset successfully', function(done) {
 
+        let asset = createAsset();
         let opts = {
-          'body' : new SalesforceMarketingCloud.Asset()
+          'body': asset
         };
 
         instance.createAsset(opts).then(function (data) {
@@ -99,4 +102,20 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
   });
 
+  function createAsset() {
+
+    let assetType = new SalesforceMarketingCloud.AssetType(HTML_EMAIL_ASSET_TYPE_ID, 'textblock');
+
+    let customerKey = getUUID(10);
+    let assetName = 'Asset ' + getUUID(10);
+    let assetDescription = 'Asset from Automated Node.js SDK';
+    return new SalesforceMarketingCloud.Asset(customerKey, assetType, assetName, assetDescription);
+  }
+
+  function getUUID(length){
+    return Math.random().toString(16).substring(length);
+  }
+
 }));
+
+
