@@ -11,9 +11,6 @@
  *
  */
 
-//TODO update imports in mustache file
-
-const ApiError = require ('../Model/ApiError');
 const Asset = require ('../Model/Asset');
 const BaseApi = require('./BaseApi');
 
@@ -24,13 +21,9 @@ const BaseApi = require('./BaseApi');
 */
 module.exports = class AssetApi extends BaseApi{
 
-    //TODO - create documentation for the new constructor in the mustache file
-
     constructor(authBasePath, clientId, clientSecret, accountId, scope) {
         super(authBasePath, clientId, clientSecret, accountId, scope);
     }
-
-
 
     /**
      * createAsset

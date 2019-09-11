@@ -5,42 +5,26 @@ class AuthService{
     constructor(clientConfig, apiClient){
         this.clientConfig = clientConfig;
         this.apiClient = apiClient;
-        //TODO - add cacheService to constructor
     }
-
-    //TODO
-    // getCacheKey() {
-    //     return this.clientConfig.clientId + "-" + this.clientConfig.accountId;
-    // }
 
     async getTokenResponse() {
 
-        //TODO - implement cache logic
+        this.apiClient.basePath = this.clientConfig.authBasePath;
 
-        let cachedTokenResponse = undefined; // for testing purposes
+        let runtimeInformationProvider = new RuntimeInformationProvider();
 
-        if (cachedTokenResponse) {
-            return cachedTokenResponse;
-        } else {
-            this.apiClient.basePath = this.clientConfig.authBasePath;
-
-            let runtimeInformationProvider = new RuntimeInformationProvider();
-
-            let authPromise = await this.apiClient.callApi('v2/token',
-                'POST',
-                {},
-                {},
-                {'User-Agent': runtimeInformationProvider.getUserAgentString()},
-                {},
-                this.getTokenRequestPayload(),
-                ['oauth2'],
-                [],
-                [],
-                typeof TokenResponse
-            );
-
-            return authPromise;
-        }
+        return await this.apiClient.callApi('v2/token',
+            'POST',
+            {},
+            {},
+            {'User-Agent': runtimeInformationProvider.getUserAgentString()},
+            {},
+            this.getTokenRequestPayload(),
+            ['oauth2'],
+            [],
+            [],
+            typeof TokenResponse
+        );
     }
 
     getTokenRequestPayload(){
