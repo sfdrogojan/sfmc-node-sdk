@@ -28,8 +28,6 @@ const querystring = require ('querystring');
 * @class
 */
 
-const OAuth = require('./Auth/OAuth');
-
 class ApiClient {
     constructor(runtimeInformationProvider) {
         this.runtimeInformationProvider = runtimeInformationProvider;
@@ -45,7 +43,6 @@ class ApiClient {
          * @type {Array.<String>}
          */
         this.authentications = {
-            'oauth2' : new OAuth()
         }
 
         /**

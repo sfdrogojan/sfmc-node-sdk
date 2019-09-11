@@ -11,6 +11,8 @@
  *
  */
 
+
+const ApiError = require ('../Model/ApiError');
 const Asset = require ('../Model/Asset');
 const BaseApi = require('./BaseApi');
 
@@ -19,11 +21,20 @@ const BaseApi = require('./BaseApi');
 * @module Api/AssetApi
 * @version 1.0.0
 */
-module.exports = class AssetApi extends BaseApi{
+module.exports = class AssetApi extends BaseApi {
 
+    /**
+    * Constructs a new AssetApi. 
+    * @alias module:Api/AssetApi
+    * @class
+    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
+    * default to {@link module:ApiClient#instance} if unspecified.
+    */
     constructor(authBasePath, clientId, clientSecret, accountId, scope) {
         super(authBasePath, clientId, clientSecret, accountId, scope);
     }
+
+
 
     /**
      * createAsset

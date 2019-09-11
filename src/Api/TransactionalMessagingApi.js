@@ -12,7 +12,6 @@
  */
 
 
-const ApiClient = require('../ApiClient'); 
 const ApiError = require ('../Model/ApiError');
 const CreateEmailDefinitionRequest = require ('../Model/CreateEmailDefinitionRequest');
 const CreateSmsDefinitionRequest = require ('../Model/CreateSmsDefinitionRequest');
@@ -31,13 +30,14 @@ const SendSmsToMultipleRecipientsRequest = require ('../Model/SendSmsToMultipleR
 const SendSmsToSingleRecipientRequest = require ('../Model/SendSmsToSingleRecipientRequest');
 const UpdateEmailDefinitionRequest = require ('../Model/UpdateEmailDefinitionRequest');
 const UpdateSmsDefinitionRequest = require ('../Model/UpdateSmsDefinitionRequest');
+const BaseApi = require('./BaseApi');
 
 /**
 * TransactionalMessaging service.
 * @module Api/TransactionalMessagingApi
 * @version 1.0.0
 */
-module.exports = class TransactionalMessagingApi {
+module.exports = class TransactionalMessagingApi extends BaseApi {
 
     /**
     * Constructs a new TransactionalMessagingApi. 
@@ -46,8 +46,8 @@ module.exports = class TransactionalMessagingApi {
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
     */
-    constructor(apiClient) {
-        this.apiClient = apiClient || ApiClient.instance;
+    constructor(authBasePath, clientId, clientSecret, accountId, scope) {
+        super(authBasePath, clientId, clientSecret, accountId, scope);
     }
 
 

@@ -11,6 +11,8 @@
  *
  */
 
+
+const ApiError = require ('../Model/ApiError');
 const Campaign = require ('../Model/Campaign');
 const BaseApi = require('./BaseApi');
 
@@ -19,11 +21,20 @@ const BaseApi = require('./BaseApi');
 * @module Api/CampaignApi
 * @version 1.0.0
 */
-module.exports = class CampaignApi extends BaseApi{
+module.exports = class CampaignApi extends BaseApi {
 
+    /**
+    * Constructs a new CampaignApi. 
+    * @alias module:Api/CampaignApi
+    * @class
+    * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
+    * default to {@link module:ApiClient#instance} if unspecified.
+    */
     constructor(authBasePath, clientId, clientSecret, accountId, scope) {
         super(authBasePath, clientId, clientSecret, accountId, scope);
     }
+
+
 
     /**
      * createCampaign
