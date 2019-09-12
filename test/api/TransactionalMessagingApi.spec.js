@@ -221,7 +221,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     let asset = new SalesforceMarketingCloud.Asset(customerKey, assetType, assetName, assetDescription);
 
     asset.views = {
-      'subjectLine':{
+      'subjectline':{
         'content':'New TS Subject Line'
       }
     };
