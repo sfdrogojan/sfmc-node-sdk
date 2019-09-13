@@ -57,7 +57,7 @@ module.exports = class AssetApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Asset;
@@ -65,7 +65,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -109,7 +109,7 @@ module.exports = class AssetApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = null;
@@ -117,7 +117,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -160,7 +160,7 @@ module.exports = class AssetApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Asset;
@@ -168,7 +168,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -214,7 +214,7 @@ module.exports = class AssetApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Asset;
@@ -222,7 +222,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
