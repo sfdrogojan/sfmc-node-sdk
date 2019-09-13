@@ -27,23 +27,18 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('TransactionalMessagingApi', function() {
-    this.timeout(30000);
+    this.timeout(40000);
 
     describe('createEmailDefinition', function() {
       it('should call createEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
         let opts = {'body':emailDefinition};
-        // let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
 
-        try {
-          let createEmailDefinitionResult = await  transactionalMessagingApiInstance.createEmailDefinition(opts);
-        }
-        catch (e) {
-          console.error(e);
-        }
-        // expect(createEmailDefinitionResult.name).to.eql(emailDefinition.name);
-        // expect(createEmailDefinitionResult.definitionKey).to.eql(emailDefinition.definitionKey);
-        // expect(createEmailDefinitionResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+
+        expect(createEmailDefinitionResult.name).to.eql(emailDefinition.name);
+        expect(createEmailDefinitionResult.definitionKey).to.eql(emailDefinition.definitionKey);
+        expect(createEmailDefinitionResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
       });
     });
     describe('createSmsDefinition', function() {
@@ -57,11 +52,41 @@ const ApiSutFactory = require('./ApiSutFactory');
       });
     });
     describe('deleteEmailDefinition', function() {
-      it('should call deleteEmailDefinition successfully', async ()=> {
+      it('should call deleteEmailDefinition successfully when definitionKey is valid', async ()=> {
+        let emailDefinition = await createEmailDefinitionObject();
+        let opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let deleteEmailDefinitionResult = await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
+
+        expect(deleteEmailDefinitionResult.requestId).not.be(undefined);
+        expect(deleteEmailDefinitionResult.deletedDefinitionKey).not.be(undefined);
+        expect(deleteEmailDefinitionResult.message).to.eql("Success");
+      });
+    });
+    describe('deleteEmailDefinition', function() {
+      it('should not call deleteEmailDefinition successfully when definitionKey is invalid', async ()=> {
+        let emailDefinitionToDeleteKey = 'NonExistingEmailDefinitionKey';
+
+        try{
+          await transactionalMessagingApiInstance.deleteEmailDefinition(emailDefinitionToDeleteKey);
+        }
+        catch (error) {
+          expect(error.status).to.eql(404);
+          expect(error.response.body.message).to.eql('FuelRuntime_ObjectNotFound: Unable to find Definition NonExistingEmailDefinitionKey');
+        }
       });
     });
     describe('deleteQueuedMessagesForEmailDefinition', function() {
       it('should call deleteQueuedMessagesForEmailDefinition successfully', async ()=> {
+        let emailDefinition = await createEmailDefinitionObject();
+        emailDefinition.status = 'inactive';
+        let opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let deleteQueuedMessagesForEmailDefinitionResult = await transactionalMessagingApiInstance.deleteQueuedMessagesForEmailDefinition(createEmailDefinitionResult.definitionKey);
+
+        expect(deleteQueuedMessagesForEmailDefinitionResult.requestId).not.be(undefined);
       });
     });
     describe('deleteQueuedMessagesForSmsDefinition', function() {
@@ -86,22 +111,85 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('getEmailDefinition', function() {
       it('should call getEmailDefinition successfully', async ()=> {
+        let emailDefinition = await createEmailDefinitionObject();
+        let opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let getEmailDefinitionsResult = await transactionalMessagingApiInstance.getEmailDefinition(createEmailDefinitionResult.definitionKey);
+
+        expect(getEmailDefinitionsResult.name).to.eql(emailDefinition.name);
+        expect(getEmailDefinitionsResult.definitionKey).to.eql(emailDefinition.definitionKey);
+        expect(getEmailDefinitionsResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
       });
     });
     describe('getEmailDefinitions', function() {
       it('should call getEmailDefinitions successfully', async ()=> {
+        let opts = {
+          'status':undefined,
+          'orderBy':undefined,
+          'pageSize':undefined,
+          'page':undefined
+        };
+
+        let getEmailDefinitionsResult = await transactionalMessagingApiInstance.getEmailDefinitions(opts);
+
+        expect(getEmailDefinitionsResult.requestId).not.be(undefined);
+        expect(getEmailDefinitionsResult.definitions).not.be(undefined);
+        expect(getEmailDefinitionsResult.count).not.be(undefined);
+        expect(getEmailDefinitionsResult.page).not.be(undefined);
+        expect(getEmailDefinitionsResult.pageSize).not.be(undefined);
       });
     });
     describe('getEmailSendStatusForRecipient', function() {
       it('should call getEmailSendStatusForRecipient successfully', async ()=> {
+        let opts;
+        let emailDefinition = await createEmailDefinitionObject();
+        opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+
+        let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
+        let messageRequestBody = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(createEmailDefinitionResult.definitionKey, recipient);
+        opts = {'body':messageRequestBody};
+        let messageKey = getUUID();
+
+        await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, opts);
+        let getEmailSendStatusForRecipientResult = await transactionalMessagingApiInstance.getEmailSendStatusForRecipient(messageKey);
+
+        let eventCategoryTypes = ['TransactionalSendEvents.EmailSent', 'TransactionalSendEvents.EmailQueued', 'TransactionalSendEvents.EmailNotSent'];
+
+        expect(getEmailSendStatusForRecipientResult.requestId).not.be(undefined);
+        expect(getEmailSendStatusForRecipientResult.timestamp).not.be(undefined);
+        expect(eventCategoryTypes).to.contain(getEmailSendStatusForRecipientResult.eventCategoryType);
       });
     });
     describe('getEmailsNotSentToRecipients', function() {
       it('should call getEmailsNotSentToRecipients successfully', async ()=> {
+        let opts = {
+          'pageSize':undefined,
+          'lastEventId':undefined
+        };
+
+        let getEmailsNotSentToRecipientsResponse = await transactionalMessagingApiInstance.getEmailsNotSentToRecipients('notSent', opts);
+
+        expect(getEmailsNotSentToRecipientsResponse.requestId).not.be(undefined);
+        expect(getEmailsNotSentToRecipientsResponse.lastEventID).not.be(undefined);
+        expect(getEmailsNotSentToRecipientsResponse.messages).not.be(undefined);
+        expect(getEmailsNotSentToRecipientsResponse.count).not.be(undefined);
+        expect(getEmailsNotSentToRecipientsResponse.pageSize).not.be(undefined);
       });
     });
     describe('getQueueMetricsForEmailDefinition', function() {
       it('should call getQueueMetricsForEmailDefinition successfully', async ()=> {
+        let emailDefinition = await createEmailDefinitionObject();
+        let opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let getQueueMetricsForEmailDefinitionResult = await transactionalMessagingApiInstance.getQueueMetricsForEmailDefinition(createEmailDefinitionResult.definitionKey);
+
+        expect(getQueueMetricsForEmailDefinitionResult.requestId);
+        expect(getQueueMetricsForEmailDefinitionResult.count);
+        expect(getQueueMetricsForEmailDefinitionResult.ageSeconds);
       });
     });
     describe('getQueueMetricsForSmsDefinition', function() {
@@ -156,6 +244,23 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('partiallyUpdateEmailDefinition', function() {
       it('should call partiallyUpdateEmailDefinition successfully', async ()=> {
+        let opts;
+        let emailDefinition = await createEmailDefinitionObject();
+        opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+
+        let updatedDefinitionDescription = new SalesforceMarketingCloud.UpdateEmailDefinitionRequest();
+        updatedDefinitionDescription.description = 'Updated email definition description';
+
+        opts = {'body':updatedDefinitionDescription};
+        let partiallyUpdateEmailDefinitionResult = await transactionalMessagingApiInstance.partiallyUpdateEmailDefinition(createEmailDefinitionResult.definitionKey, opts);
+
+        expect(partiallyUpdateEmailDefinitionResult.description).to.eql(updatedDefinitionDescription.description);
+
+        expect(partiallyUpdateEmailDefinitionResult.definitionKey).to.eql(emailDefinition.definitionKey);
+        expect(partiallyUpdateEmailDefinitionResult.name).to.eql(emailDefinition.name);
+        expect(partiallyUpdateEmailDefinitionResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
       });
     });
     describe('partiallyUpdateSmsDefinition', function() {
@@ -170,10 +275,44 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('sendEmailToMultipleRecipients', function() {
       it('should call sendEmailToMultipleRecipients successfully', async ()=> {
+          let opts;
+          let emailDefinition = await createEmailDefinitionObject();
+          opts = {'body':emailDefinition};
+
+          let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+
+          let recipient1 = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
+          let recipient2 = new SalesforceMarketingCloud.Recipient(JOHANNA_DOE_YAHOO_COM);
+          let recipientsList = [recipient1, recipient2];
+
+          let batchMessageRequestBody = new SalesforceMarketingCloud.SendEmailToMultipleRecipientsRequest(createEmailDefinitionResult.definitionKey, recipientsList);
+          opts = {'body':batchMessageRequestBody};
+
+          let sendEmailToMultipleRecipientsResult = await transactionalMessagingApiInstance.sendEmailToMultipleRecipients(opts);
+
+          expect(sendEmailToMultipleRecipientsResult.requestId).not.be(undefined);
+          expect(sendEmailToMultipleRecipientsResult.errorcode).not.be(undefined);
+          expect(sendEmailToMultipleRecipientsResult.responses).not.be(undefined);
       });
     });
     describe('sendEmailToSingleRecipient', function() {
       it('should call sendEmailToSingleRecipient successfully', async ()=> {
+        let opts;
+        let emailDefinition = await createEmailDefinitionObject();
+        opts = {'body':emailDefinition};
+
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+
+        let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
+        let messageRequestBody = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(createEmailDefinitionResult.definitionKey, recipient);
+        opts = {'body':messageRequestBody};
+        let messageKey = getUUID();
+
+        let sendEmailToSingleRecipientResult = await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, opts);
+
+        expect(sendEmailToSingleRecipientResult.requestId).not.be(undefined);
+        expect(sendEmailToSingleRecipientResult.errorcode).not.be(undefined);
+        expect(sendEmailToSingleRecipientResult.responses).not.be(undefined);
       });
     });
     describe('sendSmsToMultipleRecipients', function() {
@@ -230,6 +369,7 @@ const ApiSutFactory = require('./ApiSutFactory');
   }
 
   function getUUID(length){
+
     return Math.random().toString(16).substring(0, length);
   }
 }));
