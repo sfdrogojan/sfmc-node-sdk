@@ -298,38 +298,14 @@ class ApiClient {
     */
     applyAuthToRequest(request, authName) {
         var auth = this.authentication[authName];
-        switch (auth.type) {
-            case 'basic':
-                if (auth.username || auth.password) {
-                    request.auth(auth.username || '', auth.password || '');
-                }
-
-                break;
-            case 'apiKey':
-                if (auth.apiKey) {
-                    var data = {};
-                    if (auth.apiKeyPrefix) {
-                        data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-                    } else {
-                        data[auth.name] = auth.apiKey;
-                    }
-
-                    if (auth['in'] === 'header') {
-                        request.set(data);
-                    } else {
-                        request.query(data);
-                    }
-                }
-
-                break;
-            case 'oauth2':
-                if (auth.accessToken) {
+        
+        if (auth.type === 'oauth2'){
+            if (auth.accessToken) {
                     request.set({'Authorization': 'Bearer ' + auth.accessToken});
                 }
-
-                break;
-            default:
-                throw new Error('Unknown authentication type: ' + auth.type);
+        }
+        else{
+            throw new Error('Unknown authentication type: ' + auth.type);
         }
     }
 
