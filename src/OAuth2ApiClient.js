@@ -12,10 +12,10 @@ class OAuth2ApiClient extends ApiClient{
         let getTokenResponseResult = await this.authService.getTokenResponse();
         let tokenResponse = new TokenResponse(getTokenResponseResult.data);
 
-        this.basePath = tokenResponse.restInstaceUrl;
-        this.authentications['oauth2'].accessToken = tokenResponse.accessToken;
+        this.basePath = tokenResponse.restInstanceUrl;
+        this.authentication['oauth2'].accessToken = tokenResponse.accessToken;
 
-        return super.callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, ['oauth2'], contentTypes, accepts, returnType);
+        return super.callApi(path, httpMethod, pathParams, queryParams, headerParams, formParams, bodyParam, 'oauth2', contentTypes, accepts, returnType);
     }
 }
 

@@ -13,14 +13,14 @@ class AuthService{
 
         let runtimeInformationProvider = new RuntimeInformationProvider();
 
-        return await this.apiClient.callApi('v2/token',
+        return this.apiClient.callApi('v2/token',
             'POST',
             {},
             {},
             {'User-Agent': runtimeInformationProvider.getUserAgentString()},
             {},
             this.getTokenRequestPayload(),
-            ['oauth2'],
+            'oauth2',
             [],
             [],
             typeof TokenResponse

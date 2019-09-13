@@ -57,7 +57,7 @@ module.exports = class CampaignApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Campaign;
@@ -65,7 +65,7 @@ module.exports = class CampaignApi extends BaseApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -109,7 +109,7 @@ module.exports = class CampaignApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = null;
@@ -117,7 +117,7 @@ module.exports = class CampaignApi extends BaseApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -160,7 +160,7 @@ module.exports = class CampaignApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Campaign;
@@ -168,7 +168,7 @@ module.exports = class CampaignApi extends BaseApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 

@@ -1,4 +1,4 @@
-class OAuth {
+class Authentication {
     constructor(){
         this._accessToken = undefined;
         this._type = "oauth2";
@@ -15,4 +15,4 @@ class OAuth {
     }
 }
 
-module.exports = OAuth;
+module.exports = Authentication;

@@ -4,7 +4,7 @@ const ApiClient = require('../../src/ApiClient');
 const RuntimeInformationProvider = require('../../src/RuntimeInformationProvider');
 const AuthService = require('../../src/Auth/AuthService');
 const TokenResponse = require('../../src/Auth/TokenResponse');
-const OAuth = require('../../src/Auth/OAuth');
+const Authentication = require('../../src/Auth/Authentication');
 
 const expect = require('expect.js');
 
@@ -29,7 +29,6 @@ before(() => {
     scope = configProvider.scope;
 
     apiClient = new ApiClient(new RuntimeInformationProvider());
-    apiClient.authentications['oauth2'] = new OAuth();
 });
 
 describe('AuthService', function () {
@@ -44,8 +43,8 @@ describe('AuthService', function () {
             let tokenResponse = new TokenResponse(getTokenResponseResult.data);
 
             expect(tokenResponse.accessToken).not.be(undefined);
-            expect(tokenResponse.restInstaceUrl).not.be(undefined);
-            expect(tokenResponse.soapInstaceUrl).not.be(undefined);
+            expect(tokenResponse.restInstanceUrl).not.be(undefined);
+            expect(tokenResponse.soapInstanceUrl).not.be(undefined);
             expect(tokenResponse.tokenType).not.be(undefined);
             expect(tokenResponse.expiredIn).to.be.greaterThan(0);
             }

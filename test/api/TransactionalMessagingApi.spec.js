@@ -36,7 +36,7 @@
     if (typeof object[getter] === 'function')
       return object[getter]();
     else
-      return object[property];
+      return object[property]
   }
 
   var setProperty = function(object, setter, property, value) {

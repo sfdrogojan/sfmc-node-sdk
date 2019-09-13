@@ -2,8 +2,8 @@ class TokenResponse{
     constructor(data) {
         this._accessToken = data['access_token'];
         this._expiredIn = data['expires_in'];
-        this._restInstaceUrl = data['rest_instance_url'];
-        this._soapInstaceUrl = data['soap_instance_url'];
+        this._restInstanceUrl = data['rest_instance_url'];
+        this._soapInstanceUrl = data['soap_instance_url'];
         this._tokenType = data['token_type'];
         this._scope = data['_scope'];
     }
@@ -14,11 +14,11 @@ class TokenResponse{
     get expiredIn() {
         return this._expiredIn;
     }
-    get restInstaceUrl() {
-        return this._restInstaceUrl;
+    get restInstanceUrl() {
+        return this._restInstanceUrl;
     }
-    get soapInstaceUrl() {
-        return this._soapInstaceUrl;
+    get soapInstanceUrl() {
+        return this._soapInstanceUrl;
     }
     get tokenType() {
         return this._tokenType;
@@ -33,11 +33,11 @@ class TokenResponse{
     set expiredIn(value) {
         this._expiredIn = value;
     }
-    set restInstaceUrl(value) {
-        this._restInstaceUrl = value;
+    set restInstanceUrl(value) {
+        this._restInstanceUrl = value;
     }
-    set soapInstaceUrl(value) {
-        this._soapInstaceUrl = value;
+    set soapInstanceUrl(value) {
+        this._soapInstanceUrl = value;
     }
     set tokenType(value) {
         this._tokenType = value;

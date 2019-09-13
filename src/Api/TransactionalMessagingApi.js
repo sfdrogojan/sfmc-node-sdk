@@ -73,7 +73,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = CreateEmailDefinitionRequest;
@@ -81,7 +81,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -121,7 +121,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = CreateSmsDefinitionRequest;
@@ -129,7 +129,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -173,7 +173,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = DeleteSendDefinitionResponse;
@@ -181,7 +181,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -224,7 +224,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = DeleteQueuedMessagesForSendDefinitionResponse;
@@ -232,7 +232,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}/queue', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -275,7 +275,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = DeleteQueuedMessagesForSendDefinitionResponse;
@@ -283,7 +283,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}/queue', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -326,7 +326,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = DeleteSendDefinitionResponse;
@@ -334,7 +334,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -377,7 +377,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = CreateEmailDefinitionRequest;
@@ -385,7 +385,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -431,7 +431,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetEmailDefinitionsResponse;
@@ -439,7 +439,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -486,7 +486,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetDefinitionSendStatusForRecipientResponse;
@@ -494,7 +494,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/{messageKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -543,7 +543,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetDefinitionsNotSentToRecipientsResponse;
@@ -551,7 +551,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -597,7 +597,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetQueueMetricsForSendDefinitionResponse;
@@ -605,7 +605,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}/queue', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -648,7 +648,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetQueueMetricsForSendDefinitionResponse;
@@ -656,7 +656,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}/queue', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -705,7 +705,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetDefinitionsNotSentToRecipientsResponse;
@@ -713,7 +713,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -759,7 +759,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = CreateSmsDefinitionRequest;
@@ -767,7 +767,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -813,7 +813,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetSmsDefinitionsResponse;
@@ -821,7 +821,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -868,7 +868,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = GetDefinitionSendStatusForRecipientResponse;
@@ -876,7 +876,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/{messageKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -922,7 +922,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = CreateEmailDefinitionRequest;
@@ -930,7 +930,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -978,7 +978,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = CreateSmsDefinitionRequest;
@@ -986,7 +986,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -1027,7 +1027,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = SendDefinitionToMultipleRecipientsResponse;
@@ -1035,7 +1035,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -1082,7 +1082,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = SendDefinitionToSingleRecipientResponse;
@@ -1090,7 +1090,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/{messageKey}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -1131,7 +1131,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = SendDefinitionToMultipleRecipientsResponse;
@@ -1139,7 +1139,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -1186,7 +1186,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = SendDefinitionToSingleRecipientResponse;
@@ -1194,7 +1194,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/{messageKey}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
