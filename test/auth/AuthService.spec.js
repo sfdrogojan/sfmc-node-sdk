@@ -3,8 +3,6 @@ const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
 const ApiClient = require('../../src/ApiClient');
 const RuntimeInformationProvider = require('../../src/RuntimeInformationProvider');
 const AuthService = require('../../src/Auth/AuthService');
-const TokenResponse = require('../../src/Auth/TokenResponse');
-const Authentication = require('../../src/Auth/Authentication');
 
 const expect = require('expect.js');
 
@@ -40,13 +38,13 @@ describe('AuthService', function () {
             authService = new AuthService(clientConfiguration, apiClient);
 
             let getTokenResponseResult = await authService.getTokenResponse();
-            let tokenResponse = new TokenResponse(getTokenResponseResult.data);
+            let tokenResponse = getTokenResponseResult.data;
 
-            expect(tokenResponse.accessToken).not.be(undefined);
-            expect(tokenResponse.restInstanceUrl).not.be(undefined);
-            expect(tokenResponse.soapInstanceUrl).not.be(undefined);
-            expect(tokenResponse.tokenType).not.be(undefined);
-            expect(tokenResponse.expiredIn).to.be.greaterThan(0);
+            expect(tokenResponse.access_token).not.be(undefined);
+            expect(tokenResponse.rest_instance_url).not.be(undefined);
+            expect(tokenResponse.soap_instance_url).not.be(undefined);
+            expect(tokenResponse.token_type).not.be(undefined);
+            expect(tokenResponse.expires_in).to.be.greaterThan(0);
             }
         );
     });

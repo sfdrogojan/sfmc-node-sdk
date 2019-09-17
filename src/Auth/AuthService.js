@@ -1,5 +1,4 @@
 const RuntimeInformationProvider = require('../RuntimeInformationProvider');
-const TokenResponse = require('./TokenResponse');
 
 class AuthService{
     constructor(clientConfig, apiClient){
@@ -23,7 +22,7 @@ class AuthService{
             'oauth2',
             [],
             [],
-            typeof TokenResponse
+            Object
         );
     }
 
