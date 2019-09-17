@@ -30,8 +30,6 @@ before(() => {
 });
 
 describe('AuthService', function () {
-    this.timeout(30000);
-
     describe('getTokenResponse', function () {
         it('should return token response for valid credentials', async () => {
             clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);

@@ -23,8 +23,6 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('CampaignApi', function() {
-    this.timeout(30000);
-
     describe('createCampaign', function() {
       it('should call createCampaign successfully', async ()=> {
 
