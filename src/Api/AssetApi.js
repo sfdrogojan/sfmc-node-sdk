@@ -12,16 +12,16 @@
  */
 
 
-const ApiClient = require('../ApiClient'); 
 const ApiError = require ('../Model/ApiError');
 const Asset = require ('../Model/Asset');
+const BaseApi = require('./BaseApi');
 
 /**
 * Asset service.
 * @module Api/AssetApi
 * @version 1.0.0
 */
-module.exports = class AssetApi {
+module.exports = class AssetApi extends BaseApi {
 
     /**
     * Constructs a new AssetApi. 
@@ -30,8 +30,8 @@ module.exports = class AssetApi {
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
     */
-    constructor(apiClient) {
-        this.apiClient = apiClient || ApiClient.instance;
+    constructor(authBasePath, clientId, clientSecret, accountId, scope) {
+        super(authBasePath, clientId, clientSecret, accountId, scope);
     }
 
 
@@ -57,7 +57,7 @@ module.exports = class AssetApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Asset;
@@ -65,7 +65,7 @@ module.exports = class AssetApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -109,7 +109,7 @@ module.exports = class AssetApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = null;
@@ -117,7 +117,7 @@ module.exports = class AssetApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -160,7 +160,7 @@ module.exports = class AssetApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Asset;
@@ -168,7 +168,7 @@ module.exports = class AssetApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -214,7 +214,7 @@ module.exports = class AssetApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Asset;
@@ -222,7 +222,7 @@ module.exports = class AssetApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 

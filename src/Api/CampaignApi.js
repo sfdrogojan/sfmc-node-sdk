@@ -12,16 +12,16 @@
  */
 
 
-const ApiClient = require('../ApiClient'); 
 const ApiError = require ('../Model/ApiError');
 const Campaign = require ('../Model/Campaign');
+const BaseApi = require('./BaseApi');
 
 /**
 * Campaign service.
 * @module Api/CampaignApi
 * @version 1.0.0
 */
-module.exports = class CampaignApi {
+module.exports = class CampaignApi extends BaseApi {
 
     /**
     * Constructs a new CampaignApi. 
@@ -30,8 +30,8 @@ module.exports = class CampaignApi {
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
     */
-    constructor(apiClient) {
-        this.apiClient = apiClient || ApiClient.instance;
+    constructor(authBasePath, clientId, clientSecret, accountId, scope) {
+        super(authBasePath, clientId, clientSecret, accountId, scope);
     }
 
 
@@ -57,7 +57,7 @@ module.exports = class CampaignApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Campaign;
@@ -65,7 +65,7 @@ module.exports = class CampaignApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -109,7 +109,7 @@ module.exports = class CampaignApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = null;
@@ -117,7 +117,7 @@ module.exports = class CampaignApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 
@@ -160,7 +160,7 @@ module.exports = class CampaignApi {
       let formParams = {
       };
 
-      let authNames = [];
+      let authName = '';
       let contentTypes = [];
       let accepts = [];
       let returnType = Campaign;
@@ -168,7 +168,7 @@ module.exports = class CampaignApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType
       );
     }
 

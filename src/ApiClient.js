@@ -14,6 +14,7 @@
 
 const superagent = require ('superagent');
 const querystring = require ('querystring');
+const Authentication = require('../src/Auth/Authentication');
 
 /**
 * @module ApiClient
@@ -27,8 +28,10 @@ const querystring = require ('querystring');
 * @alias module:ApiClient
 * @class
 */
-module.exports = class ApiClient {
-    constructor() {
+
+class ApiClient {
+    constructor(runtimeInformationProvider) {
+        this.runtimeInformationProvider = runtimeInformationProvider;
         /**
          * The base URL against which to resolve every API call's (relative) path.
          * @type {String}
@@ -37,10 +40,10 @@ module.exports = class ApiClient {
         this.basePath = 'https://www.exacttargetapis.com'.replace(/\/+$/, '');
 
         /**
-         * The authentication methods to be included for all API calls.
-         * @type {Array.<String>}
+         * The authentication method to be included for all API calls.
          */
-        this.authentications = {
+        this.authentication = {
+            'oauth2' : new Authentication()
         }
 
         /**
@@ -48,7 +51,9 @@ module.exports = class ApiClient {
          * @type {Array.<String>}
          * @default {}
          */
-        this.defaultHeaders = {};
+        this.defaultHeaders = {
+            'User-Agent' : this.runtimeInformationProvider.getUserAgentString()
+        };
 
         /**
          * The default HTTP timeout for all API calls.
@@ -289,45 +294,19 @@ module.exports = class ApiClient {
     /**
     * Applies authentication headers to the request.
     * @param {Object} request The request object created by a <code>superagent()</code> call.
-    * @param {Array.<String>} authNames An array of authentication method names.
+    * @param {String} authName String representing authentication method name.
     */
-    applyAuthToRequest(request, authNames) {
-        authNames.forEach((authName) => {
-            var auth = this.authentications[authName];
-            switch (auth.type) {
-                case 'basic':
-                    if (auth.username || auth.password) {
-                        request.auth(auth.username || '', auth.password || '');
-                    }
-
-                    break;
-                case 'apiKey':
-                    if (auth.apiKey) {
-                        var data = {};
-                        if (auth.apiKeyPrefix) {
-                            data[auth.name] = auth.apiKeyPrefix + ' ' + auth.apiKey;
-                        } else {
-                            data[auth.name] = auth.apiKey;
-                        }
-
-                        if (auth['in'] === 'header') {
-                            request.set(data);
-                        } else {
-                            request.query(data);
-                        }
-                    }
-
-                    break;
-                case 'oauth2':
-                    if (auth.accessToken) {
-                        request.set({'Authorization': 'Bearer ' + auth.accessToken});
-                    }
-
-                    break;
-                default:
-                    throw new Error('Unknown authentication type: ' + auth.type);
-            }
-        });
+    applyAuthToRequest(request, authName) {
+        var auth = this.authentication[authName];
+        
+        if (auth.type === 'oauth2'){
+            if (auth.accessToken) {
+                    request.set({'Authorization': 'Bearer ' + auth.accessToken});
+                }
+        }
+        else{
+            throw new Error('Unknown authentication type: ' + auth.type);
+        }
     }
 
     /**
@@ -366,7 +345,7 @@ module.exports = class ApiClient {
     * @param {Object.<String, Object>} headerParams A map of header parameters and their values.
     * @param {Object.<String, Object>} formParams A map of form parameters and their values.
     * @param {Object} bodyParam The value to pass as the request body.
-    * @param {Array.<String>} authNames An array of authentication type names.
+    * @param {String} authName String representing authentication method name.
     * @param {Array.<String>} contentTypes An array of request MIME types.
     * @param {Array.<String>} accepts An array of acceptable response MIME types.
     * @param {(String|Array|ObjectFunction)} returnType The required type to return; can be a string for simple types or the
@@ -374,14 +353,14 @@ module.exports = class ApiClient {
     * @returns {Promise} A {@link https://www.promisejs.org/|Promise} object.
     */
     callApi(path, httpMethod, pathParams,
-        queryParams, headerParams, formParams, bodyParam, authNames, contentTypes, accepts,
+        queryParams, headerParams, formParams, bodyParam, authName, contentTypes, accepts,
         returnType) {
 
         var url = this.buildUrl(path, pathParams);
         var request = superagent(httpMethod, url);
 
-        // apply authentications
-        this.applyAuthToRequest(request, authNames);
+        // apply authentication
+        this.applyAuthToRequest(request, authName);
 
         // set query parameters
         if (httpMethod.toUpperCase() === 'GET' && this.cache === false) {
@@ -573,3 +552,5 @@ module.exports = class ApiClient {
 * The default API client implementation.
 * @type {module:ApiClient}
 */
+
+module.exports = ApiClient;
