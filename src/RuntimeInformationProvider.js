@@ -1,16 +1,17 @@
-const packageLock = require('../package-lock');
+const pkg = require('../package');
+const os = require('os');
 
 class RuntimeInformationProvider{
     constructor(){
-        this._osPlatform = process.platform;
-        this._osArchitecture = process.arch;
         this._nodeVersion = process.version;
+        this._osType = os.type();
+        this._osRelease = os.release();
     }
     getUserAgentString(){
-        return `MCSDK/NODE/SDK.VERSION=${RuntimeInformationProvider.getSdkVersion()}/NODE.VERSION=${this._nodeVersion}/OS.NAME=${this._osPlatform}/OS.ARCH=${this._osArchitecture}`;
+        return `MCSDK/NODE/${RuntimeInformationProvider.getSdkVersion()}/${this._nodeVersion}/${this._osType}/${this._osRelease}`;
     }
     static getSdkVersion(){
-        return packageLock['version'];
+        return pkg['version'];
     }
 }
 

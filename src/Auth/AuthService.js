@@ -1,5 +1,4 @@
 const RuntimeInformationProvider = require('../RuntimeInformationProvider');
-const TokenResponse = require('./TokenResponse');
 
 class AuthService{
     constructor(clientConfig, apiClient){
@@ -23,7 +22,7 @@ class AuthService{
             'oauth2',
             [],
             [],
-            typeof TokenResponse
+            Object
         );
     }
 
@@ -31,11 +30,9 @@ class AuthService{
         let tokenRequestPayload = {
             'client_id': this.clientConfig.clientId,
             'client_secret': this.clientConfig.clientSecret,
-            'grant_type': 'client_credentials'
+            'grant_type': 'client_credentials',
+            'account_id': this.clientConfig.accountId
         };
-        if (this.clientConfig.accountId) {
-            tokenRequestPayload['account_id'] = this.clientConfig.accountId;
-        }
         if (this.clientConfig.scope) {
             tokenRequestPayload['scope'] = this.clientConfig.scope;
         }
