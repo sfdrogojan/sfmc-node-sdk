@@ -1,4 +1,4 @@
-const packageLock = require('../package-lock');
+const pkg = require('../package');
 const os = require('os');
 
 class RuntimeInformationProvider{
@@ -11,7 +11,7 @@ class RuntimeInformationProvider{
         return `MCSDK/NODE/${RuntimeInformationProvider.getSdkVersion()}/${this._nodeVersion}/${this._osType}/${this._osRelease}`;
     }
     static getSdkVersion(){
-        return packageLock['version'];
+        return pkg['version'];
     }
 }
 
