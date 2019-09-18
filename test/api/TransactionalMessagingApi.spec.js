@@ -27,8 +27,6 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('TransactionalMessagingApi', function() {
-    this.timeout(40000);
-
     describe('createEmailDefinition', function() {
       it('should call createEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();

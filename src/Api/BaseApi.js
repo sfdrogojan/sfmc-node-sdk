@@ -3,7 +3,6 @@ const RuntimeInformationProvider = require('../RuntimeInformationProvider');
 const ApiClient = require('../ApiClient');
 const AuthService = require('../Auth/AuthService');
 const OAuth2ApiClient = require('../OAuth2ApiClient');
-const Authentication = require('../Auth/Authentication');
 
 class BaseApi {
     constructor(authBasePath, clientId, clientSecret, accountId, scope){
