@@ -21,12 +21,12 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('CampaignApi', function() {
+    this.timeout(30000);
+
     describe('createCampaign', function() {
       it('should call createCampaign successfully', async ()=> {
-
         let campaign = createCampaignObject();
-        let opts = {'body':campaign};
-        let createCampaignResponse = await campaignApiInstance.createCampaign(opts);
+        let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
 
         expect(createCampaignResponse.name).to.eql(campaign.name);
         expect(createCampaignResponse.description).to.eql(campaign.description);
@@ -38,8 +38,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('deleteCampaignById', function() {
       it('should call deleteCampaignById successfully', async ()=> {
         let campaign = createCampaignObject();
-        let opts = {'body':campaign};
-        let createCampaignResponse = await campaignApiInstance.createCampaign(opts);
+        let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
         let campaignToDeleteId = createCampaignResponse.id;
 
         await campaignApiInstance.deleteCampaignById(campaignToDeleteId);
@@ -57,8 +56,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('getCampaignById', function() {
       it('should call getCampaignById successfully', async ()=> {
         let campaign = createCampaignObject();
-        let opts = {'body':campaign};
-        let createCampaignResponse = await campaignApiInstance.createCampaign(opts);
+        let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
         let campaignToRetrieveId = createCampaignResponse.id;
 
         let getCampaignByIdResponse = await campaignApiInstance.getCampaignById(campaignToRetrieveId);

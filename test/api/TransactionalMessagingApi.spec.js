@@ -27,12 +27,13 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('TransactionalMessagingApi', function() {
+    this.timeout(30000);
+
     describe('createEmailDefinition', function() {
       it('should call createEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-        let opts = {'body':emailDefinition};
 
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
 
         expect(createEmailDefinitionResult.name).to.eql(emailDefinition.name);
         expect(createEmailDefinitionResult.definitionKey).to.eql(emailDefinition.definitionKey);
@@ -52,9 +53,8 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('deleteEmailDefinition', function() {
       it('should call deleteEmailDefinition successfully when definitionKey is valid', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-        let opts = {'body':emailDefinition};
 
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
         let deleteEmailDefinitionResult = await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(deleteEmailDefinitionResult.requestId).not.be(undefined);
@@ -79,9 +79,8 @@ const ApiSutFactory = require('./ApiSutFactory');
       it('should call deleteQueuedMessagesForEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
         emailDefinition.status = 'inactive';
-        let opts = {'body':emailDefinition};
 
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
         let deleteQueuedMessagesForEmailDefinitionResult = await transactionalMessagingApiInstance.deleteQueuedMessagesForEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(deleteQueuedMessagesForEmailDefinitionResult.requestId).not.be(undefined);
@@ -110,9 +109,8 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('getEmailDefinition', function() {
       it('should call getEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-        let opts = {'body':emailDefinition};
 
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
         let getEmailDefinitionsResult = await transactionalMessagingApiInstance.getEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(getEmailDefinitionsResult.name).to.eql(emailDefinition.name);
@@ -140,18 +138,14 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('getEmailSendStatusForRecipient', function() {
       it('should call getEmailSendStatusForRecipient successfully', async ()=> {
-        let opts;
         let emailDefinition = await createEmailDefinitionObject();
-        opts = {'body':emailDefinition};
-
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
 
         let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let messageRequestBody = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(createEmailDefinitionResult.definitionKey, recipient);
-        opts = {'body':messageRequestBody};
         let messageKey = getUUID();
 
-        await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, opts);
+        await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, messageRequestBody);
         let getEmailSendStatusForRecipientResult = await transactionalMessagingApiInstance.getEmailSendStatusForRecipient(messageKey);
 
         let eventCategoryTypes = ['TransactionalSendEvents.EmailSent', 'TransactionalSendEvents.EmailQueued', 'TransactionalSendEvents.EmailNotSent'];
@@ -180,9 +174,8 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('getQueueMetricsForEmailDefinition', function() {
       it('should call getQueueMetricsForEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-        let opts = {'body':emailDefinition};
 
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
         let getQueueMetricsForEmailDefinitionResult = await transactionalMessagingApiInstance.getQueueMetricsForEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(getQueueMetricsForEmailDefinitionResult.requestId);
@@ -242,17 +235,13 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('partiallyUpdateEmailDefinition', function() {
       it('should call partiallyUpdateEmailDefinition successfully', async ()=> {
-        let opts;
         let emailDefinition = await createEmailDefinitionObject();
-        opts = {'body':emailDefinition};
-
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
 
         let updatedDefinitionDescription = new SalesforceMarketingCloud.UpdateEmailDefinitionRequest();
         updatedDefinitionDescription.description = 'Updated email definition description';
 
-        opts = {'body':updatedDefinitionDescription};
-        let partiallyUpdateEmailDefinitionResult = await transactionalMessagingApiInstance.partiallyUpdateEmailDefinition(createEmailDefinitionResult.definitionKey, opts);
+        let partiallyUpdateEmailDefinitionResult = await transactionalMessagingApiInstance.partiallyUpdateEmailDefinition(createEmailDefinitionResult.definitionKey, updatedDefinitionDescription);
 
         expect(partiallyUpdateEmailDefinitionResult.description).to.eql(updatedDefinitionDescription.description);
 
@@ -273,20 +262,16 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('sendEmailToMultipleRecipients', function() {
       it('should call sendEmailToMultipleRecipients successfully', async ()=> {
-          let opts;
           let emailDefinition = await createEmailDefinitionObject();
-          opts = {'body':emailDefinition};
-
-          let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+          let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
 
           let recipient1 = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
           let recipient2 = new SalesforceMarketingCloud.Recipient(JOHANNA_DOE_YAHOO_COM);
           let recipientsList = [recipient1, recipient2];
 
           let batchMessageRequestBody = new SalesforceMarketingCloud.SendEmailToMultipleRecipientsRequest(createEmailDefinitionResult.definitionKey, recipientsList);
-          opts = {'body':batchMessageRequestBody};
 
-          let sendEmailToMultipleRecipientsResult = await transactionalMessagingApiInstance.sendEmailToMultipleRecipients(opts);
+          let sendEmailToMultipleRecipientsResult = await transactionalMessagingApiInstance.sendEmailToMultipleRecipients(batchMessageRequestBody);
 
           expect(sendEmailToMultipleRecipientsResult.requestId).not.be(undefined);
           expect(sendEmailToMultipleRecipientsResult.errorcode).not.be(undefined);
@@ -295,18 +280,15 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('sendEmailToSingleRecipient', function() {
       it('should call sendEmailToSingleRecipient successfully', async ()=> {
-        let opts;
         let emailDefinition = await createEmailDefinitionObject();
-        opts = {'body':emailDefinition};
 
-        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(opts);
+        let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
 
         let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let messageRequestBody = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(createEmailDefinitionResult.definitionKey, recipient);
-        opts = {'body':messageRequestBody};
         let messageKey = getUUID();
 
-        let sendEmailToSingleRecipientResult = await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, opts);
+        let sendEmailToSingleRecipientResult = await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, messageRequestBody);
 
         expect(sendEmailToSingleRecipientResult.requestId).not.be(undefined);
         expect(sendEmailToSingleRecipientResult.errorcode).not.be(undefined);
@@ -337,9 +319,8 @@ const ApiSutFactory = require('./ApiSutFactory');
 
   async function createEmailDefinitionObject() {
     let asset = createAssetObject();
-    let opts = {'body': asset};
 
-    let createAssetResponse = await assetApiInstance.createAsset(opts);
+    let createAssetResponse = await assetApiInstance.createAsset(asset);
     let customerKey = createAssetResponse.customerKey;
 
     let emailDefinitionName = 'EmailDefinition ' + getUUID(10);

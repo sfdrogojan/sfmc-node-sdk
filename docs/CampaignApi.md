@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 <a name="createCampaign"></a>
 # **createCampaign**
-> Campaign createCampaign(opts)
+> Campaign createCampaign(body)
 
 createCampaign
 
@@ -23,10 +23,9 @@ const SalesforceMarketingCloud = require ('SalesforceMarketingCloud');
 
 let apiInstance = new SalesforceMarketingCloud.CampaignApi();
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.Campaign() // Campaign | JSON Parameters
-};
-apiInstance.createCampaign(opts).then((data) => {
+let body = new SalesforceMarketingCloud.Campaign(); // Campaign | JSON Parameters
+
+apiInstance.createCampaign(body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -38,7 +37,7 @@ apiInstance.createCampaign(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Campaign**](Campaign.md)| JSON Parameters | [optional] 
+ **body** | [**Campaign**](Campaign.md)| JSON Parameters | 
 
 ### Return type
 

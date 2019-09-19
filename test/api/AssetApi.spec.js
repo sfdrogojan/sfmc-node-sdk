@@ -23,11 +23,12 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('AssetApi', function() {
+    this.timeout(30000);
+
     describe('createAsset', function() {
       it('should call createAsset successfully', async ()=>{
         let asset = createAssetObject();
-        let opts = {'body':asset};
-        let createAssetResponse = await assetApiInstance.createAsset(opts);
+        let createAssetResponse = await assetApiInstance.createAsset(asset);
 
         expect(createAssetResponse.customerKey).to.eql(asset.customerKey);
         expect(createAssetResponse.name).to.eql(asset.name);
@@ -39,8 +40,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('deleteAssetById', function() {
       it('should call deleteAssetById successfully', async ()=>{
         let asset = createAssetObject();
-        let opts = {'body':asset};
-        let createAssetResponse = await assetApiInstance.createAsset(opts);
+        let createAssetResponse = await assetApiInstance.createAsset(asset);
         let assetToDeleteId = createAssetResponse.id;
 
         await assetApiInstance.deleteAssetById(assetToDeleteId);
@@ -58,8 +58,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('getAssetById', function() {
       it('should call getAssetById successfully', async ()=> {
         let asset = createAssetObject();
-        let opts = {'body':asset};
-        let createAssetResponse = await assetApiInstance.createAsset(opts);
+        let createAssetResponse = await assetApiInstance.createAsset(asset);
         let assetToRetrieveId = createAssetResponse.id;
 
         let getAssetByIdResponse = await assetApiInstance.getAssetById(assetToRetrieveId);
@@ -74,15 +73,13 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('partiallyUpdateAssetById', function() {
       it('should call partiallyUpdateAssetById successfully', async ()=> {
         let asset = createAssetObject();
-        let opts = {'body':asset};
-
-        let createAssetResponse = await assetApiInstance.createAsset(opts);
+        let createAssetResponse = await assetApiInstance.createAsset(asset);
         let assetToPartiallyUpdateId = createAssetResponse.id;
         createAssetResponse.description = 'Updated asset description';
 
         let partiallyUpdateAssetResult = await assetApiInstance.partiallyUpdateAssetById(assetToPartiallyUpdateId, createAssetResponse);
 
-        expect(partiallyUpdateAssetResult.description).to.eql(asset.description);
+        expect(partiallyUpdateAssetResult.description).to.eql(createAssetResponse.description);
 
         expect(partiallyUpdateAssetResult.customerKey).to.eql(asset.customerKey);
         expect(partiallyUpdateAssetResult.name).to.eql(asset.name);
