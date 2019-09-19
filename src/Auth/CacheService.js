@@ -1,13 +1,13 @@
 class CacheService {
-    constructor(dateTimeProvider) {
-        this.dateTimeProvider = dateTimeProvider;
-        this.cachedData = {};
+    static cachedData = {};
+
+    constructor() {
         this.invalidCacheWindowInSeconds = 5 * 60;
     }
 
     get(cacheKey) {
-        if (this.cachedData.hasOwnProperty(cacheKey) && this.isCachedValueValid(cacheKey)) {
-            return this.cachedData[cacheKey];
+        if (CacheService.cachedData.hasOwnProperty(cacheKey) && this.isCachedValueValid(cacheKey)) {
+            return CacheService.cachedData[cacheKey];
         }
         return null;
     }
@@ -15,14 +15,14 @@ class CacheService {
     addOrUpdate(cacheKey, value) {
         let expirationTime = new Date().getTime() + (value.expires_in - this.invalidCacheWindowInSeconds) * 1000;
 
-        this.cachedData[cacheKey] = {
+        CacheService.cachedData[cacheKey] = {
             expirationTime: expirationTime,
             tokenResponse: value
         }
     }
 
     isCachedValueValid(cacheKey) {
-        return new Date().getTime() < this.cachedData[cacheKey].expirationTime;
+        return new Date().getTime() < CacheService.cachedData[cacheKey].expirationTime;
     }
 }
 
