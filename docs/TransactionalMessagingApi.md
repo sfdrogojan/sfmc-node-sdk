@@ -790,7 +790,7 @@ No authorization required
 
 <a name="partiallyUpdateSmsDefinition"></a>
 # **partiallyUpdateSmsDefinition**
-> CreateSmsDefinitionRequest partiallyUpdateSmsDefinition(definitionKey, opts)
+> CreateSmsDefinitionRequest partiallyUpdateSmsDefinition(definitionKey, body)
 
 partiallyUpdateSmsDefinition
 
@@ -804,10 +804,9 @@ let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
 let definitionKey = "definitionKey_example"; // String | Unique identifier of the definition.
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.UpdateSmsDefinitionRequest() // UpdateSmsDefinitionRequest | JSON Parameters
-};
-apiInstance.partiallyUpdateSmsDefinition(definitionKey, opts).then((data) => {
+let body = new SalesforceMarketingCloud.UpdateSmsDefinitionRequest(); // UpdateSmsDefinitionRequest | JSON Parameters
+
+apiInstance.partiallyUpdateSmsDefinition(definitionKey, body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -820,7 +819,7 @@ apiInstance.partiallyUpdateSmsDefinition(definitionKey, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definitionKey** | **String**| Unique identifier of the definition. | 
- **body** | [**UpdateSmsDefinitionRequest**](UpdateSmsDefinitionRequest.md)| JSON Parameters | [optional] 
+ **body** | [**UpdateSmsDefinitionRequest**](UpdateSmsDefinitionRequest.md)| JSON Parameters | 
 
 ### Return type
 

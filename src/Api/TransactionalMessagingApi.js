@@ -960,17 +960,20 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * partiallyUpdateSmsDefinition
      * Updates a specific SMS definition.
      * @param {String} definitionKey Unique identifier of the definition.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/UpdateSmsDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/UpdateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateSmsDefinitionRequest} and HTTP response
      */
-    partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, body) {
+      let postBody = body;
 
       // verify the required parameter 'definitionKey' is set
       if (definitionKey === undefined || definitionKey === null) {
         throw new Error("Missing the required parameter 'definitionKey' when calling partiallyUpdateSmsDefinition");
+      }
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling partiallyUpdateSmsDefinition");
       }
 
 
@@ -1000,12 +1003,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * partiallyUpdateSmsDefinition
      * Updates a specific SMS definition.
      * @param {String} definitionKey Unique identifier of the definition.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/UpdateSmsDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/UpdateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateSmsDefinitionRequest}
      */
-    partiallyUpdateSmsDefinition(definitionKey, opts) {
-      return this.partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, opts)
+    partiallyUpdateSmsDefinition(definitionKey, body) {
+      return this.partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

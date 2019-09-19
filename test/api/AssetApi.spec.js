@@ -23,8 +23,6 @@ const ApiSutFactory = require('./ApiSutFactory');
   });
 
   describe('AssetApi', function() {
-    this.timeout(30000);
-
     describe('createAsset', function() {
       it('should call createAsset successfully', async ()=>{
         let asset = createAssetObject();
