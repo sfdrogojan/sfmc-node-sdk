@@ -24,6 +24,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('createCampaign', function() {
       it('should call createCampaign successfully', async ()=> {
         let campaign = createCampaignObject();
+
         let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
 
         expect(createCampaignResponse.name).to.eql(campaign.name);
@@ -31,6 +32,8 @@ const ApiSutFactory = require('./ApiSutFactory');
         expect(createCampaignResponse.campaignCode).to.eql(campaign.campaignCode);
         expect(createCampaignResponse.color).to.eql(campaign.color);
         expect(createCampaignResponse.favorite).to.eql(campaign.favorite);
+
+        await campaignApiInstance.deleteCampaignById(createCampaignResponse.id);
       });
     });
     describe('deleteCampaignById', function() {
@@ -64,6 +67,8 @@ const ApiSutFactory = require('./ApiSutFactory');
         expect(getCampaignByIdResponse.campaignCode).to.eql(campaign.campaignCode);
         expect(getCampaignByIdResponse.color).to.eql(campaign.color);
         expect(getCampaignByIdResponse.favorite).to.eql(campaign.favorite);
+
+        await campaignApiInstance.deleteCampaignById(createCampaignResponse.id);
       });
     });
   });

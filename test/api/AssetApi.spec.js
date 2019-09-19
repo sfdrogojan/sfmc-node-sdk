@@ -26,6 +26,7 @@ const ApiSutFactory = require('./ApiSutFactory');
     describe('createAsset', function() {
       it('should call createAsset successfully', async ()=>{
         let asset = createAssetObject();
+
         let createAssetResponse = await assetApiInstance.createAsset(asset);
 
         expect(createAssetResponse.customerKey).to.eql(asset.customerKey);
@@ -33,6 +34,8 @@ const ApiSutFactory = require('./ApiSutFactory');
         expect(createAssetResponse.description).to.eql(asset.description);
         expect(createAssetResponse.assetType.id).to.eql(asset.assetType.id);
         expect(createAssetResponse.assetType.name).to.eql(asset.assetType.name);
+
+        await assetApiInstance.deleteAssetById(createAssetResponse.id);
       });
     });
     describe('deleteAssetById', function() {
@@ -66,6 +69,8 @@ const ApiSutFactory = require('./ApiSutFactory');
         expect(getAssetByIdResponse.description).to.eql(asset.description);
         expect(getAssetByIdResponse.assetType.id).to.eql(asset.assetType.id);
         expect(getAssetByIdResponse.assetType.name).to.eql(asset.assetType.name);
+
+        await assetApiInstance.deleteAssetById(createAssetResponse.id);
       });
     });
     describe('partiallyUpdateAssetById', function() {
@@ -83,6 +88,8 @@ const ApiSutFactory = require('./ApiSutFactory');
         expect(partiallyUpdateAssetResult.name).to.eql(asset.name);
         expect(partiallyUpdateAssetResult.assetType.id).to.eql(asset.assetType.id);
         expect(partiallyUpdateAssetResult.assetType.name).to.eql(asset.assetType.name);
+
+        await assetApiInstance.deleteAssetById(createAssetResponse.id);
       });
     });
   });

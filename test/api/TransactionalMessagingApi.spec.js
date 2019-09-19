@@ -39,6 +39,8 @@ const ConfigProvider = require('../ConfigProvider');
         expect(createEmailDefinitionResult.name).to.eql(emailDefinition.name);
         expect(createEmailDefinitionResult.definitionKey).to.eql(emailDefinition.definitionKey);
         expect(createEmailDefinitionResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('createSmsDefinition', function() {
@@ -52,13 +54,15 @@ const ConfigProvider = require('../ConfigProvider');
         expect(createSmsDefinitionResult.subscriptions.shortCode).to.eql(smsDefinition.subscriptions.shortCode);
         expect(createSmsDefinitionResult.subscriptions.countryCode).to.eql(smsDefinition.subscriptions.countryCode);
         expect(createSmsDefinitionResult.content).to.eql(smsDefinition.content);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('deleteEmailDefinition', function() {
       it('should call deleteEmailDefinition successfully when definitionKey is valid', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
+
         let deleteEmailDefinitionResult = await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(deleteEmailDefinitionResult.requestId).not.be(undefined);
@@ -83,34 +87,38 @@ const ConfigProvider = require('../ConfigProvider');
       it('should call deleteQueuedMessagesForEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
         emailDefinition.status = 'inactive';
-
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
+
         let deleteQueuedMessagesForEmailDefinitionResult = await transactionalMessagingApiInstance.deleteQueuedMessagesForEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(deleteQueuedMessagesForEmailDefinitionResult.requestId).not.be(undefined);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('deleteQueuedMessagesForSmsDefinition', function() {
       it('should call deleteQueuedMessagesForSmsDefinition successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
         smsDefinition.status = 'inactive';
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
+
         let deleteQueuedMessagesForSmsDefinitionResult = await transactionalMessagingApiInstance.deleteQueuedMessagesForSmsDefinition(createSmsDefinitionResult.definitionKey);
 
         expect(deleteQueuedMessagesForSmsDefinitionResult.requestId).not.be(undefined);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('deleteSmsDefinition', function() {
       it('should call deleteSmsDefinition successfully', async ()=> {
-            let smsDefinition = createSmsDefinitionObject();
+        let smsDefinition = createSmsDefinitionObject();
+        let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
 
-            let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
-            let deleteSmsDefinitionResult = await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
+        let deleteSmsDefinitionResult = await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
 
-            expect(deleteSmsDefinitionResult.requestId).not.be(undefined);
-            expect(deleteSmsDefinitionResult.deletedDefinitionKey).not.be(undefined);
-            expect(deleteSmsDefinitionResult.message).to.eql("Success");
+        expect(deleteSmsDefinitionResult.requestId).not.be(undefined);
+        expect(deleteSmsDefinitionResult.deletedDefinitionKey).not.be(undefined);
+        expect(deleteSmsDefinitionResult.message).to.eql("Success");
       });
     });
     describe('deleteSmsDefinition', function() {
@@ -129,22 +137,24 @@ const ConfigProvider = require('../ConfigProvider');
     describe('getEmailDefinition', function() {
       it('should call getEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
+
         let getEmailDefinitionsResult = await transactionalMessagingApiInstance.getEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(getEmailDefinitionsResult.name).to.eql(emailDefinition.name);
         expect(getEmailDefinitionsResult.definitionKey).to.eql(emailDefinition.definitionKey);
         expect(getEmailDefinitionsResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('getEmailDefinitions', function() {
       it('should call getEmailDefinitions successfully', async ()=> {
         let opts = {
-          'status':undefined,
-          'orderBy':undefined,
-          'pageSize':undefined,
-          'page':undefined
+          'status': undefined,
+          'orderBy': undefined,
+          'pageSize': undefined,
+          'page': undefined
         };
 
         let getEmailDefinitionsResult = await transactionalMessagingApiInstance.getEmailDefinitions(opts);
@@ -160,12 +170,11 @@ const ConfigProvider = require('../ConfigProvider');
       it('should call getEmailSendStatusForRecipient successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
-
         let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let messageRequestBody = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(createEmailDefinitionResult.definitionKey, recipient);
         let messageKey = getUUID();
-
         await transactionalMessagingApiInstance.sendEmailToSingleRecipient(messageKey, messageRequestBody);
+
         let getEmailSendStatusForRecipientResult = await transactionalMessagingApiInstance.getEmailSendStatusForRecipient(messageKey);
 
         let eventCategoryTypes = ['TransactionalSendEvents.EmailSent', 'TransactionalSendEvents.EmailQueued', 'TransactionalSendEvents.EmailNotSent'];
@@ -173,6 +182,8 @@ const ConfigProvider = require('../ConfigProvider');
         expect(getEmailSendStatusForRecipientResult.requestId).not.be(undefined);
         expect(getEmailSendStatusForRecipientResult.timestamp).not.be(undefined);
         expect(eventCategoryTypes).to.contain(getEmailSendStatusForRecipientResult.eventCategoryType);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('getEmailsNotSentToRecipients', function() {
@@ -194,25 +205,29 @@ const ConfigProvider = require('../ConfigProvider');
     describe('getQueueMetricsForEmailDefinition', function() {
       it('should call getQueueMetricsForEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
+
         let getQueueMetricsForEmailDefinitionResult = await transactionalMessagingApiInstance.getQueueMetricsForEmailDefinition(createEmailDefinitionResult.definitionKey);
 
         expect(getQueueMetricsForEmailDefinitionResult.requestId);
         expect(getQueueMetricsForEmailDefinitionResult.count);
         expect(getQueueMetricsForEmailDefinitionResult.ageSeconds);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('getQueueMetricsForSmsDefinition', function() {
       it('should call getQueueMetricsForSmsDefinition successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
+
         let getQueueMetricsForSmsDefinitionResult = await transactionalMessagingApiInstance.getQueueMetricsForSmsDefinition(createSmsDefinitionResult.definitionKey);
 
         expect(getQueueMetricsForSmsDefinitionResult.requestId);
         expect(getQueueMetricsForSmsDefinitionResult.count);
         expect(getQueueMetricsForSmsDefinitionResult.ageSeconds);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('getSMSsNotSentToRecipients', function() {
@@ -234,8 +249,8 @@ const ConfigProvider = require('../ConfigProvider');
     describe('getSmsDefinition', function() {
       it('should call getSmsDefinition successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
+
         let getSmsDefinitionResult = await transactionalMessagingApiInstance.getSmsDefinition(createSmsDefinitionResult.definitionKey);
 
         expect(getSmsDefinitionResult.definitionKey).to.eql(smsDefinition.definitionKey);
@@ -243,6 +258,8 @@ const ConfigProvider = require('../ConfigProvider');
         expect(getSmsDefinitionResult.subscriptions.shortCode).to.eql(smsDefinition.subscriptions.shortCode);
         expect(getSmsDefinitionResult.subscriptions.countryCode).to.eql(smsDefinition.subscriptions.countryCode);
         expect(getSmsDefinitionResult.content).to.eql(smsDefinition.content);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('getSmsDefinitions', function() {
@@ -266,14 +283,12 @@ const ConfigProvider = require('../ConfigProvider');
     describe('getSmsSendStatusForRecipient', function() {
       it('should call getSmsSendStatusForRecipient successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
-
         let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let messageRequestBody = new SalesforceMarketingCloud.SendSmsToSingleRecipientRequest(createSmsDefinitionResult.definitionKey, recipient);
         let messageKey = getUUID();
-
         await transactionalMessagingApiInstance.sendSmsToSingleRecipient(messageKey, messageRequestBody);
+
         let getSmsSendStatusForRecipientResult = await transactionalMessagingApiInstance.getSmsSendStatusForRecipient(messageKey);
 
         let eventCategoryTypes = ['TransactionalSendEvents.SMSSent', 'TransactionalSendEvents.SMSQueued', 'TransactionalSendEvents.SMSNotSent'];
@@ -281,13 +296,14 @@ const ConfigProvider = require('../ConfigProvider');
         expect(getSmsSendStatusForRecipientResult.requestId).not.be(undefined);
         expect(getSmsSendStatusForRecipientResult.timestamp).not.be(undefined);
         expect(eventCategoryTypes).to.contain(getSmsSendStatusForRecipientResult.eventCategoryType);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('partiallyUpdateEmailDefinition', function() {
       it('should call partiallyUpdateEmailDefinition successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
-
         let updatedDefinitionDescription = new SalesforceMarketingCloud.UpdateEmailDefinitionRequest();
         updatedDefinitionDescription.description = 'Updated email definition description';
 
@@ -299,14 +315,14 @@ const ConfigProvider = require('../ConfigProvider');
         expect(partiallyUpdateEmailDefinitionResult.name).to.eql(emailDefinition.name);
         expect(partiallyUpdateEmailDefinitionResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
         expect(partiallyUpdateEmailDefinitionResult.content.customerKey).to.eql(emailDefinition.content.customerKey);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('partiallyUpdateSmsDefinition', function() {
       it('should call partiallyUpdateSmsDefinition successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
-
         let updatedDefinitionDescription = new SalesforceMarketingCloud.UpdateSmsDefinitionRequest();
         updatedDefinitionDescription.description = 'Updated SMS definition description';
 
@@ -318,17 +334,17 @@ const ConfigProvider = require('../ConfigProvider');
         expect(partiallyUpdateSmsDefinitionResult.name).to.eql(smsDefinition.name);
         expect(partiallyUpdateSmsDefinitionResult.content.customerKey).to.eql(smsDefinition.content.customerKey);
         expect(partiallyUpdateSmsDefinitionResult.content.customerKey).to.eql(smsDefinition.content.customerKey);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('sendEmailToMultipleRecipients', function() {
       it('should call sendEmailToMultipleRecipients successfully', async ()=> {
           let emailDefinition = await createEmailDefinitionObject();
           let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
-
           let recipient1 = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
           let recipient2 = new SalesforceMarketingCloud.Recipient(JOHANNA_DOE_YAHOO_COM);
           let recipientsList = [recipient1, recipient2];
-
           let batchMessageRequestBody = new SalesforceMarketingCloud.SendEmailToMultipleRecipientsRequest(createEmailDefinitionResult.definitionKey, recipientsList);
 
           let sendEmailToMultipleRecipientsResult = await transactionalMessagingApiInstance.sendEmailToMultipleRecipients(batchMessageRequestBody);
@@ -336,14 +352,14 @@ const ConfigProvider = require('../ConfigProvider');
           expect(sendEmailToMultipleRecipientsResult.requestId).not.be(undefined);
           expect(sendEmailToMultipleRecipientsResult.errorcode).not.be(undefined);
           expect(sendEmailToMultipleRecipientsResult.responses).not.be(undefined);
+
+          await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('sendEmailToSingleRecipient', function() {
       it('should call sendEmailToSingleRecipient successfully', async ()=> {
         let emailDefinition = await createEmailDefinitionObject();
-
         let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
-
         let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let messageRequestBody = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(createEmailDefinitionResult.definitionKey, recipient);
         let messageKey = getUUID();
@@ -353,18 +369,17 @@ const ConfigProvider = require('../ConfigProvider');
         expect(sendEmailToSingleRecipientResult.requestId).not.be(undefined);
         expect(sendEmailToSingleRecipientResult.errorcode).not.be(undefined);
         expect(sendEmailToSingleRecipientResult.responses).not.be(undefined);
+
+        await transactionalMessagingApiInstance.deleteEmailDefinition(createEmailDefinitionResult.definitionKey);
       });
     });
     describe('sendSmsToMultipleRecipients', function() {
       it('should call sendSmsToMultipleRecipients successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
-
         let recipient1 = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let recipient2 = new SalesforceMarketingCloud.Recipient(JOHANNA_DOE_YAHOO_COM);
         let recipientsList = [recipient1, recipient2];
-
         let batchMessageRequestBody = new SalesforceMarketingCloud.SendSmsToMultipleRecipientsRequest(createSmsDefinitionResult.definitionKey, recipientsList);
 
         let sendSmsToMultipleRecipientsResult = await transactionalMessagingApiInstance.sendSmsToMultipleRecipients(batchMessageRequestBody);
@@ -372,14 +387,14 @@ const ConfigProvider = require('../ConfigProvider');
         expect(sendSmsToMultipleRecipientsResult.requestId).not.be(undefined);
         expect(sendSmsToMultipleRecipientsResult.errorcode).not.be(undefined);
         expect(sendSmsToMultipleRecipientsResult.responses).not.be(undefined);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
     describe('sendSmsToSingleRecipient', function() {
       it('should call sendSmsToSingleRecipient successfully', async ()=> {
         let smsDefinition = createSmsDefinitionObject();
-
         let createSmsDefinitionResult = await transactionalMessagingApiInstance.createSmsDefinition(smsDefinition);
-
         let recipient = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
         let messageRequestBody = new SalesforceMarketingCloud.SendSmsToSingleRecipientRequest(createSmsDefinitionResult.definitionKey, recipient);
         let messageKey = getUUID();
@@ -389,6 +404,8 @@ const ConfigProvider = require('../ConfigProvider');
         expect(sendSmsToSingleRecipientResult.requestId).not.be(undefined);
         expect(sendSmsToSingleRecipientResult.errorcode).not.be(undefined);
         expect(sendSmsToSingleRecipientResult.responses).not.be(undefined);
+
+        await transactionalMessagingApiInstance.deleteSmsDefinition(createSmsDefinitionResult.definitionKey);
       });
     });
   });
