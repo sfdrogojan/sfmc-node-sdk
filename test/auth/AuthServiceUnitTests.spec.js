@@ -6,30 +6,62 @@ const AuthService = require('../../src/Auth/AuthService');
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-let cacheServiceStub;
+const date = 1568972613184;
+
+let cacheService;
 let clientConfiguration;
+let tokenResponseData;
 let apiClientStub;
+let clock;
 
 describe('AuthService', function () {
-
     before(() => {
         clientConfiguration = TestHelper.createClientConfiguration();
+        tokenResponseData = TestHelper.createTokenResponseData();
+        cacheService = new CacheService();
+    });
+
+    beforeEach(() => {
+        apiClientStub = sinon.createStubInstance(ApiClient, {
+            callApi: tokenResponseData
+        });
+        clock = sinon.useFakeTimers(date);
+    });
+
+    afterEach(() => {
+        CacheService.cachedData = {};
+        apiClientStub.callApi.restore();
+        clock.restore();
     });
 
     describe('getTokenResponse', function () {
-        it('should execute the callApi when there is no cached value for a cache key', async () => {
-            apiClientStub = sinon.createStubInstance(ApiClient, {
-                callApi: {data: 'data'}
-            });
-            cacheServiceStub = sinon.createStubInstance(CacheService, {
-                get: null
-            });
-            let authService = new AuthService(clientConfiguration, apiClientStub, cacheServiceStub);
+        it('should execute the callApi method when there is no cached value for a cache key', async () => {
+            let authService = new AuthService(clientConfiguration, apiClientStub, cacheService);
 
             await authService.getTokenResponse();
 
             expect(apiClientStub.callApi.calledOnce).to.eql(true);
             }
         );
+        it('should execute the callApi method when the cached value for a cache key is expired', async () => {
+            let authService = new AuthService(clientConfiguration, apiClientStub, cacheService);
+
+            await authService.getTokenResponse();
+            let cachedDataExpirationCause = (tokenResponseData.data.expires_in - cacheService.invalidCacheWindowInSeconds) * 1000;
+            // making the cached data corresponding to cacheKey to have the expirationTime equal to the current time, thus invalid
+            clock.tick(cachedDataExpirationCause);
+            await authService.getTokenResponse();
+
+            expect(apiClientStub.callApi.calledTwice).to.eql(true);
+        });
+        it('should execute exactly one time the callApi method when multiple instances are used', async () => {
+            let authService1 = new AuthService(clientConfiguration, apiClientStub, cacheService);
+            let authService2 = new AuthService(clientConfiguration, apiClientStub, cacheService);
+
+            await authService1.getTokenResponse();
+            await authService2.getTokenResponse();
+
+            expect(apiClientStub.callApi.calledOnce).to.eql(true);
+        })
     });
 });
