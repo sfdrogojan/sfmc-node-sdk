@@ -33,7 +33,7 @@ class AuthService{
             return authRequestResponse;
         }
         else{
-            return {data:cachedTokenResponse.tokenResponse};
+            return cachedTokenResponse.tokenResponse;
         }
     }
 

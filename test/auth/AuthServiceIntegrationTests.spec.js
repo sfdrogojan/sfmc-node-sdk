@@ -89,7 +89,7 @@ describe('AuthService', function () {
             let tokenResponse1 = await authService.getTokenResponse();
             let tokenResponse2 = await authService.getTokenResponse();
 
-            expect(tokenResponse1.data).to.eql(tokenResponse2.data);
+            expect(tokenResponse1.data).to.eql(tokenResponse2);
             }
         );
     });
