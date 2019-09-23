@@ -55,13 +55,16 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * createEmailDefinition
      * Creates the definition for an email.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/CreateEmailDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/CreateEmailDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateEmailDefinitionRequest} and HTTP response
      */
-    createEmailDefinitionWithHttpInfo(opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    createEmailDefinitionWithHttpInfo(body) {
+      let postBody = body;
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling createEmailDefinition");
+      }
 
 
       let pathParams = {
@@ -88,12 +91,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * createEmailDefinition
      * Creates the definition for an email.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/CreateEmailDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/CreateEmailDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateEmailDefinitionRequest}
      */
-    createEmailDefinition(opts) {
-      return this.createEmailDefinitionWithHttpInfo(opts)
+    createEmailDefinition(body) {
+      return this.createEmailDefinitionWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -103,13 +105,16 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * createSmsDefinition
      * Creates the definition for an SMS.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/CreateSmsDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/CreateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateSmsDefinitionRequest} and HTTP response
      */
-    createSmsDefinitionWithHttpInfo(opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    createSmsDefinitionWithHttpInfo(body) {
+      let postBody = body;
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling createSmsDefinition");
+      }
 
 
       let pathParams = {
@@ -136,12 +141,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * createSmsDefinition
      * Creates the definition for an SMS.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/CreateSmsDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/CreateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateSmsDefinitionRequest}
      */
-    createSmsDefinition(opts) {
-      return this.createSmsDefinitionWithHttpInfo(opts)
+    createSmsDefinition(body) {
+      return this.createSmsDefinitionWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -898,17 +902,20 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * partiallyUpdateEmailDefinition
      * Updates a specific email definition.
      * @param {String} definitionKey Unique identifier of the definition.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/UpdateEmailDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/UpdateEmailDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateEmailDefinitionRequest} and HTTP response
      */
-    partiallyUpdateEmailDefinitionWithHttpInfo(definitionKey, opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    partiallyUpdateEmailDefinitionWithHttpInfo(definitionKey, body) {
+      let postBody = body;
 
       // verify the required parameter 'definitionKey' is set
       if (definitionKey === undefined || definitionKey === null) {
         throw new Error("Missing the required parameter 'definitionKey' when calling partiallyUpdateEmailDefinition");
+      }
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling partiallyUpdateEmailDefinition");
       }
 
 
@@ -938,12 +945,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * partiallyUpdateEmailDefinition
      * Updates a specific email definition.
      * @param {String} definitionKey Unique identifier of the definition.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/UpdateEmailDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/UpdateEmailDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateEmailDefinitionRequest}
      */
-    partiallyUpdateEmailDefinition(definitionKey, opts) {
-      return this.partiallyUpdateEmailDefinitionWithHttpInfo(definitionKey, opts)
+    partiallyUpdateEmailDefinition(definitionKey, body) {
+      return this.partiallyUpdateEmailDefinitionWithHttpInfo(definitionKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -954,17 +960,20 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * partiallyUpdateSmsDefinition
      * Updates a specific SMS definition.
      * @param {String} definitionKey Unique identifier of the definition.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/UpdateSmsDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/UpdateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateSmsDefinitionRequest} and HTTP response
      */
-    partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, body) {
+      let postBody = body;
 
       // verify the required parameter 'definitionKey' is set
       if (definitionKey === undefined || definitionKey === null) {
         throw new Error("Missing the required parameter 'definitionKey' when calling partiallyUpdateSmsDefinition");
+      }
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling partiallyUpdateSmsDefinition");
       }
 
 
@@ -994,12 +1003,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * partiallyUpdateSmsDefinition
      * Updates a specific SMS definition.
      * @param {String} definitionKey Unique identifier of the definition.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/UpdateSmsDefinitionRequest} opts.body JSON Parameters
+     * @param {module:Model/UpdateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateSmsDefinitionRequest}
      */
-    partiallyUpdateSmsDefinition(definitionKey, opts) {
-      return this.partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, opts)
+    partiallyUpdateSmsDefinition(definitionKey, body) {
+      return this.partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1009,13 +1017,16 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * sendEmailToMultipleRecipients
      * Sends a message to multiple recipients using an email definition. You can provide a messageKey in the request; otherwise, the messageKey is automatically generated in the response.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendEmailToMultipleRecipientsRequest} opts.body JSON Parameters
+     * @param {module:Model/SendEmailToMultipleRecipientsRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse} and HTTP response
      */
-    sendEmailToMultipleRecipientsWithHttpInfo(opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    sendEmailToMultipleRecipientsWithHttpInfo(body) {
+      let postBody = body;
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling sendEmailToMultipleRecipients");
+      }
 
 
       let pathParams = {
@@ -1042,12 +1053,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * sendEmailToMultipleRecipients
      * Sends a message to multiple recipients using an email definition. You can provide a messageKey in the request; otherwise, the messageKey is automatically generated in the response.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendEmailToMultipleRecipientsRequest} opts.body JSON Parameters
+     * @param {module:Model/SendEmailToMultipleRecipientsRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse}
      */
-    sendEmailToMultipleRecipients(opts) {
-      return this.sendEmailToMultipleRecipientsWithHttpInfo(opts)
+    sendEmailToMultipleRecipients(body) {
+      return this.sendEmailToMultipleRecipientsWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1058,17 +1068,20 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * sendEmailToSingleRecipient
      * Sends a message to a single recipient via an email definition using a messageKey path parameter.
      * @param {String} messageKey Unique identifier used to track message status. Can be automatically created when you create a message or provided as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendEmailToSingleRecipientRequest} opts.body JSON Parameters
+     * @param {module:Model/SendEmailToSingleRecipientRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToSingleRecipientResponse} and HTTP response
      */
-    sendEmailToSingleRecipientWithHttpInfo(messageKey, opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    sendEmailToSingleRecipientWithHttpInfo(messageKey, body) {
+      let postBody = body;
 
       // verify the required parameter 'messageKey' is set
       if (messageKey === undefined || messageKey === null) {
         throw new Error("Missing the required parameter 'messageKey' when calling sendEmailToSingleRecipient");
+      }
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling sendEmailToSingleRecipient");
       }
 
 
@@ -1098,12 +1111,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * sendEmailToSingleRecipient
      * Sends a message to a single recipient via an email definition using a messageKey path parameter.
      * @param {String} messageKey Unique identifier used to track message status. Can be automatically created when you create a message or provided as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendEmailToSingleRecipientRequest} opts.body JSON Parameters
+     * @param {module:Model/SendEmailToSingleRecipientRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToSingleRecipientResponse}
      */
-    sendEmailToSingleRecipient(messageKey, opts) {
-      return this.sendEmailToSingleRecipientWithHttpInfo(messageKey, opts)
+    sendEmailToSingleRecipient(messageKey, body) {
+      return this.sendEmailToSingleRecipientWithHttpInfo(messageKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1113,13 +1125,16 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * sendSmsToMultipleRecipients
      * Sends a message to multiple recipients using an email definition. You can provide a messageKey in the request; otherwise, the messageKey is automatically generated in the response.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendSmsToMultipleRecipientsRequest} opts.body JSON Parameters
+     * @param {module:Model/SendSmsToMultipleRecipientsRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse} and HTTP response
      */
-    sendSmsToMultipleRecipientsWithHttpInfo(opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    sendSmsToMultipleRecipientsWithHttpInfo(body) {
+      let postBody = body;
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling sendSmsToMultipleRecipients");
+      }
 
 
       let pathParams = {
@@ -1146,12 +1161,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
     /**
      * sendSmsToMultipleRecipients
      * Sends a message to multiple recipients using an email definition. You can provide a messageKey in the request; otherwise, the messageKey is automatically generated in the response.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendSmsToMultipleRecipientsRequest} opts.body JSON Parameters
+     * @param {module:Model/SendSmsToMultipleRecipientsRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse}
      */
-    sendSmsToMultipleRecipients(opts) {
-      return this.sendSmsToMultipleRecipientsWithHttpInfo(opts)
+    sendSmsToMultipleRecipients(body) {
+      return this.sendSmsToMultipleRecipientsWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1162,17 +1176,20 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * sendSmsToSingleRecipient
      * Sends a message to a single recipient via a SMS definition using a messageKey path parameter.
      * @param {String} messageKey Unique identifier of the definition used to track message status. The messageKey can be created automatically when you create a message, or you can provide it as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendSmsToSingleRecipientRequest} opts.body JSON Parameters
+     * @param {module:Model/SendSmsToSingleRecipientRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToSingleRecipientResponse} and HTTP response
      */
-    sendSmsToSingleRecipientWithHttpInfo(messageKey, opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    sendSmsToSingleRecipientWithHttpInfo(messageKey, body) {
+      let postBody = body;
 
       // verify the required parameter 'messageKey' is set
       if (messageKey === undefined || messageKey === null) {
         throw new Error("Missing the required parameter 'messageKey' when calling sendSmsToSingleRecipient");
+      }
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling sendSmsToSingleRecipient");
       }
 
 
@@ -1202,12 +1219,11 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * sendSmsToSingleRecipient
      * Sends a message to a single recipient via a SMS definition using a messageKey path parameter.
      * @param {String} messageKey Unique identifier of the definition used to track message status. The messageKey can be created automatically when you create a message, or you can provide it as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/SendSmsToSingleRecipientRequest} opts.body JSON Parameters
+     * @param {module:Model/SendSmsToSingleRecipientRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToSingleRecipientResponse}
      */
-    sendSmsToSingleRecipient(messageKey, opts) {
-      return this.sendSmsToSingleRecipientWithHttpInfo(messageKey, opts)
+    sendSmsToSingleRecipient(messageKey, body) {
+      return this.sendSmsToSingleRecipientWithHttpInfo(messageKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

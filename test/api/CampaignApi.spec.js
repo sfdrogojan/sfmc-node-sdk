@@ -14,40 +14,38 @@ const ApiSutFactory = require('./ApiSutFactory');
 }(this, function(expect, SalesforceMarketingCloud) {
   'use strict';
 
-  let instance;
-  let apiSutFactory;
+  let campaignApiInstance;
 
   before(()=>{
-    apiSutFactory = new ApiSutFactory(SalesforceMarketingCloud.CampaignApi.prototype.constructor);
-    instance = apiSutFactory.create();
+    campaignApiInstance = new ApiSutFactory(SalesforceMarketingCloud.CampaignApi.prototype.constructor).create();
   });
 
   describe('CampaignApi', function() {
     describe('createCampaign', function() {
       it('should call createCampaign successfully', async ()=> {
+        let campaign = createCampaignObject();
 
-        let campaign = createCampaign();
-        let opts = {'body':campaign};
-        let createCampaignResponse = await instance.createCampaign(opts);
+        let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
 
         expect(createCampaignResponse.name).to.eql(campaign.name);
         expect(createCampaignResponse.description).to.eql(campaign.description);
         expect(createCampaignResponse.campaignCode).to.eql(campaign.campaignCode);
         expect(createCampaignResponse.color).to.eql(campaign.color);
         expect(createCampaignResponse.favorite).to.eql(campaign.favorite);
+
+        await campaignApiInstance.deleteCampaignById(createCampaignResponse.id);
       });
     });
     describe('deleteCampaignById', function() {
       it('should call deleteCampaignById successfully', async ()=> {
-        let campaign = createCampaign();
-        let opts = {'body':campaign};
-        let createCampaignResponse = await instance.createCampaign(opts);
+        let campaign = createCampaignObject();
+        let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
         let campaignToDeleteId = createCampaignResponse.id;
 
-        await instance.deleteCampaignById(campaignToDeleteId);
+        await campaignApiInstance.deleteCampaignById(campaignToDeleteId);
 
         try {
-          await instance.getCampaignById(campaignToDeleteId);
+          await campaignApiInstance.getCampaignById(campaignToDeleteId);
 
           expect().fail('No exception thrown');
         }
@@ -58,23 +56,24 @@ const ApiSutFactory = require('./ApiSutFactory');
     });
     describe('getCampaignById', function() {
       it('should call getCampaignById successfully', async ()=> {
-        let campaign = createCampaign();
-        let opts = {'body':campaign};
-        let createCampaignResponse = await instance.createCampaign(opts);
+        let campaign = createCampaignObject();
+        let createCampaignResponse = await campaignApiInstance.createCampaign(campaign);
         let campaignToRetrieveId = createCampaignResponse.id;
 
-        let getCampaignByIdResponse = await instance.getCampaignById(campaignToRetrieveId);
+        let getCampaignByIdResponse = await campaignApiInstance.getCampaignById(campaignToRetrieveId);
 
         expect(getCampaignByIdResponse.name).to.eql(campaign.name);
         expect(getCampaignByIdResponse.description).to.eql(campaign.description);
         expect(getCampaignByIdResponse.campaignCode).to.eql(campaign.campaignCode);
         expect(getCampaignByIdResponse.color).to.eql(campaign.color);
         expect(getCampaignByIdResponse.favorite).to.eql(campaign.favorite);
+
+        await campaignApiInstance.deleteCampaignById(createCampaignResponse.id);
       });
     });
   });
 
-  function createCampaign() {
+  function createCampaignObject() {
     let campaignName = 'Campaign ' + getUUID(10);
     let campaignDescription = 'Campaign from Automated Node.js SDK';
     let campaignCode = 'CampaignCode';

@@ -7,7 +7,8 @@ class ConfigProvider{
             accountId: process.env.SFMC_ACCOUNT_ID,
             scope: process.env.SFMC_SCOPE,
             shortCode: process.env.SFMC_SHORT_CODE,
-            keyWord: process.env.SFMC_KEYWORD
+            keyWord: process.env.SFMC_KEYWORD,
+            countryCode: process.env.SFMC_COUNTRY_CODE
         }
     }
 }

@@ -72,10 +72,9 @@ var SalesforceMarketingCloud = require('SalesforceMarketingCloud');
 
 var api = new SalesforceMarketingCloud.AssetApi()
 
-var opts = { 
-  'body': new SalesforceMarketingCloud.Asset() // {Asset} JSON Parameters
-};
-api.createAsset(opts).then(function(data) {
+var body = new SalesforceMarketingCloud.Asset(); // {Asset} JSON Parameters
+
+api.createAsset(body).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

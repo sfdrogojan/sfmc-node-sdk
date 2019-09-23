@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 <a name="createAsset"></a>
 # **createAsset**
-> Asset createAsset(opts)
+> Asset createAsset(body)
 
 createAsset
 
@@ -24,10 +24,9 @@ const SalesforceMarketingCloud = require ('SalesforceMarketingCloud');
 
 let apiInstance = new SalesforceMarketingCloud.AssetApi();
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.Asset() // Asset | JSON Parameters
-};
-apiInstance.createAsset(opts).then((data) => {
+let body = new SalesforceMarketingCloud.Asset(); // Asset | JSON Parameters
+
+apiInstance.createAsset(body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -39,7 +38,7 @@ apiInstance.createAsset(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Asset**](Asset.md)| JSON Parameters | [optional] 
+ **body** | [**Asset**](Asset.md)| JSON Parameters | 
 
 ### Return type
 
@@ -142,7 +141,7 @@ No authorization required
 
 <a name="partiallyUpdateAssetById"></a>
 # **partiallyUpdateAssetById**
-> Asset partiallyUpdateAssetById(id, opts)
+> Asset partiallyUpdateAssetById(id, body)
 
 partiallyUpdateAssetById
 
@@ -156,10 +155,9 @@ let apiInstance = new SalesforceMarketingCloud.AssetApi();
 
 let id = 8.14; // Number | The ID of the asset to update
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.Asset() // Asset | JSON Parameters
-};
-apiInstance.partiallyUpdateAssetById(id, opts).then((data) => {
+let body = new SalesforceMarketingCloud.Asset(); // Asset | JSON Parameters
+
+apiInstance.partiallyUpdateAssetById(id, body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -172,7 +170,7 @@ apiInstance.partiallyUpdateAssetById(id, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Number**| The ID of the asset to update | 
- **body** | [**Asset**](Asset.md)| JSON Parameters | [optional] 
+ **body** | [**Asset**](Asset.md)| JSON Parameters | 
 
 ### Return type
 
