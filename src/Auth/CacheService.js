@@ -2,7 +2,7 @@ class CacheService {
     static cachedData = {};
 
     constructor() {
-        this.invalidCacheWindowInSeconds = 5 * 60;
+        this.invalidCacheWindowInSeconds = 30;
     }
 
     get(cacheKey) {
