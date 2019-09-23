@@ -30,7 +30,7 @@ Method | HTTP request | Description
 
 <a name="createEmailDefinition"></a>
 # **createEmailDefinition**
-> CreateEmailDefinitionRequest createEmailDefinition(opts)
+> CreateEmailDefinitionRequest createEmailDefinition(body)
 
 createEmailDefinition
 
@@ -42,10 +42,9 @@ const SalesforceMarketingCloud = require ('SalesforceMarketingCloud');
 
 let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.CreateEmailDefinitionRequest() // CreateEmailDefinitionRequest | JSON Parameters
-};
-apiInstance.createEmailDefinition(opts).then((data) => {
+let body = new SalesforceMarketingCloud.CreateEmailDefinitionRequest(); // CreateEmailDefinitionRequest | JSON Parameters
+
+apiInstance.createEmailDefinition(body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -57,7 +56,7 @@ apiInstance.createEmailDefinition(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**CreateEmailDefinitionRequest**](CreateEmailDefinitionRequest.md)| JSON Parameters | [optional] 
+ **body** | [**CreateEmailDefinitionRequest**](CreateEmailDefinitionRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -74,7 +73,7 @@ No authorization required
 
 <a name="createSmsDefinition"></a>
 # **createSmsDefinition**
-> CreateSmsDefinitionRequest createSmsDefinition(opts)
+> CreateSmsDefinitionRequest createSmsDefinition(body)
 
 createSmsDefinition
 
@@ -86,10 +85,9 @@ const SalesforceMarketingCloud = require ('SalesforceMarketingCloud');
 
 let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.CreateSmsDefinitionRequest() // CreateSmsDefinitionRequest | JSON Parameters
-};
-apiInstance.createSmsDefinition(opts).then((data) => {
+let body = new SalesforceMarketingCloud.CreateSmsDefinitionRequest(); // CreateSmsDefinitionRequest | JSON Parameters
+
+apiInstance.createSmsDefinition(body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -101,7 +99,7 @@ apiInstance.createSmsDefinition(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**CreateSmsDefinitionRequest**](CreateSmsDefinitionRequest.md)| JSON Parameters | [optional] 
+ **body** | [**CreateSmsDefinitionRequest**](CreateSmsDefinitionRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -746,7 +744,7 @@ No authorization required
 
 <a name="partiallyUpdateEmailDefinition"></a>
 # **partiallyUpdateEmailDefinition**
-> CreateEmailDefinitionRequest partiallyUpdateEmailDefinition(definitionKey, opts)
+> CreateEmailDefinitionRequest partiallyUpdateEmailDefinition(definitionKey, body)
 
 partiallyUpdateEmailDefinition
 
@@ -760,10 +758,9 @@ let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
 let definitionKey = "definitionKey_example"; // String | Unique identifier of the definition.
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.UpdateEmailDefinitionRequest() // UpdateEmailDefinitionRequest | JSON Parameters
-};
-apiInstance.partiallyUpdateEmailDefinition(definitionKey, opts).then((data) => {
+let body = new SalesforceMarketingCloud.UpdateEmailDefinitionRequest(); // UpdateEmailDefinitionRequest | JSON Parameters
+
+apiInstance.partiallyUpdateEmailDefinition(definitionKey, body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -776,7 +773,7 @@ apiInstance.partiallyUpdateEmailDefinition(definitionKey, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definitionKey** | **String**| Unique identifier of the definition. | 
- **body** | [**UpdateEmailDefinitionRequest**](UpdateEmailDefinitionRequest.md)| JSON Parameters | [optional] 
+ **body** | [**UpdateEmailDefinitionRequest**](UpdateEmailDefinitionRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -793,7 +790,7 @@ No authorization required
 
 <a name="partiallyUpdateSmsDefinition"></a>
 # **partiallyUpdateSmsDefinition**
-> CreateSmsDefinitionRequest partiallyUpdateSmsDefinition(definitionKey, opts)
+> CreateSmsDefinitionRequest partiallyUpdateSmsDefinition(definitionKey, body)
 
 partiallyUpdateSmsDefinition
 
@@ -807,10 +804,9 @@ let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
 let definitionKey = "definitionKey_example"; // String | Unique identifier of the definition.
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.UpdateSmsDefinitionRequest() // UpdateSmsDefinitionRequest | JSON Parameters
-};
-apiInstance.partiallyUpdateSmsDefinition(definitionKey, opts).then((data) => {
+let body = new SalesforceMarketingCloud.UpdateSmsDefinitionRequest(); // UpdateSmsDefinitionRequest | JSON Parameters
+
+apiInstance.partiallyUpdateSmsDefinition(definitionKey, body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -823,7 +819,7 @@ apiInstance.partiallyUpdateSmsDefinition(definitionKey, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definitionKey** | **String**| Unique identifier of the definition. | 
- **body** | [**UpdateSmsDefinitionRequest**](UpdateSmsDefinitionRequest.md)| JSON Parameters | [optional] 
+ **body** | [**UpdateSmsDefinitionRequest**](UpdateSmsDefinitionRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -840,7 +836,7 @@ No authorization required
 
 <a name="sendEmailToMultipleRecipients"></a>
 # **sendEmailToMultipleRecipients**
-> SendDefinitionToMultipleRecipientsResponse sendEmailToMultipleRecipients(opts)
+> SendDefinitionToMultipleRecipientsResponse sendEmailToMultipleRecipients(body)
 
 sendEmailToMultipleRecipients
 
@@ -852,10 +848,9 @@ const SalesforceMarketingCloud = require ('SalesforceMarketingCloud');
 
 let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.SendEmailToMultipleRecipientsRequest() // SendEmailToMultipleRecipientsRequest | JSON Parameters
-};
-apiInstance.sendEmailToMultipleRecipients(opts).then((data) => {
+let body = new SalesforceMarketingCloud.SendEmailToMultipleRecipientsRequest(); // SendEmailToMultipleRecipientsRequest | JSON Parameters
+
+apiInstance.sendEmailToMultipleRecipients(body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -867,7 +862,7 @@ apiInstance.sendEmailToMultipleRecipients(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SendEmailToMultipleRecipientsRequest**](SendEmailToMultipleRecipientsRequest.md)| JSON Parameters | [optional] 
+ **body** | [**SendEmailToMultipleRecipientsRequest**](SendEmailToMultipleRecipientsRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -884,7 +879,7 @@ No authorization required
 
 <a name="sendEmailToSingleRecipient"></a>
 # **sendEmailToSingleRecipient**
-> SendDefinitionToSingleRecipientResponse sendEmailToSingleRecipient(messageKey, opts)
+> SendDefinitionToSingleRecipientResponse sendEmailToSingleRecipient(messageKey, body)
 
 sendEmailToSingleRecipient
 
@@ -898,10 +893,9 @@ let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
 let messageKey = "messageKey_example"; // String | Unique identifier used to track message status. Can be automatically created when you create a message or provided as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected.
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest() // SendEmailToSingleRecipientRequest | JSON Parameters
-};
-apiInstance.sendEmailToSingleRecipient(messageKey, opts).then((data) => {
+let body = new SalesforceMarketingCloud.SendEmailToSingleRecipientRequest(); // SendEmailToSingleRecipientRequest | JSON Parameters
+
+apiInstance.sendEmailToSingleRecipient(messageKey, body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -914,7 +908,7 @@ apiInstance.sendEmailToSingleRecipient(messageKey, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **messageKey** | **String**| Unique identifier used to track message status. Can be automatically created when you create a message or provided as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected. | 
- **body** | [**SendEmailToSingleRecipientRequest**](SendEmailToSingleRecipientRequest.md)| JSON Parameters | [optional] 
+ **body** | [**SendEmailToSingleRecipientRequest**](SendEmailToSingleRecipientRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -931,7 +925,7 @@ No authorization required
 
 <a name="sendSmsToMultipleRecipients"></a>
 # **sendSmsToMultipleRecipients**
-> SendDefinitionToMultipleRecipientsResponse sendSmsToMultipleRecipients(opts)
+> SendDefinitionToMultipleRecipientsResponse sendSmsToMultipleRecipients(body)
 
 sendSmsToMultipleRecipients
 
@@ -943,10 +937,9 @@ const SalesforceMarketingCloud = require ('SalesforceMarketingCloud');
 
 let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.SendSmsToMultipleRecipientsRequest() // SendSmsToMultipleRecipientsRequest | JSON Parameters
-};
-apiInstance.sendSmsToMultipleRecipients(opts).then((data) => {
+let body = new SalesforceMarketingCloud.SendSmsToMultipleRecipientsRequest(); // SendSmsToMultipleRecipientsRequest | JSON Parameters
+
+apiInstance.sendSmsToMultipleRecipients(body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -958,7 +951,7 @@ apiInstance.sendSmsToMultipleRecipients(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SendSmsToMultipleRecipientsRequest**](SendSmsToMultipleRecipientsRequest.md)| JSON Parameters | [optional] 
+ **body** | [**SendSmsToMultipleRecipientsRequest**](SendSmsToMultipleRecipientsRequest.md)| JSON Parameters | 
 
 ### Return type
 
@@ -975,7 +968,7 @@ No authorization required
 
 <a name="sendSmsToSingleRecipient"></a>
 # **sendSmsToSingleRecipient**
-> SendDefinitionToSingleRecipientResponse sendSmsToSingleRecipient(messageKey, opts)
+> SendDefinitionToSingleRecipientResponse sendSmsToSingleRecipient(messageKey, body)
 
 sendSmsToSingleRecipient
 
@@ -989,10 +982,9 @@ let apiInstance = new SalesforceMarketingCloud.TransactionalMessagingApi();
 
 let messageKey = "messageKey_example"; // String | Unique identifier of the definition used to track message status. The messageKey can be created automatically when you create a message, or you can provide it as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected.
 
-let opts = { 
-  'body': new SalesforceMarketingCloud.SendSmsToSingleRecipientRequest() // SendSmsToSingleRecipientRequest | JSON Parameters
-};
-apiInstance.sendSmsToSingleRecipient(messageKey, opts).then((data) => {
+let body = new SalesforceMarketingCloud.SendSmsToSingleRecipientRequest(); // SendSmsToSingleRecipientRequest | JSON Parameters
+
+apiInstance.sendSmsToSingleRecipient(messageKey, body).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -1005,7 +997,7 @@ apiInstance.sendSmsToSingleRecipient(messageKey, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **messageKey** | **String**| Unique identifier of the definition used to track message status. The messageKey can be created automatically when you create a message, or you can provide it as part of the request. Each recipient in a request must have a unique messageKey. If you use a duplicate messageKey in the same send request, the message is rejected. | 
- **body** | [**SendSmsToSingleRecipientRequest**](SendSmsToSingleRecipientRequest.md)| JSON Parameters | [optional] 
+ **body** | [**SendSmsToSingleRecipientRequest**](SendSmsToSingleRecipientRequest.md)| JSON Parameters | 
 
 ### Return type
 

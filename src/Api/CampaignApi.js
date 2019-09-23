@@ -39,13 +39,16 @@ module.exports = class CampaignApi extends BaseApi {
     /**
      * createCampaign
      * Creates a campaign.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/Campaign} opts.body JSON Parameters
+     * @param {module:Model/Campaign} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Campaign} and HTTP response
      */
-    createCampaignWithHttpInfo(opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    createCampaignWithHttpInfo(body) {
+      let postBody = body;
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling createCampaign");
+      }
 
 
       let pathParams = {
@@ -72,12 +75,11 @@ module.exports = class CampaignApi extends BaseApi {
     /**
      * createCampaign
      * Creates a campaign.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/Campaign} opts.body JSON Parameters
+     * @param {module:Model/Campaign} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Campaign}
      */
-    createCampaign(opts) {
-      return this.createCampaignWithHttpInfo(opts)
+    createCampaign(body) {
+      return this.createCampaignWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

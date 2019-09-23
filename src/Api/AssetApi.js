@@ -39,13 +39,16 @@ module.exports = class AssetApi extends BaseApi {
     /**
      * createAsset
      * Creates a new asset.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/Asset} opts.body JSON Parameters
+     * @param {module:Model/Asset} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Asset} and HTTP response
      */
-    createAssetWithHttpInfo(opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    createAssetWithHttpInfo(body) {
+      let postBody = body;
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling createAsset");
+      }
 
 
       let pathParams = {
@@ -72,12 +75,11 @@ module.exports = class AssetApi extends BaseApi {
     /**
      * createAsset
      * Creates a new asset.
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/Asset} opts.body JSON Parameters
+     * @param {module:Model/Asset} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Asset}
      */
-    createAsset(opts) {
-      return this.createAssetWithHttpInfo(opts)
+    createAsset(body) {
+      return this.createAssetWithHttpInfo(body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -190,17 +192,20 @@ module.exports = class AssetApi extends BaseApi {
      * partiallyUpdateAssetById
      * Updates part of an asset.
      * @param {Number} id The ID of the asset to update
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/Asset} opts.body JSON Parameters
+     * @param {module:Model/Asset} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Asset} and HTTP response
      */
-    partiallyUpdateAssetByIdWithHttpInfo(id, opts) {
-      opts = opts || {};
-      let postBody = opts['body'];
+    partiallyUpdateAssetByIdWithHttpInfo(id, body) {
+      let postBody = body;
 
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
         throw new Error("Missing the required parameter 'id' when calling partiallyUpdateAssetById");
+      }
+
+      // verify the required parameter 'body' is set
+      if (body === undefined || body === null) {
+        throw new Error("Missing the required parameter 'body' when calling partiallyUpdateAssetById");
       }
 
 
@@ -230,12 +235,11 @@ module.exports = class AssetApi extends BaseApi {
      * partiallyUpdateAssetById
      * Updates part of an asset.
      * @param {Number} id The ID of the asset to update
-     * @param {Object} opts Optional parameters
-     * @param {module:Model/Asset} opts.body JSON Parameters
+     * @param {module:Model/Asset} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Asset}
      */
-    partiallyUpdateAssetById(id, opts) {
-      return this.partiallyUpdateAssetByIdWithHttpInfo(id, opts)
+    partiallyUpdateAssetById(id, body) {
+      return this.partiallyUpdateAssetByIdWithHttpInfo(id, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
