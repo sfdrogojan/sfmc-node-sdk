@@ -44,7 +44,8 @@ describe('CacheService', function () {
         });
         it('should return null when the passed parameter is a cache key and the corresponding cache is expired', function () {
             cacheService.addOrUpdate(cacheKey, tokenResponseData);
-            let validCacheWindowInMs = (tokenResponseData.expires_in - cacheService.invalidCacheWindowInSeconds) * 1000;
+            let invalidCacheWindowInSeconds = 30;
+            let validCacheWindowInMs = (tokenResponseData.expires_in - invalidCacheWindowInSeconds) * 1000;
             // making the cached data corresponding to cacheKey to have the expirationTime equal to the current time, thus invalid
             clock.tick(validCacheWindowInMs);
 

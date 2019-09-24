@@ -1,10 +1,6 @@
 class CacheService {
     static cachedData = {};
 
-    constructor() {
-        this.invalidCacheWindowInSeconds = 30;
-    }
-
     get(cacheKey) {
         if (CacheService.cachedData.hasOwnProperty(cacheKey) && this.isCachedValueValid(cacheKey)) {
             return CacheService.cachedData[cacheKey];
@@ -13,7 +9,8 @@ class CacheService {
     }
 
     addOrUpdate(cacheKey, value) {
-        let expirationTime = new Date().getTime() + (value.expires_in - this.invalidCacheWindowInSeconds) * 1000;
+        let invalidCacheWindowInSeconds = 30;
+        let expirationTime = new Date().getTime() + (value.expires_in - invalidCacheWindowInSeconds) * 1000;
 
         CacheService.cachedData[cacheKey] = {
             expirationTime: expirationTime,

@@ -46,7 +46,8 @@ describe('AuthService', function () {
             let authService = new AuthService(clientConfiguration, apiClientStub, cacheService);
 
             await authService.getTokenResponse();
-            let validCacheWindowInMs = (tokenResponseData.expires_in - cacheService.invalidCacheWindowInSeconds) * 1000;
+            let invalidCacheWindowInSeconds = 30;
+            let validCacheWindowInMs = (tokenResponseData.expires_in - invalidCacheWindowInSeconds) * 1000;
             // making the cached data corresponding to cacheKey to have the expirationTime equal to the current time, thus invalid
             clock.tick(validCacheWindowInMs);
             await authService.getTokenResponse();
