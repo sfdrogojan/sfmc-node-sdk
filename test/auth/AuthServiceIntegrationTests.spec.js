@@ -44,16 +44,14 @@ describe('AuthService', function () {
             clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
             authService = new AuthService(clientConfiguration, apiClient, cacheService);
 
-            let getTokenResponseResult = await authService.getTokenResponse();
-            let tokenResponse = getTokenResponseResult.data;
+            let tokenResponse = await authService.getTokenResponse();
 
             expect(tokenResponse.access_token).not.be(undefined);
             expect(tokenResponse.rest_instance_url).not.be(undefined);
             expect(tokenResponse.soap_instance_url).not.be(undefined);
             expect(tokenResponse.token_type).not.be(undefined);
             expect(tokenResponse.expires_in).to.be.greaterThan(0);
-            }
-        );
+        });
     });
     describe('getTokenResponse', function () {
         it('should return Unauthorized error for invalid clientId', async () => {
@@ -65,8 +63,7 @@ describe('AuthService', function () {
             } catch (e) {
                 expect(e.status).to.eql(401);
             }
-        }
-        );
+        });
     });
     describe('getTokenResponse', function () {
         it('should return Unauthorized error for invalid clientSecret', async () => {
@@ -78,8 +75,7 @@ describe('AuthService', function () {
             } catch (e) {
                 expect(e.status).to.eql(401);
             }
-        }
-        );
+        });
     });
     describe('getTokenResponse', function () {
         it('should return the same token response object when called multiple times', async () => {
@@ -89,9 +85,8 @@ describe('AuthService', function () {
             let tokenResponse1 = await authService.getTokenResponse();
             let tokenResponse2 = await authService.getTokenResponse();
 
-            expect(tokenResponse1.data).to.eql(tokenResponse2);
-            }
-        );
+            expect(tokenResponse1).to.eql(tokenResponse2);
+        });
     });
     describe('getTokenResponse', function () {
         it('should call only one time the ApiClient callApi method when multiple instances are used', async () => {
@@ -106,7 +101,6 @@ describe('AuthService', function () {
             await authService2.getTokenResponse();
 
             expect(apiClientSpy.calledOnce).to.eql(true);
-            }
-        );
+        });
     });
 });

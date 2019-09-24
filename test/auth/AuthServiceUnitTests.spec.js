@@ -6,7 +6,7 @@ const AuthService = require('../../src/Auth/AuthService');
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-const date = 1568972613184;
+const date = new Date(2000, 1, 1).getTime();
 
 let cacheService;
 let clientConfiguration;
@@ -41,15 +41,14 @@ describe('AuthService', function () {
             await authService.getTokenResponse();
 
             expect(apiClientStub.callApi.calledOnce).to.eql(true);
-            }
-        );
+        });
         it('should execute the callApi method when the cached value for a cache key is expired', async () => {
             let authService = new AuthService(clientConfiguration, apiClientStub, cacheService);
 
             await authService.getTokenResponse();
-            let cachedDataExpirationCause = (tokenResponseData.data.expires_in - cacheService.invalidCacheWindowInSeconds) * 1000;
+            let validCacheWindowInMs = (tokenResponseData.expires_in - cacheService.invalidCacheWindowInSeconds) * 1000;
             // making the cached data corresponding to cacheKey to have the expirationTime equal to the current time, thus invalid
-            clock.tick(cachedDataExpirationCause);
+            clock.tick(validCacheWindowInMs);
             await authService.getTokenResponse();
 
             expect(apiClientStub.callApi.calledTwice).to.eql(true);

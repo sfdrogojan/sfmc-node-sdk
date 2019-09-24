@@ -30,7 +30,7 @@ class AuthService{
 
             this.cacheService.addOrUpdate(cacheKey, authRequestResponse.data);
 
-            return authRequestResponse;
+            return authRequestResponse.data;
         }
         else{
             return cachedTokenResponse.tokenResponse;
