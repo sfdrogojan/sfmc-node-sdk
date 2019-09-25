@@ -1,4 +1,5 @@
 const RuntimeInformationProvider = require('../RuntimeInformationProvider');
+const ApiExceptionFactory = require('../Exception/ApiExceptionFactory');
 
 class AuthService{
     constructor(clientConfig, apiClient, cacheService){
@@ -15,22 +16,29 @@ class AuthService{
         if(!cachedTokenResponse){
             this.apiClient.basePath = this.clientConfig.authBasePath;
 
-            let authRequestResponse = await this.apiClient.callApi('v2/token',
-                'POST',
-                {},
-                {},
-                {'User-Agent': new RuntimeInformationProvider().getUserAgentString()},
-                {},
-                this.getTokenRequestPayload(),
-                'oauth2',
-                [],
-                [],
-                Object
-            );
+            let authRequestResponse;
 
-            this.cacheService.addOrUpdate(cacheKey, authRequestResponse.data);
+            try {
+                authRequestResponse = await this.apiClient.callApi('v2/token',
+                    'POST',
+                    {},
+                    {},
+                    {'User-Agent': new RuntimeInformationProvider().getUserAgentString()},
+                    {},
+                    this.getTokenRequestPayload(),
+                    'oauth2',
+                    [],
+                    [],
+                    Object
+                );
 
-            return authRequestResponse.data;
+                this.cacheService.addOrUpdate(cacheKey, authRequestResponse.data);
+
+                return authRequestResponse.data;
+            }
+            catch (e) {
+                throw ApiExceptionFactory.buildCustomException('getTokenResponse', e);
+            }
         }
         else{
             return cachedTokenResponse.tokenResponse;
