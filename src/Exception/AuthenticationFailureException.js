@@ -1,4 +1,4 @@
-class BadRequestException extends Error {
+class AuthenticationFailureException extends Error {
     constructor(exceptionMessage, statusCode) {
         super();
         this.name = 'Salesforce.MarketingCloud.Exceptions.' + this.constructor.name;
@@ -7,5 +7,5 @@ class BadRequestException extends Error {
     }
 }
 
-module.exports = BadRequestException;
+module.exports = AuthenticationFailureException;
 

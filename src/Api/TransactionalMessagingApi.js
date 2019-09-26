@@ -58,7 +58,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/CreateEmailDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateEmailDefinitionRequest} and HTTP response
      */
-    createEmailDefinitionWithHttpInfo(body) {
+    createEmailDefinitionWithHttpInfo(caller, body) {
       let postBody = body;
 
       // verify the required parameter 'body' is set
@@ -84,7 +84,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -95,7 +95,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateEmailDefinitionRequest}
      */
     createEmailDefinition(body) {
-      return this.createEmailDefinitionWithHttpInfo(body)
+      return this.createEmailDefinitionWithHttpInfo('createEmailDefinition', body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -108,7 +108,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/CreateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateSmsDefinitionRequest} and HTTP response
      */
-    createSmsDefinitionWithHttpInfo(body) {
+    createSmsDefinitionWithHttpInfo(caller, body) {
       let postBody = body;
 
       // verify the required parameter 'body' is set
@@ -134,7 +134,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -145,7 +145,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateSmsDefinitionRequest}
      */
     createSmsDefinition(body) {
-      return this.createSmsDefinitionWithHttpInfo(body)
+      return this.createSmsDefinitionWithHttpInfo('createSmsDefinition', body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -158,7 +158,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the definition to delete
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/DeleteSendDefinitionResponse} and HTTP response
      */
-    deleteEmailDefinitionWithHttpInfo(definitionKey) {
+    deleteEmailDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -185,7 +185,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -196,7 +196,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/DeleteSendDefinitionResponse}
      */
     deleteEmailDefinition(definitionKey) {
-      return this.deleteEmailDefinitionWithHttpInfo(definitionKey)
+      return this.deleteEmailDefinitionWithHttpInfo('deleteEmailDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -209,7 +209,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the email definition
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/DeleteQueuedMessagesForSendDefinitionResponse} and HTTP response
      */
-    deleteQueuedMessagesForEmailDefinitionWithHttpInfo(definitionKey) {
+    deleteQueuedMessagesForEmailDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -236,7 +236,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}/queue', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -247,7 +247,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/DeleteQueuedMessagesForSendDefinitionResponse}
      */
     deleteQueuedMessagesForEmailDefinition(definitionKey) {
-      return this.deleteQueuedMessagesForEmailDefinitionWithHttpInfo(definitionKey)
+      return this.deleteQueuedMessagesForEmailDefinitionWithHttpInfo('deleteQueuedMessagesForEmailDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -260,7 +260,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the SMS definition
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/DeleteQueuedMessagesForSendDefinitionResponse} and HTTP response
      */
-    deleteQueuedMessagesForSmsDefinitionWithHttpInfo(definitionKey) {
+    deleteQueuedMessagesForSmsDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -287,7 +287,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}/queue', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -298,7 +298,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/DeleteQueuedMessagesForSendDefinitionResponse}
      */
     deleteQueuedMessagesForSmsDefinition(definitionKey) {
-      return this.deleteQueuedMessagesForSmsDefinitionWithHttpInfo(definitionKey)
+      return this.deleteQueuedMessagesForSmsDefinitionWithHttpInfo('deleteQueuedMessagesForSmsDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -311,7 +311,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the definition to delete
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/DeleteSendDefinitionResponse} and HTTP response
      */
-    deleteSmsDefinitionWithHttpInfo(definitionKey) {
+    deleteSmsDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -338,7 +338,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -349,7 +349,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/DeleteSendDefinitionResponse}
      */
     deleteSmsDefinition(definitionKey) {
-      return this.deleteSmsDefinitionWithHttpInfo(definitionKey)
+      return this.deleteSmsDefinitionWithHttpInfo('deleteSmsDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -362,7 +362,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the definition to get
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateEmailDefinitionRequest} and HTTP response
      */
-    getEmailDefinitionWithHttpInfo(definitionKey) {
+    getEmailDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -389,7 +389,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -400,7 +400,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateEmailDefinitionRequest}
      */
     getEmailDefinition(definitionKey) {
-      return this.getEmailDefinitionWithHttpInfo(definitionKey)
+      return this.getEmailDefinitionWithHttpInfo('getEmailDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -417,7 +417,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/String} opts.orderBy Sort by a dimension. You can sort by only one dimension. Accepted values are definitionKey, name, createdDate, modifiedDate, and status.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetEmailDefinitionsResponse} and HTTP response
      */
-    getEmailDefinitionsWithHttpInfo(opts) {
+    getEmailDefinitionsWithHttpInfo(caller, opts) {
       opts = opts || {};
       let postBody = null;
 
@@ -443,7 +443,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -458,7 +458,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetEmailDefinitionsResponse}
      */
     getEmailDefinitions(opts) {
-      return this.getEmailDefinitionsWithHttpInfo(opts)
+      return this.getEmailDefinitionsWithHttpInfo('getEmailDefinitions', opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -471,7 +471,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} messageKey Unique identifier to track message send status. You must provide it in singleton requests using the recipient attribute. To provide it in batch requests, use the recipients array attribute. If you don’t provide the message key for recipients, it’s generated in the response.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetDefinitionSendStatusForRecipientResponse} and HTTP response
      */
-    getEmailSendStatusForRecipientWithHttpInfo(messageKey) {
+    getEmailSendStatusForRecipientWithHttpInfo(caller, messageKey) {
       let postBody = null;
 
       // verify the required parameter 'messageKey' is set
@@ -498,7 +498,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/{messageKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -509,7 +509,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetDefinitionSendStatusForRecipientResponse}
      */
     getEmailSendStatusForRecipient(messageKey) {
-      return this.getEmailSendStatusForRecipientWithHttpInfo(messageKey)
+      return this.getEmailSendStatusForRecipientWithHttpInfo('getEmailSendStatusForRecipient', messageKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -525,7 +525,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {Number} opts.lastEventId Event ID from which you want the response to start. To obtain the initial event ID, submit a request without a lastEventId. The events in the response are listed top to bottom from oldest to newest.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetDefinitionsNotSentToRecipientsResponse} and HTTP response
      */
-    getEmailsNotSentToRecipientsWithHttpInfo(type, opts) {
+    getEmailsNotSentToRecipientsWithHttpInfo(caller, type, opts) {
       opts = opts || {};
       let postBody = null;
 
@@ -555,7 +555,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -569,7 +569,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetDefinitionsNotSentToRecipientsResponse}
      */
     getEmailsNotSentToRecipients(type, opts) {
-      return this.getEmailsNotSentToRecipientsWithHttpInfo(type, opts)
+      return this.getEmailsNotSentToRecipientsWithHttpInfo('getEmailsNotSentToRecipients', type, opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -582,7 +582,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the email definition
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetQueueMetricsForSendDefinitionResponse} and HTTP response
      */
-    getQueueMetricsForEmailDefinitionWithHttpInfo(definitionKey) {
+    getQueueMetricsForEmailDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -609,7 +609,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}/queue', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -620,7 +620,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetQueueMetricsForSendDefinitionResponse}
      */
     getQueueMetricsForEmailDefinition(definitionKey) {
-      return this.getQueueMetricsForEmailDefinitionWithHttpInfo(definitionKey)
+      return this.getQueueMetricsForEmailDefinitionWithHttpInfo('getQueueMetricsForEmailDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -633,7 +633,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the SMS definition
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetQueueMetricsForSendDefinitionResponse} and HTTP response
      */
-    getQueueMetricsForSmsDefinitionWithHttpInfo(definitionKey) {
+    getQueueMetricsForSmsDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -660,7 +660,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}/queue', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -671,7 +671,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetQueueMetricsForSendDefinitionResponse}
      */
     getQueueMetricsForSmsDefinition(definitionKey) {
-      return this.getQueueMetricsForSmsDefinitionWithHttpInfo(definitionKey)
+      return this.getQueueMetricsForSmsDefinitionWithHttpInfo('getQueueMetricsForSmsDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -687,7 +687,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {Number} opts.lastEventId Event ID from which you want the response to start. To obtain the initial event ID, submit a request without a lastEventId. The events in the response are listed top to bottom from oldest to newest.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetDefinitionsNotSentToRecipientsResponse} and HTTP response
      */
-    getSMSsNotSentToRecipientsWithHttpInfo(type, opts) {
+    getSMSsNotSentToRecipientsWithHttpInfo(caller, type, opts) {
       opts = opts || {};
       let postBody = null;
 
@@ -717,7 +717,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -731,7 +731,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetDefinitionsNotSentToRecipientsResponse}
      */
     getSMSsNotSentToRecipients(type, opts) {
-      return this.getSMSsNotSentToRecipientsWithHttpInfo(type, opts)
+      return this.getSMSsNotSentToRecipientsWithHttpInfo('getSMSsNotSentToRecipients', type, opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -744,7 +744,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} definitionKey Unique identifier of the definition to get
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateSmsDefinitionRequest} and HTTP response
      */
-    getSmsDefinitionWithHttpInfo(definitionKey) {
+    getSmsDefinitionWithHttpInfo(caller, definitionKey) {
       let postBody = null;
 
       // verify the required parameter 'definitionKey' is set
@@ -771,7 +771,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -782,7 +782,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateSmsDefinitionRequest}
      */
     getSmsDefinition(definitionKey) {
-      return this.getSmsDefinitionWithHttpInfo(definitionKey)
+      return this.getSmsDefinitionWithHttpInfo('getSmsDefinition', definitionKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -799,7 +799,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/String} opts.orderBy Sort by a dimension. You can sort by only one dimension. Accepted values are definitionKey, name, createdDate, modifiedDate, and status.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetSmsDefinitionsResponse} and HTTP response
      */
-    getSmsDefinitionsWithHttpInfo(opts) {
+    getSmsDefinitionsWithHttpInfo(caller, opts) {
       opts = opts || {};
       let postBody = null;
 
@@ -825,7 +825,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -840,7 +840,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetSmsDefinitionsResponse}
      */
     getSmsDefinitions(opts) {
-      return this.getSmsDefinitionsWithHttpInfo(opts)
+      return this.getSmsDefinitionsWithHttpInfo('getSmsDefinitions', opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -853,7 +853,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {String} messageKey Unique identifier to track message send status. You must provide it in singleton requests using the recipient attribute. To provide message key in batch requests, use the recipients array attribute. If you don’t provide the message key for recipients, it’s generated in the response.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/GetDefinitionSendStatusForRecipientResponse} and HTTP response
      */
-    getSmsSendStatusForRecipientWithHttpInfo(messageKey) {
+    getSmsSendStatusForRecipientWithHttpInfo(caller, messageKey) {
       let postBody = null;
 
       // verify the required parameter 'messageKey' is set
@@ -880,7 +880,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/{messageKey}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -891,7 +891,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/GetDefinitionSendStatusForRecipientResponse}
      */
     getSmsSendStatusForRecipient(messageKey) {
-      return this.getSmsSendStatusForRecipientWithHttpInfo(messageKey)
+      return this.getSmsSendStatusForRecipientWithHttpInfo('getSmsSendStatusForRecipient', messageKey)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -905,7 +905,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/UpdateEmailDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateEmailDefinitionRequest} and HTTP response
      */
-    partiallyUpdateEmailDefinitionWithHttpInfo(definitionKey, body) {
+    partiallyUpdateEmailDefinitionWithHttpInfo(caller, definitionKey, body) {
       let postBody = body;
 
       // verify the required parameter 'definitionKey' is set
@@ -937,7 +937,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/definitions/{definitionKey}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -949,7 +949,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateEmailDefinitionRequest}
      */
     partiallyUpdateEmailDefinition(definitionKey, body) {
-      return this.partiallyUpdateEmailDefinitionWithHttpInfo(definitionKey, body)
+      return this.partiallyUpdateEmailDefinitionWithHttpInfo('partiallyUpdateEmailDefinition', definitionKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -963,7 +963,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/UpdateSmsDefinitionRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/CreateSmsDefinitionRequest} and HTTP response
      */
-    partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, body) {
+    partiallyUpdateSmsDefinitionWithHttpInfo(caller, definitionKey, body) {
       let postBody = body;
 
       // verify the required parameter 'definitionKey' is set
@@ -995,7 +995,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/definitions/{definitionKey}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -1007,7 +1007,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/CreateSmsDefinitionRequest}
      */
     partiallyUpdateSmsDefinition(definitionKey, body) {
-      return this.partiallyUpdateSmsDefinitionWithHttpInfo(definitionKey, body)
+      return this.partiallyUpdateSmsDefinitionWithHttpInfo('partiallyUpdateSmsDefinition', definitionKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1020,7 +1020,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/SendEmailToMultipleRecipientsRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse} and HTTP response
      */
-    sendEmailToMultipleRecipientsWithHttpInfo(body) {
+    sendEmailToMultipleRecipientsWithHttpInfo(caller, body) {
       let postBody = body;
 
       // verify the required parameter 'body' is set
@@ -1046,7 +1046,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -1057,7 +1057,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse}
      */
     sendEmailToMultipleRecipients(body) {
-      return this.sendEmailToMultipleRecipientsWithHttpInfo(body)
+      return this.sendEmailToMultipleRecipientsWithHttpInfo('sendEmailToMultipleRecipients', body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1071,7 +1071,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/SendEmailToSingleRecipientRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToSingleRecipientResponse} and HTTP response
      */
-    sendEmailToSingleRecipientWithHttpInfo(messageKey, body) {
+    sendEmailToSingleRecipientWithHttpInfo(caller, messageKey, body) {
       let postBody = body;
 
       // verify the required parameter 'messageKey' is set
@@ -1103,7 +1103,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/email/messages/{messageKey}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -1115,7 +1115,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToSingleRecipientResponse}
      */
     sendEmailToSingleRecipient(messageKey, body) {
-      return this.sendEmailToSingleRecipientWithHttpInfo(messageKey, body)
+      return this.sendEmailToSingleRecipientWithHttpInfo('sendEmailToSingleRecipient', messageKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1128,7 +1128,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/SendSmsToMultipleRecipientsRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse} and HTTP response
      */
-    sendSmsToMultipleRecipientsWithHttpInfo(body) {
+    sendSmsToMultipleRecipientsWithHttpInfo(caller, body) {
       let postBody = body;
 
       // verify the required parameter 'body' is set
@@ -1154,7 +1154,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -1165,7 +1165,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToMultipleRecipientsResponse}
      */
     sendSmsToMultipleRecipients(body) {
-      return this.sendSmsToMultipleRecipientsWithHttpInfo(body)
+      return this.sendSmsToMultipleRecipientsWithHttpInfo('sendSmsToMultipleRecipients', body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -1179,7 +1179,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @param {module:Model/SendSmsToSingleRecipientRequest} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/SendDefinitionToSingleRecipientResponse} and HTTP response
      */
-    sendSmsToSingleRecipientWithHttpInfo(messageKey, body) {
+    sendSmsToSingleRecipientWithHttpInfo(caller, messageKey, body) {
       let postBody = body;
 
       // verify the required parameter 'messageKey' is set
@@ -1211,7 +1211,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
       return this.apiClient.callApi(
         '/messaging/v1/sms/messages/{messageKey}', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -1223,7 +1223,7 @@ module.exports = class TransactionalMessagingApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/SendDefinitionToSingleRecipientResponse}
      */
     sendSmsToSingleRecipient(messageKey, body) {
-      return this.sendSmsToSingleRecipientWithHttpInfo(messageKey, body)
+      return this.sendSmsToSingleRecipientWithHttpInfo('sendSmsToSingleRecipient', messageKey, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

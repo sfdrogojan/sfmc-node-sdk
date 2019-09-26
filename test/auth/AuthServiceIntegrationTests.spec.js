@@ -20,20 +20,20 @@ let apiClient;
 let cacheService;
 let authService;
 
-before(() => {
-    configProvider = new ConfigProvider();
-
-    authBasePath = configProvider.authBasePath;
-    clientId = configProvider.clientId;
-    clientSecret = configProvider.clientSecret;
-    accountId = configProvider.accountId;
-    scope = configProvider.scope;
-
-    cacheService = new CacheService();
-    apiClient = new ApiClient(new RuntimeInformationProvider());
-});
-
 describe('AuthService', function () {
+
+    before(() => {
+        configProvider = new ConfigProvider();
+
+        authBasePath = configProvider.authBasePath;
+        clientId = configProvider.clientId;
+        clientSecret = configProvider.clientSecret;
+        accountId = configProvider.accountId;
+        scope = configProvider.scope;
+
+        cacheService = new CacheService();
+        apiClient = new ApiClient(new RuntimeInformationProvider());
+    });
 
     afterEach(()=>{
         CacheService.cachedData = {};
@@ -56,7 +56,7 @@ describe('AuthService', function () {
     describe('getTokenResponse', function () {
         it('should return Unauthorized error for invalid clientId', async () => {
             let invalidClientConfiguration = new ClientConfiguration(authBasePath, 'invalidClientId', clientSecret, accountId, scope);
-                authService = new AuthService(invalidClientConfiguration, apiClient, cacheService);
+            authService = new AuthService(invalidClientConfiguration, apiClient, cacheService);
 
             try {
                 await authService.getTokenResponse();

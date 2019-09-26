@@ -1,15 +1,48 @@
 const BadRequestException = require('./BadRequestException');
+const AuthenticationFailureException = require('./AuthenticationFailureException');
+const UnauthorizedAccessException = require('./UnauthorizedAccessException');
+const ResourceNotFoundException = require('./ResourceNotFoundException');
+const InternalServerErrorException = require('./InternalServerErrorException');
+const BadGatewayException = require('./BadGatewayException');
+const ServiceUnavailableException = require('./ServiceUnavailableException');
+const GatewayTimeoutException = require('./GatewayTimeoutException');
+const ServerUnreachableException = require('./ServerUnreachableException');
+const ApiException = require('./ApiException');
 
 class ApiExceptionFactory {
-    static buildCustomException(methodName, response) {
-        if (response.status >= 400) {
+    static buildCustomException(caller, error) {
+        let statusCode = error.status;
+        let exceptionMessage;
 
-            const exceptionMessage = `Error calling ${methodName}: ${JSON.stringify(response.response.body)}`;
-            switch (response.status) {
+        if (statusCode >= 400) {
+
+            exceptionMessage = `Error calling ${caller}: ${JSON.stringify(error.response.body)}`;
+
+            switch (statusCode) {
                 case 400:
-                    return new BadRequestException(response, exceptionMessage);
-                //TODO - add default case
+                    return new BadRequestException(exceptionMessage, statusCode);
+                case 401:
+                    return new AuthenticationFailureException(exceptionMessage, statusCode);
+                case 403:
+                    return new UnauthorizedAccessException(exceptionMessage, statusCode);
+                case 404:
+                    return new ResourceNotFoundException(exceptionMessage, statusCode);
+                case 500:
+                    return new InternalServerErrorException(exceptionMessage, statusCode);
+                case 502:
+                    return new BadGatewayException(exceptionMessage, statusCode);
+                case 503:
+                    return new ServiceUnavailableException(exceptionMessage, statusCode);
+                case 504:
+                    return new GatewayTimeoutException(exceptionMessage, statusCode);
+                default:
+                    return new ApiException(exceptionMessage, statusCode);
             }
+        }
+        if(statusCode === undefined){
+            exceptionMessage = `Error calling ${caller}: ${JSON.stringify(error.errno)}`;
+
+            return new ServerUnreachableException(exceptionMessage);
         }
     }
 }
