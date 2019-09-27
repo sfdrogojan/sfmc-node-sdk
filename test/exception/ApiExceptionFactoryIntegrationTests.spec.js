@@ -7,6 +7,9 @@ const CacheService = require('../../src/Auth/CacheService');
 const AuthenticationFailureException = require('../../src/Exception/AuthenticationFailureException');
 const ServerUnreachableException = require('../../src/Exception/ServerUnreachableException');
 const BadRequestException = require('../../src/Exception/BadRequestException');
+const ResourceNotFoundException = require('../../src/Exception/ResourceNotFoundException');
+const ApiSutFactory = require('../api/ApiSutFactory');
+const AssetApi = require('../../src/Api/AssetApi');
 
 const expect = require('expect.js');
 
@@ -20,9 +23,10 @@ let configProvider;
 let apiClient;
 let cacheService;
 let authService;
+let assetApiInstance;
+let clientConfiguration;
 
 describe('ApiExceptionFactory', function () {
-
     before(() => {
         configProvider = new ConfigProvider();
 
@@ -34,10 +38,8 @@ describe('ApiExceptionFactory', function () {
 
         cacheService = new CacheService();
         apiClient = new ApiClient(new RuntimeInformationProvider());
-    });
-
-    afterEach(()=>{
-        CacheService.cachedData = {};
+        assetApiInstance = new ApiSutFactory(AssetApi.prototype.constructor).create();
+        clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
     });
 
     describe('buildCustomException', function () {
@@ -51,17 +53,7 @@ describe('ApiExceptionFactory', function () {
                 expect(e).to.be.an(AuthenticationFailureException);
             }
         });
-        it('should return AuthenticationFailureException for invalid clientSecret', async () => {
-            let invalidClientSecretConfig = new ClientConfiguration(authBasePath, clientId, 'invalidClientSecret', accountId, scope);
-            authService = new AuthService(invalidClientSecretConfig, apiClient, cacheService);
-
-            try {
-                await authService.getTokenResponse();
-            } catch (e) {
-                expect(e).to.be.an(AuthenticationFailureException);
-            }
-        });
-        it('should return BadRequestException when number passed as clientId', async () => {
+        it('should return BadRequestException when number passed for clientId', async () => {
             let invalidClientSecretConfig = new ClientConfiguration(authBasePath, 3.141592, clientSecret, accountId, scope);
             authService = new AuthService(invalidClientSecretConfig, apiClient, cacheService);
 
@@ -81,5 +73,22 @@ describe('ApiExceptionFactory', function () {
                 expect(e).to.be.an(ServerUnreachableException);
             }
         });
+        it('should return ResourceNotFoundException for GET on invalid asset id', async () => {
+            try {
+                let randomInt = getRandomInt(7);
+                await assetApiInstance.getAssetById(randomInt);
+            } catch (e) {
+                expect(e).to.be.an(ResourceNotFoundException);
+            }
+        });
     });
 });
+
+function getRandomInt(length){
+    return Math.floor(Math.random() * Math.pow(10, length));
+}
+
+
+
+
+

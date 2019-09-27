@@ -40,7 +40,7 @@ class ApiExceptionFactory {
             }
         }
         if(statusCode === undefined){
-            exceptionMessage = `Error calling ${caller}: ${JSON.stringify(error.errno)}`;
+            exceptionMessage = `Error calling ${caller}: ${JSON.stringify(error)}`;
 
             return new ServerUnreachableException(exceptionMessage);
         }

@@ -1,4 +1,4 @@
-class ServerUnreachable extends Error {
+class ServerUnreachableException extends Error {
     constructor(exceptionMessage) {
         super();
         this.name = 'Salesforce.MarketingCloud.Exceptions.' + this.constructor.name;
@@ -6,5 +6,5 @@ class ServerUnreachable extends Error {
     }
 }
 
-module.exports = ServerUnreachable;
+module.exports = ServerUnreachableException;
 
