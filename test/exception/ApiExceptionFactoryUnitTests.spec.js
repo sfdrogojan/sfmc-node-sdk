@@ -24,7 +24,7 @@ describe('ApiExceptionFactory', function () {
             let exceptionObjKey = Object.keys(exception)[0];
             let exceptionObjValue = exception[exceptionObjKey];
 
-            xit(`should return a ${exceptionObjKey} for a ${exceptionObjValue} status code in the request response`, function () {
+            it(`should return a ${exceptionObjKey} for a ${exceptionObjValue} status code in the request response`, function () {
                 let requestResponse = TestHelper.createRequestResponse(exceptionObjValue);
                 let expectedExceptionMessage = `Error calling ${callApiCallerMethod}: "${requestResponse.response.body}"`;
                 let expectedExceptionName = `Salesforce.MarketingCloud.Exceptions.${exceptionObjKey}`;
