@@ -433,7 +433,7 @@ class ApiClient {
         return new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
-                    reject(ApiExceptionFactory.buildCustomException(caller, error));
+                    reject(ApiExceptionFactory.createCustomException(caller, error));
                 } else {
                     try {
                         var data = this.deserialize(response, returnType);

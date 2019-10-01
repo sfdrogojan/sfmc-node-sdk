@@ -18,7 +18,7 @@ describe('ApiExceptionFactory', function () {
         {ApiException: 418}
     ];
 
-    describe('buildCustomException', function () {
+    describe('createCustomException', function () {
         exceptions.forEach((exception) => {
 
             let exceptionObjKey = Object.keys(exception)[0];
@@ -29,7 +29,7 @@ describe('ApiExceptionFactory', function () {
                 let expectedExceptionMessage = `Error calling ${callApiCallerMethod}: "${requestResponse.response.body}"`;
                 let expectedExceptionName = `Salesforce.MarketingCloud.Exceptions.${exceptionObjKey}`;
 
-                let returnedException = ApiExceptionFactory.buildCustomException(callApiCallerMethod, requestResponse);
+                let returnedException = ApiExceptionFactory.createCustomException(callApiCallerMethod, requestResponse);
 
                 expect(returnedException.name).to.eql(expectedExceptionName);
                 expect(returnedException.message).to.eql(expectedExceptionMessage);
@@ -41,7 +41,7 @@ describe('ApiExceptionFactory', function () {
             let expectedExceptionMessage = `Error calling ${callApiCallerMethod}: ${JSON.stringify(serverUnreachableError)}`;
             let expectedExceptionName = `Salesforce.MarketingCloud.Exceptions.ServerUnreachableException`;
 
-            let returnedException = ApiExceptionFactory.buildCustomException(callApiCallerMethod, serverUnreachableError);
+            let returnedException = ApiExceptionFactory.createCustomException(callApiCallerMethod, serverUnreachableError);
 
             expect(returnedException.name).to.eql(expectedExceptionName);
             expect(returnedException.message).to.eql(expectedExceptionMessage);

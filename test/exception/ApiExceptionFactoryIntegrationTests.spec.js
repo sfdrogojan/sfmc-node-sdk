@@ -42,7 +42,7 @@ describe('ApiExceptionFactory', function () {
         clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
     });
 
-    describe('buildCustomException', function () {
+    describe('createCustomException', function () {
         it('should return AuthenticationFailureException for invalid clientId', async () => {
             let invalidClientIdConfig = new ClientConfiguration(authBasePath, 'invalidClientId', clientSecret, accountId, scope);
             authService = new AuthService(invalidClientIdConfig, apiClient, cacheService);
@@ -87,8 +87,3 @@ describe('ApiExceptionFactory', function () {
 function getRandomInt(length){
     return Math.floor(Math.random() * Math.pow(10, length));
 }
-
-
-
-
-

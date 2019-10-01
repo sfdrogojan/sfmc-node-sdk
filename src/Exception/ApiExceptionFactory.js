@@ -10,7 +10,7 @@ const ServerUnreachableException = require('./ServerUnreachableException');
 const ApiException = require('./ApiException');
 
 class ApiExceptionFactory {
-    static buildCustomException(caller, error) {
+    static createCustomException(caller, error) {
         let statusCode = error.status;
         let exceptionMessage;
 
