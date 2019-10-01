@@ -15,6 +15,7 @@
 const superagent = require ('superagent');
 const querystring = require ('querystring');
 const Authentication = require('../src/Auth/Authentication');
+const ApiExceptionFactory = require('./Exception/ApiExceptionFactory');
 
 /**
 * @module ApiClient
@@ -354,7 +355,7 @@ class ApiClient {
     */
     callApi(path, httpMethod, pathParams,
         queryParams, headerParams, formParams, bodyParam, authName, contentTypes, accepts,
-        returnType) {
+        returnType, caller) {
 
         var url = this.buildUrl(path, pathParams);
         var request = superagent(httpMethod, url);
@@ -432,7 +433,7 @@ class ApiClient {
         return new Promise((resolve, reject) => {
             request.end((error, response) => {
                 if (error) {
-                    reject(error);
+                    reject(ApiExceptionFactory.createCustomException(caller, error));
                 } else {
                     try {
                         var data = this.deserialize(response, returnType);

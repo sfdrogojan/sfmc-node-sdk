@@ -1,7 +1,7 @@
 const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
 
 class TestHelper {
-    static createTokenResponseData(){
+    static createTokenResponseData() {
         return {
             data: {
                 access_token: 'access_token',
@@ -14,7 +14,7 @@ class TestHelper {
         }
     }
 
-    static createClientConfiguration(){
+    static createClientConfiguration() {
         return new ClientConfiguration(
             'https://auth.com',
             'clientId',
@@ -22,6 +22,24 @@ class TestHelper {
             123456,
             'scope'
         )
+    }
+
+    static createRequestResponse(statusCode) {
+        return {
+            status: statusCode,
+            response: {
+                body: 'errorResponseBody'
+            }
+        }
+    }
+
+    static createServerUnreachableError(){
+        return {
+            code: 'ENOTFOUND',
+            errno: 'ENOTFOUND',
+            syscall: 'getaddrinfo',
+            hostname: 'host'
+        }
     }
 }
 

@@ -15,18 +15,19 @@ class AuthService{
         if(!cachedTokenResponse){
             this.apiClient.basePath = this.clientConfig.authBasePath;
 
-            let authRequestResponse = await this.apiClient.callApi('v2/token',
-                'POST',
-                {},
-                {},
-                {'User-Agent': new RuntimeInformationProvider().getUserAgentString()},
-                {},
-                this.getTokenRequestPayload(),
-                'oauth2',
-                [],
-                [],
-                Object
-            );
+             let authRequestResponse = await this.apiClient.callApi('v2/token',
+                 'POST',
+                 {},
+                 {},
+                 {'User-Agent': new RuntimeInformationProvider().getUserAgentString()},
+                 {},
+                 this.getTokenRequestPayload(),
+                 'oauth2',
+                 [],
+                 [],
+                 Object,
+                 'getTokenResponse'
+             );
 
             this.cacheService.addOrUpdate(cacheKey, authRequestResponse.data);
 

@@ -42,7 +42,7 @@ module.exports = class AssetApi extends BaseApi {
      * @param {module:Model/Asset} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Asset} and HTTP response
      */
-    createAssetWithHttpInfo(body) {
+    createAssetWithHttpInfo(caller, body) {
       let postBody = body;
 
       // verify the required parameter 'body' is set
@@ -68,7 +68,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -79,7 +79,7 @@ module.exports = class AssetApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Asset}
      */
     createAsset(body) {
-      return this.createAssetWithHttpInfo(body)
+      return this.createAssetWithHttpInfo('createAsset', body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -92,7 +92,7 @@ module.exports = class AssetApi extends BaseApi {
      * @param {Number} id The ID of the asset to delete
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    deleteAssetByIdWithHttpInfo(id) {
+    deleteAssetByIdWithHttpInfo(caller, id) {
       let postBody = null;
 
       // verify the required parameter 'id' is set
@@ -119,7 +119,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -130,7 +130,7 @@ module.exports = class AssetApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     deleteAssetById(id) {
-      return this.deleteAssetByIdWithHttpInfo(id)
+      return this.deleteAssetByIdWithHttpInfo('deleteAssetById', id)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -143,7 +143,7 @@ module.exports = class AssetApi extends BaseApi {
      * @param {Number} id The ID of the asset
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Asset} and HTTP response
      */
-    getAssetByIdWithHttpInfo(id) {
+    getAssetByIdWithHttpInfo(caller, id) {
       let postBody = null;
 
       // verify the required parameter 'id' is set
@@ -170,7 +170,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -181,7 +181,7 @@ module.exports = class AssetApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Asset}
      */
     getAssetById(id) {
-      return this.getAssetByIdWithHttpInfo(id)
+      return this.getAssetByIdWithHttpInfo('getAssetById', id)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -195,7 +195,7 @@ module.exports = class AssetApi extends BaseApi {
      * @param {module:Model/Asset} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Asset} and HTTP response
      */
-    partiallyUpdateAssetByIdWithHttpInfo(id, body) {
+    partiallyUpdateAssetByIdWithHttpInfo(caller, id, body) {
       let postBody = body;
 
       // verify the required parameter 'id' is set
@@ -227,7 +227,7 @@ module.exports = class AssetApi extends BaseApi {
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -239,7 +239,7 @@ module.exports = class AssetApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Asset}
      */
     partiallyUpdateAssetById(id, body) {
-      return this.partiallyUpdateAssetByIdWithHttpInfo(id, body)
+      return this.partiallyUpdateAssetByIdWithHttpInfo('partiallyUpdateAssetById', id, body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

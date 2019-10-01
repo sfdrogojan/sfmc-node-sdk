@@ -42,7 +42,7 @@ module.exports = class CampaignApi extends BaseApi {
      * @param {module:Model/Campaign} body JSON Parameters
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Campaign} and HTTP response
      */
-    createCampaignWithHttpInfo(body) {
+    createCampaignWithHttpInfo(caller, body) {
       let postBody = body;
 
       // verify the required parameter 'body' is set
@@ -68,7 +68,7 @@ module.exports = class CampaignApi extends BaseApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -79,7 +79,7 @@ module.exports = class CampaignApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Campaign}
      */
     createCampaign(body) {
-      return this.createCampaignWithHttpInfo(body)
+      return this.createCampaignWithHttpInfo('createCampaign', body)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -92,7 +92,7 @@ module.exports = class CampaignApi extends BaseApi {
      * @param {String} id The ID of the campaign to delete
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    deleteCampaignByIdWithHttpInfo(id) {
+    deleteCampaignByIdWithHttpInfo(caller, id) {
       let postBody = null;
 
       // verify the required parameter 'id' is set
@@ -119,7 +119,7 @@ module.exports = class CampaignApi extends BaseApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -130,7 +130,7 @@ module.exports = class CampaignApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
     deleteCampaignById(id) {
-      return this.deleteCampaignByIdWithHttpInfo(id)
+      return this.deleteCampaignByIdWithHttpInfo('deleteCampaignById', id)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -143,7 +143,7 @@ module.exports = class CampaignApi extends BaseApi {
      * @param {String} id Campaign ID
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:Model/Campaign} and HTTP response
      */
-    getCampaignByIdWithHttpInfo(id) {
+    getCampaignByIdWithHttpInfo(caller, id) {
       let postBody = null;
 
       // verify the required parameter 'id' is set
@@ -170,7 +170,7 @@ module.exports = class CampaignApi extends BaseApi {
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authName, contentTypes, accepts, returnType
+        authName, contentTypes, accepts, returnType, caller
       );
     }
 
@@ -181,7 +181,7 @@ module.exports = class CampaignApi extends BaseApi {
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:Model/Campaign}
      */
     getCampaignById(id) {
-      return this.getCampaignByIdWithHttpInfo(id)
+      return this.getCampaignByIdWithHttpInfo('getCampaignById', id)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
