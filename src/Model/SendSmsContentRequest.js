@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The SendSmsContentRequest model module.
 * @module Model/SendSmsContentRequest
@@ -32,10 +34,7 @@ module.exports = class SendSmsContentRequest{
 
     constructor() {
         
-
         
-        
-
         
 
         

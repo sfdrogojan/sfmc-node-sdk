@@ -19,6 +19,8 @@ const SendDefinitionResponseItem = require ('./SendDefinitionResponseItem');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The SendDefinitionToSingleRecipientResponse model module.
 * @module Model/SendDefinitionToSingleRecipientResponse
@@ -33,8 +35,9 @@ module.exports = class SendDefinitionToSingleRecipientResponse{
 
     constructor() {
         
-
         
+        
+
         
 
         

@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The CreateEmailDefinitionOptionsRequest model module.
 * @module Model/CreateEmailDefinitionOptionsRequest
@@ -32,10 +34,7 @@ module.exports = class CreateEmailDefinitionOptionsRequest{
 
     constructor() {
         
-
         
-        
-
         
 
         

@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetDefinitionSendStatusForRecipientResponseInfo model module.
 * @module Model/GetDefinitionSendStatusForRecipientResponseInfo
@@ -32,8 +34,13 @@ module.exports = class GetDefinitionSendStatusForRecipientResponseInfo{
 
     constructor() {
         
+        
+        
 
         
+
+        
+
         
 
         

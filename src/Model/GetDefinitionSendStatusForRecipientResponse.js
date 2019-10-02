@@ -19,6 +19,8 @@ const GetDefinitionSendStatusForRecipientResponseInfo = require ('./GetDefinitio
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetDefinitionSendStatusForRecipientResponse model module.
 * @module Model/GetDefinitionSendStatusForRecipientResponse
@@ -33,8 +35,13 @@ module.exports = class GetDefinitionSendStatusForRecipientResponse{
 
     constructor() {
         
+        
+        
 
         
+
+        
+
         
 
         

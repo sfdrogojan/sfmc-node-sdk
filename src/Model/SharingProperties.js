@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The SharingProperties model module.
 * @module Model/SharingProperties
@@ -32,7 +34,6 @@ module.exports = class SharingProperties{
 
     constructor() {
         
-
         
         
 

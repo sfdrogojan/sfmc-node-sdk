@@ -24,7 +24,7 @@ describe('ApiExceptionFactory', function () {
             let exceptionObjKey = Object.keys(exception)[0];
             let exceptionObjValue = exception[exceptionObjKey];
 
-            it(`should return a ${exceptionObjKey} for a ${exceptionObjValue} status code in the request response`, function () {
+            it(`should return ${exceptionObjKey} for a ${exceptionObjValue} status code in the request response`, function () {
                 let requestResponse = TestHelper.createRequestResponse(exceptionObjValue);
                 let expectedExceptionMessage = `Error calling ${callApiCallerMethod}: "${requestResponse.response.body}"`;
                 let expectedExceptionName = `Salesforce.MarketingCloud.Exceptions.${exceptionObjKey}`;
@@ -36,7 +36,7 @@ describe('ApiExceptionFactory', function () {
                 expect(returnedException.status).to.eql(exceptionObjValue);
             });
         });
-        it('should return a ServerUnreachableException when status code is undefined', function () {
+        it('should return ServerUnreachableException when status code is undefined', function () {
             let serverUnreachableError = TestHelper.createServerUnreachableError();
             let expectedExceptionMessage = `Error calling ${callApiCallerMethod}: ${JSON.stringify(serverUnreachableError)}`;
             let expectedExceptionName = `Salesforce.MarketingCloud.Exceptions.ServerUnreachableException`;

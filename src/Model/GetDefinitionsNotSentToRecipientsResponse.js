@@ -19,6 +19,8 @@ const GetDefinitionsNotSentToRecipientsMessage = require ('./GetDefinitionsNotSe
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetDefinitionsNotSentToRecipientsResponse model module.
 * @module Model/GetDefinitionsNotSentToRecipientsResponse
@@ -33,8 +35,13 @@ module.exports = class GetDefinitionsNotSentToRecipientsResponse{
 
     constructor() {
         
+        
+        
 
         
+
+        
+
         
 
         

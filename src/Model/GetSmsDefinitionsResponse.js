@@ -19,6 +19,8 @@ const CreateSmsDefinitionRequest = require ('./CreateSmsDefinitionRequest');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetSmsDefinitionsResponse model module.
 * @module Model/GetSmsDefinitionsResponse
@@ -33,8 +35,13 @@ module.exports = class GetSmsDefinitionsResponse{
 
     constructor() {
         
+        
+        
 
         
+
+        
+
         
 
         

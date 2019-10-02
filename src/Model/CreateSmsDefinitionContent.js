@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The CreateSmsDefinitionContent model module.
 * @module Model/CreateSmsDefinitionContent
@@ -33,11 +35,15 @@ module.exports = class CreateSmsDefinitionContent{
 
     constructor(message) {
         
-
         
         
-
-        this['message'] = message;
+        // verify the required parameter 'message' is set
+        if(message === undefined || message === null){
+            throw new InvalidModelException('"message" is a required property for CreateSmsDefinitionContent and cannot be undefined or null');
+        }
+        else{ 
+            this['message'] = message;
+        } 
 
         
     }

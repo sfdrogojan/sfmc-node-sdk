@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The DeleteSendDefinitionResponse model module.
 * @module Model/DeleteSendDefinitionResponse
@@ -32,8 +34,9 @@ module.exports = class DeleteSendDefinitionResponse{
 
     constructor() {
         
-
         
+        
+
         
 
         

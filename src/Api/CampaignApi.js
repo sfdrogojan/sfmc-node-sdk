@@ -63,7 +63,7 @@ module.exports = class CampaignApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Campaign;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/hub/v1/campaigns', 'POST',
@@ -165,7 +165,7 @@ module.exports = class CampaignApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Campaign;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/hub/v1/campaigns/{id}', 'GET',

@@ -20,6 +20,8 @@ const CreateSmsDefinitionSubscriptions = require ('./CreateSmsDefinitionSubscrip
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The CreateSmsDefinitionRequest model module.
 * @module Model/CreateSmsDefinitionRequest
@@ -38,11 +40,52 @@ module.exports = class CreateSmsDefinitionRequest{
 
     constructor(definitionKey, name, content, subscriptions) {
         
-
         
         
+        // verify the required parameter 'definitionKey' is set
+        if(definitionKey === undefined || definitionKey === null){
+            throw new InvalidModelException('"definitionKey" is a required property for CreateSmsDefinitionRequest and cannot be undefined or null');
+        }
+        else{ 
+            this['definitionKey'] = definitionKey;
+        } 
 
-        this['definitionKey'] = definitionKey;this['name'] = name;this['content'] = content;this['subscriptions'] = subscriptions;
+        
+        // verify the required parameter 'name' is set
+        if(name === undefined || name === null){
+            throw new InvalidModelException('"name" is a required property for CreateSmsDefinitionRequest and cannot be undefined or null');
+        }
+        else{ 
+            this['name'] = name;
+        } 
+
+        
+        // verify the required parameter 'content' is set
+        if(content === undefined || content === null){
+            throw new InvalidModelException('"content" is a required property for CreateSmsDefinitionRequest and cannot be undefined or null');
+        }
+        else{ 
+            this['content'] = content;
+        } 
+
+        
+
+        
+
+        
+
+        
+
+        
+        // verify the required parameter 'subscriptions' is set
+        if(subscriptions === undefined || subscriptions === null){
+            throw new InvalidModelException('"subscriptions" is a required property for CreateSmsDefinitionRequest and cannot be undefined or null');
+        }
+        else{ 
+            this['subscriptions'] = subscriptions;
+        } 
+
+        
 
         
     }

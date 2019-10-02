@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The Attributes model module.
 * @module Model/Attributes
@@ -32,12 +34,7 @@ module.exports = class Attributes{
 
     constructor() {
         
-
         
-        
-
-        
-
         
     }
 

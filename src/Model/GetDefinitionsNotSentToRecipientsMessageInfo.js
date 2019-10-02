@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetDefinitionsNotSentToRecipientsMessageInfo model module.
 * @module Model/GetDefinitionsNotSentToRecipientsMessageInfo
@@ -32,8 +34,9 @@ module.exports = class GetDefinitionsNotSentToRecipientsMessageInfo{
 
     constructor() {
         
-
         
+        
+
         
 
         

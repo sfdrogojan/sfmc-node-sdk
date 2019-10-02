@@ -63,7 +63,7 @@ module.exports = class AssetApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Asset;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/asset/v1/content/assets', 'POST',
@@ -165,7 +165,7 @@ module.exports = class AssetApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Asset;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'GET',
@@ -222,7 +222,7 @@ module.exports = class AssetApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Asset;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'PATCH',

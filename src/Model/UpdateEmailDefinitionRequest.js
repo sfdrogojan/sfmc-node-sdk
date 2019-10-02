@@ -21,6 +21,8 @@ const CreateEmailDefinitionSubscriptions = require ('./CreateEmailDefinitionSubs
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The UpdateEmailDefinitionRequest model module.
 * @module Model/UpdateEmailDefinitionRequest
@@ -35,8 +37,17 @@ module.exports = class UpdateEmailDefinitionRequest{
 
     constructor() {
         
+        
+        
 
         
+
+        
+
+        
+
+        
+
         
 
         
