@@ -13,7 +13,7 @@ class AuthService{
         let cachedTokenResponse = this.cacheService.get(cacheKey);
 
         if(!cachedTokenResponse){
-            this.apiClient.basePath = this.clientConfig.authBasePath;
+            this.apiClient.basePath = this.clientConfig.authBaseUrl;
 
              let authRequestResponse = await this.apiClient.callApi('v2/token',
                  'POST',

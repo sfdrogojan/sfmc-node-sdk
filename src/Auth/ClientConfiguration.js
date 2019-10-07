@@ -1,13 +1,13 @@
 class ClientConfiguration{
-    constructor(authBasePath, clientId, clientSecret, accountId, scope){
-        this._authBasePath = authBasePath;
+    constructor(authBaseUrl, clientId, clientSecret, accountId, scope){
+        this._authBaseUrl = authBaseUrl;
         this._clientId = clientId;
         this._clientSecret = clientSecret;
         this._accountId = accountId;
         this._scope = scope;
     }
-    get authBasePath() {
-        return this._authBasePath;
+    get authBaseUrl() {
+        return this._authBaseUrl;
     }
 
     get clientId() {

@@ -13,7 +13,7 @@ const AssetApi = require('../../src/Api/AssetApi');
 
 const expect = require('expect.js');
 
-let authBasePath;
+let authBaseUrl;
 let clientId;
 let clientSecret;
 let accountId;
@@ -30,7 +30,7 @@ describe('ApiExceptionFactory', function () {
     before(() => {
         configProvider = new ConfigProvider();
 
-        authBasePath = configProvider.authBasePath;
+        authBaseUrl = configProvider.authBaseUrl;
         clientId = configProvider.clientId;
         clientSecret = configProvider.clientSecret;
         accountId = configProvider.accountId;
@@ -39,12 +39,12 @@ describe('ApiExceptionFactory', function () {
         cacheService = new CacheService();
         apiClient = new ApiClient(new RuntimeInformationProvider());
         assetApiInstance = new ApiSutFactory(AssetApi.prototype.constructor).create();
-        clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
+        clientConfiguration = new ClientConfiguration(authBaseUrl, clientId, clientSecret, accountId, scope);
     });
 
     describe('createCustomException', function () {
         it('should return AuthenticationFailureException for invalid clientId', async () => {
-            let invalidClientIdConfig = new ClientConfiguration(authBasePath, 'invalidClientId', clientSecret, accountId, scope);
+            let invalidClientIdConfig = new ClientConfiguration(authBaseUrl, 'invalidClientId', clientSecret, accountId, scope);
             authService = new AuthService(invalidClientIdConfig, apiClient, cacheService);
 
             try {
@@ -54,7 +54,7 @@ describe('ApiExceptionFactory', function () {
             }
         });
         it('should return BadRequestException when number passed for clientId', async () => {
-            let invalidClientSecretConfig = new ClientConfiguration(authBasePath, 3.141592, clientSecret, accountId, scope);
+            let invalidClientSecretConfig = new ClientConfiguration(authBaseUrl, 3.141592, clientSecret, accountId, scope);
             authService = new AuthService(invalidClientSecretConfig, apiClient, cacheService);
 
             try {
@@ -63,8 +63,8 @@ describe('ApiExceptionFactory', function () {
                 expect(e).to.be.an(BadRequestException);
             }
         });
-        it('should return ServerUnreachableException for invalid authBasePath', async () => {
-            let invalidClientSecretConfig = new ClientConfiguration('invalidAuthBasePath', clientId, clientSecret, accountId, scope);
+        it('should return ServerUnreachableException for invalid authBaseUrl', async () => {
+            let invalidClientSecretConfig = new ClientConfiguration('invalidAuthBaseUrl', clientId, clientSecret, accountId, scope);
             authService = new AuthService(invalidClientSecretConfig, apiClient, cacheService);
 
             try {

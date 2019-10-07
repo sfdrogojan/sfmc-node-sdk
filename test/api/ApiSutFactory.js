@@ -7,13 +7,13 @@ class ApiSutFactory{
     create(){
         let configProvider = new ConfigProvider();
 
-        let authBasePath = configProvider['authBasePath'];
+        let authBaseUrl = configProvider['authBaseUrl'];
         let clientId = configProvider['clientId'];
         let clientSecret = configProvider['clientSecret'];
         let accountId = configProvider['accountId'];
         let scope = configProvider['scope'];
 
-        return new this._type(authBasePath, clientId, clientSecret, accountId, scope);
+        return new this._type(authBaseUrl, clientId, clientSecret, accountId, scope);
     }
 }
 

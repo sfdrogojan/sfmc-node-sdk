@@ -1,7 +1,7 @@
 class ConfigProvider{
     constructor(){
         return {
-            authBasePath: process.env.SFMC_AUTH_BASE_PATH,
+            authBaseUrl: process.env.SFMC_AUTH_BASE_URL,
             clientId: process.env.SFMC_CLIENT_ID,
             clientSecret: process.env.SFMC_CLIENT_SECRET,
             accountId: process.env.SFMC_ACCOUNT_ID,

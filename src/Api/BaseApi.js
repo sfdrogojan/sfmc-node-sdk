@@ -6,8 +6,8 @@ const OAuth2ApiClient = require('../OAuth2ApiClient');
 const CacheService = require('../Auth/CacheService');
 
 class BaseApi {
-    constructor(authBasePath, clientId, clientSecret, accountId, scope){
-        this.clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
+    constructor(authBaseUrl, clientId, clientSecret, accountId, scope){
+        this.clientConfiguration = new ClientConfiguration(authBaseUrl, clientId, clientSecret, accountId, scope);
         this.runtimeInformationProvider = new RuntimeInformationProvider();
         let apiClient = new ApiClient(this.runtimeInformationProvider);
         let cacheService = new CacheService();

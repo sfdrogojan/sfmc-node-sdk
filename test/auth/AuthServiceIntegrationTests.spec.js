@@ -8,7 +8,7 @@ const CacheService = require('../../src/Auth/CacheService');
 const expect = require('expect.js');
 const sinon = require('sinon');
 
-let authBasePath;
+let authBaseUrl;
 let clientId;
 let clientSecret;
 let accountId;
@@ -25,7 +25,7 @@ describe('AuthService', function () {
     before(() => {
         configProvider = new ConfigProvider();
 
-        authBasePath = configProvider.authBasePath;
+        authBaseUrl = configProvider.authBaseUrl;
         clientId = configProvider.clientId;
         clientSecret = configProvider.clientSecret;
         accountId = configProvider.accountId;
@@ -41,7 +41,7 @@ describe('AuthService', function () {
 
     describe('getTokenResponse', function () {
         it('should return token response for valid credentials', async () => {
-            clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
+            clientConfiguration = new ClientConfiguration(authBaseUrl, clientId, clientSecret, accountId, scope);
             authService = new AuthService(clientConfiguration, apiClient, cacheService);
 
             let tokenResponse = await authService.getTokenResponse();
@@ -55,7 +55,7 @@ describe('AuthService', function () {
     });
     describe('getTokenResponse', function () {
         it('should return Unauthorized error for invalid clientId', async () => {
-            let invalidClientConfiguration = new ClientConfiguration(authBasePath, 'invalidClientId', clientSecret, accountId, scope);
+            let invalidClientConfiguration = new ClientConfiguration(authBaseUrl, 'invalidClientId', clientSecret, accountId, scope);
             authService = new AuthService(invalidClientConfiguration, apiClient, cacheService);
 
             try {
@@ -67,7 +67,7 @@ describe('AuthService', function () {
     });
     describe('getTokenResponse', function () {
         it('should return Unauthorized error for invalid clientSecret', async () => {
-            let invalidClientConfiguration = new ClientConfiguration(authBasePath, clientId, 'invalidClientSecret', accountId, scope);
+            let invalidClientConfiguration = new ClientConfiguration(authBaseUrl, clientId, 'invalidClientSecret', accountId, scope);
             authService = new AuthService(invalidClientConfiguration, apiClient, cacheService);
 
             try {
@@ -79,7 +79,7 @@ describe('AuthService', function () {
     });
     describe('getTokenResponse', function () {
         it('should return the same token response object when called multiple times', async () => {
-            clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
+            clientConfiguration = new ClientConfiguration(authBaseUrl, clientId, clientSecret, accountId, scope);
             authService = new AuthService(clientConfiguration, apiClient, cacheService);
 
             let tokenResponse1 = await authService.getTokenResponse();
@@ -90,7 +90,7 @@ describe('AuthService', function () {
     });
     describe('getTokenResponse', function () {
         it('should call only one time the ApiClient callApi method when multiple instances are used', async () => {
-            clientConfiguration = new ClientConfiguration(authBasePath, clientId, clientSecret, accountId, scope);
+            clientConfiguration = new ClientConfiguration(authBaseUrl, clientId, clientSecret, accountId, scope);
 
             let authService1 = new AuthService(clientConfiguration, apiClient, cacheService);
             let authService2 = new AuthService(clientConfiguration, apiClient, cacheService);
