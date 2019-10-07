@@ -13,7 +13,6 @@ class TestHelper {
             }
         }
     }
-
     static createClientConfiguration() {
         return new ClientConfiguration(
             'https://auth.com',
@@ -23,7 +22,6 @@ class TestHelper {
             'scope'
         )
     }
-
     static createRequestResponse(statusCode) {
         return {
             status: statusCode,
@@ -32,13 +30,21 @@ class TestHelper {
             }
         }
     }
-
     static createServerUnreachableError(){
         return {
             code: 'ENOTFOUND',
             errno: 'ENOTFOUND',
             syscall: 'getaddrinfo',
             hostname: 'host'
+        }
+    }
+    static createConfigProvider(){
+        return {
+            authBaseUrl: 'authBaseUrl',
+            clientId: 'clientId',
+            clientSecret: 'clientSecret',
+            accountId: 'accountId',
+            scope: 'scope',
         }
     }
 }
