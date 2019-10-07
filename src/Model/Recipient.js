@@ -36,22 +36,14 @@ module.exports = class Recipient{
 
     constructor(contactKey) {
         
-        
-        
         // verify the required parameter 'contactKey' is set
         if(contactKey === undefined || contactKey === null){
             throw new InvalidModelException('"contactKey" is a required property for Recipient and cannot be undefined or null');
         }
-        else{ 
-            this['contactKey'] = contactKey;
-        } 
-
+        this['contactKey'] = contactKey;
         
-
         
-
         
-
         
     }
 

@@ -30,8 +30,8 @@ module.exports = class CampaignApi extends BaseApi {
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
     */
-    constructor(authBasePath, clientId, clientSecret, accountId, scope) {
-        super(authBasePath, clientId, clientSecret, accountId, scope);
+    constructor(authBaseUrl, clientId, clientSecret, accountId, scope) {
+        super(authBaseUrl, clientId, clientSecret, accountId, scope);
     }
 
 

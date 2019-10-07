@@ -40,31 +40,20 @@ module.exports = class SendSmsToMultipleRecipientsRequest{
 
     constructor(definitionKey, recipients) {
         
-        
-        
         // verify the required parameter 'definitionKey' is set
         if(definitionKey === undefined || definitionKey === null){
             throw new InvalidModelException('"definitionKey" is a required property for SendSmsToMultipleRecipientsRequest and cannot be undefined or null');
         }
-        else{ 
-            this['definitionKey'] = definitionKey;
-        } 
-
+        this['definitionKey'] = definitionKey;
         
         // verify the required parameter 'recipients' is set
         if(recipients === undefined || recipients === null){
             throw new InvalidModelException('"recipients" is a required property for SendSmsToMultipleRecipientsRequest and cannot be undefined or null');
         }
-        else{ 
-            this['recipients'] = recipients;
-        } 
-
+        this['recipients'] = recipients;
         
-
         
-
         
-
         
     }
 

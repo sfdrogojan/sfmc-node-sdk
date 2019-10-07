@@ -34,8 +34,6 @@ module.exports = class Attributes{
 
     constructor() {
         
-        
-        
     }
 
     /**

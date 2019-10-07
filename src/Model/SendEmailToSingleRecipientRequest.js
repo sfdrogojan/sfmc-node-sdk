@@ -37,25 +37,17 @@ module.exports = class SendEmailToSingleRecipientRequest{
 
     constructor(definitionKey, recipient) {
         
-        
-        
         // verify the required parameter 'definitionKey' is set
         if(definitionKey === undefined || definitionKey === null){
             throw new InvalidModelException('"definitionKey" is a required property for SendEmailToSingleRecipientRequest and cannot be undefined or null');
         }
-        else{ 
-            this['definitionKey'] = definitionKey;
-        } 
-
+        this['definitionKey'] = definitionKey;
         
         // verify the required parameter 'recipient' is set
         if(recipient === undefined || recipient === null){
             throw new InvalidModelException('"recipient" is a required property for SendEmailToSingleRecipientRequest and cannot be undefined or null');
         }
-        else{ 
-            this['recipient'] = recipient;
-        } 
-
+        this['recipient'] = recipient;
         
     }
 

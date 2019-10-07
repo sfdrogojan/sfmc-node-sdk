@@ -35,22 +35,14 @@ module.exports = class CreateEmailDefinitionSubscriptions{
 
     constructor(list) {
         
-        
-        
         // verify the required parameter 'list' is set
         if(list === undefined || list === null){
             throw new InvalidModelException('"list" is a required property for CreateEmailDefinitionSubscriptions and cannot be undefined or null');
         }
-        else{ 
-            this['list'] = list;
-        } 
-
+        this['list'] = list;
         
-
         
-
         
-
         
     }
 

@@ -37,19 +37,10 @@ module.exports = class GetDefinitionsNotSentToRecipientsMessage{
         
         
         
-
         
-
         
-
         
-
         
-
-        
-
-        
-
         
     }
 

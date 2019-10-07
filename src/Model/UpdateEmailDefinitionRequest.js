@@ -39,19 +39,10 @@ module.exports = class UpdateEmailDefinitionRequest{
         
         
         
-
         
-
         
-
         
-
         
-
-        
-
-        
-
         
     }
 

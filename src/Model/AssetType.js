@@ -37,27 +37,18 @@ module.exports = class AssetType{
 
     constructor(id, name) {
         
-        
-        
         // verify the required parameter 'id' is set
         if(id === undefined || id === null){
             throw new InvalidModelException('"id" is a required property for AssetType and cannot be undefined or null');
         }
-        else{ 
-            this['id'] = id;
-        } 
-
+        this['id'] = id;
         
         // verify the required parameter 'name' is set
         if(name === undefined || name === null){
             throw new InvalidModelException('"name" is a required property for AssetType and cannot be undefined or null');
         }
-        else{ 
-            this['name'] = name;
-        } 
-
+        this['name'] = name;
         
-
         
     }
 

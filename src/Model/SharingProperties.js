@@ -36,10 +36,6 @@ module.exports = class SharingProperties{
         
         
         
-
-        
-
-        
     }
 
     /**

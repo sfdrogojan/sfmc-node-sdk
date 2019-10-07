@@ -37,15 +37,8 @@ module.exports = class GetDefinitionSendStatusForRecipientResponse{
         
         
         
-
         
-
         
-
-        
-
-        
-
         
     }
 

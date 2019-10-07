@@ -37,13 +37,7 @@ module.exports = class SendDefinitionToMultipleRecipientsResponse{
         
         
         
-
         
-
-        
-
-        
-
         
     }
 

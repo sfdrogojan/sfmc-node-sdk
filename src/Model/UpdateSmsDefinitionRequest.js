@@ -38,15 +38,8 @@ module.exports = class UpdateSmsDefinitionRequest{
         
         
         
-
         
-
         
-
-        
-
-        
-
         
     }
 

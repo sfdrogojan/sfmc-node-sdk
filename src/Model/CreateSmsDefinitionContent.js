@@ -35,16 +35,11 @@ module.exports = class CreateSmsDefinitionContent{
 
     constructor(message) {
         
-        
-        
         // verify the required parameter 'message' is set
         if(message === undefined || message === null){
             throw new InvalidModelException('"message" is a required property for CreateSmsDefinitionContent and cannot be undefined or null');
         }
-        else{ 
-            this['message'] = message;
-        } 
-
+        this['message'] = message;
         
     }
 

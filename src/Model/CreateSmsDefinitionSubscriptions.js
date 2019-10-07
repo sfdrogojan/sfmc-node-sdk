@@ -36,29 +36,19 @@ module.exports = class CreateSmsDefinitionSubscriptions{
 
     constructor(shortCode, countryCode) {
         
-        
-        
         // verify the required parameter 'shortCode' is set
         if(shortCode === undefined || shortCode === null){
             throw new InvalidModelException('"shortCode" is a required property for CreateSmsDefinitionSubscriptions and cannot be undefined or null');
         }
-        else{ 
-            this['shortCode'] = shortCode;
-        } 
-
+        this['shortCode'] = shortCode;
         
         // verify the required parameter 'countryCode' is set
         if(countryCode === undefined || countryCode === null){
             throw new InvalidModelException('"countryCode" is a required property for CreateSmsDefinitionSubscriptions and cannot be undefined or null');
         }
-        else{ 
-            this['countryCode'] = countryCode;
-        } 
-
+        this['countryCode'] = countryCode;
         
-
         
-
         
     }
 

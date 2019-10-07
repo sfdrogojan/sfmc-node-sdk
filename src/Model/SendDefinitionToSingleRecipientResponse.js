@@ -37,11 +37,6 @@ module.exports = class SendDefinitionToSingleRecipientResponse{
         
         
         
-
-        
-
-        
-
         
     }
 
