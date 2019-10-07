@@ -20,6 +20,8 @@ const SendSmsContentRequest = require ('./SendSmsContentRequest');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The SendSmsToSingleRecipientRequest model module.
 * @module Model/SendSmsToSingleRecipientRequest
@@ -36,12 +38,18 @@ module.exports = class SendSmsToSingleRecipientRequest{
 
     constructor(definitionKey, recipient) {
         
-
+        // verify the required parameter 'definitionKey' is set
+        if(definitionKey === undefined || definitionKey === null){
+            throw new InvalidModelException('"definitionKey" is a required property for SendSmsToSingleRecipientRequest and cannot be undefined or null');
+        }
+        this['definitionKey'] = definitionKey;
         
+        // verify the required parameter 'recipient' is set
+        if(recipient === undefined || recipient === null){
+            throw new InvalidModelException('"recipient" is a required property for SendSmsToSingleRecipientRequest and cannot be undefined or null');
+        }
+        this['recipient'] = recipient;
         
-
-        this['definitionKey'] = definitionKey;this['recipient'] = recipient;
-
         
     }
 

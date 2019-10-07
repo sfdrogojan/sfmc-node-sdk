@@ -30,8 +30,8 @@ module.exports = class AssetApi extends BaseApi {
     * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
     * default to {@link module:ApiClient#instance} if unspecified.
     */
-    constructor(authBasePath, clientId, clientSecret, accountId, scope) {
-        super(authBasePath, clientId, clientSecret, accountId, scope);
+    constructor(authBaseUrl, clientId, clientSecret, accountId, scope) {
+        super(authBaseUrl, clientId, clientSecret, accountId, scope);
     }
 
 
@@ -63,7 +63,7 @@ module.exports = class AssetApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Asset;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/asset/v1/content/assets', 'POST',
@@ -165,7 +165,7 @@ module.exports = class AssetApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Asset;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'GET',
@@ -222,7 +222,7 @@ module.exports = class AssetApi extends BaseApi {
       let authName = '';
       let contentTypes = [];
       let accepts = [];
-      let returnType = Asset;
+      let returnType = Object;
 
       return this.apiClient.callApi(
         '/asset/v1/content/assets/{id}', 'PATCH',

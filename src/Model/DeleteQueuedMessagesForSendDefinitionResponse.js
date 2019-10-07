@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The DeleteQueuedMessagesForSendDefinitionResponse model module.
 * @module Model/DeleteQueuedMessagesForSendDefinitionResponse
@@ -32,12 +34,6 @@ module.exports = class DeleteQueuedMessagesForSendDefinitionResponse{
 
     constructor() {
         
-
-        
-        
-
-        
-
         
     }
 

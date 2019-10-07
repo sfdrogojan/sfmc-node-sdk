@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The SendDefinitionResponseItem model module.
 * @module Model/SendDefinitionResponseItem
@@ -32,12 +34,8 @@ module.exports = class SendDefinitionResponseItem{
 
     constructor() {
         
-
         
         
-
-        
-
         
     }
 

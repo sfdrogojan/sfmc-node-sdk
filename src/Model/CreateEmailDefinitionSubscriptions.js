@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The CreateEmailDefinitionSubscriptions model module.
 * @module Model/CreateEmailDefinitionSubscriptions
@@ -33,12 +35,14 @@ module.exports = class CreateEmailDefinitionSubscriptions{
 
     constructor(list) {
         
-
-        
-        
-
+        // verify the required parameter 'list' is set
+        if(list === undefined || list === null){
+            throw new InvalidModelException('"list" is a required property for CreateEmailDefinitionSubscriptions and cannot be undefined or null');
+        }
         this['list'] = list;
-
+        
+        
+        
         
     }
 

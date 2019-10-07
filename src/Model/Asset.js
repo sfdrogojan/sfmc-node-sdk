@@ -20,6 +20,8 @@ const SharingProperties = require ('./SharingProperties');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The Asset model module.
 * @module Model/Asset
@@ -38,12 +40,53 @@ module.exports = class Asset{
 
     constructor(customerKey, assetType, name, description) {
         
-
+        
+        // verify the required parameter 'customerKey' is set
+        if(customerKey === undefined || customerKey === null){
+            throw new InvalidModelException('"customerKey" is a required property for Asset and cannot be undefined or null');
+        }
+        this['customerKey'] = customerKey;
         
         
-
-        this['customerKey'] = customerKey;this['assetType'] = assetType;this['name'] = name;this['description'] = description;
-
+        
+        // verify the required parameter 'assetType' is set
+        if(assetType === undefined || assetType === null){
+            throw new InvalidModelException('"assetType" is a required property for Asset and cannot be undefined or null');
+        }
+        this['assetType'] = assetType;
+        
+        
+        
+        
+        // verify the required parameter 'name' is set
+        if(name === undefined || name === null){
+            throw new InvalidModelException('"name" is a required property for Asset and cannot be undefined or null');
+        }
+        this['name'] = name;
+        
+        // verify the required parameter 'description' is set
+        if(description === undefined || description === null){
+            throw new InvalidModelException('"description" is a required property for Asset and cannot be undefined or null');
+        }
+        this['description'] = description;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
 

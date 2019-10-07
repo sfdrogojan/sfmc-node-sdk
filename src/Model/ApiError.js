@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The ApiError model module.
 * @module Model/ApiError
@@ -32,12 +34,8 @@ module.exports = class ApiError{
 
     constructor() {
         
-
         
         
-
-        
-
         
     }
 

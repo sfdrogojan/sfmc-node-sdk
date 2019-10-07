@@ -20,6 +20,8 @@ const CreateSmsDefinitionSubscriptions = require ('./CreateSmsDefinitionSubscrip
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The UpdateSmsDefinitionRequest model module.
 * @module Model/UpdateSmsDefinitionRequest
@@ -34,12 +36,10 @@ module.exports = class UpdateSmsDefinitionRequest{
 
     constructor() {
         
-
         
         
-
         
-
+        
         
     }
 

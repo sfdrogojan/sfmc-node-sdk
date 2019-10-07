@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The CreateEmailDefinitionContent model module.
 * @module Model/CreateEmailDefinitionContent
@@ -33,12 +35,11 @@ module.exports = class CreateEmailDefinitionContent{
 
     constructor(customerKey) {
         
-
-        
-        
-
+        // verify the required parameter 'customerKey' is set
+        if(customerKey === undefined || customerKey === null){
+            throw new InvalidModelException('"customerKey" is a required property for CreateEmailDefinitionContent and cannot be undefined or null');
+        }
         this['customerKey'] = customerKey;
-
         
     }
 

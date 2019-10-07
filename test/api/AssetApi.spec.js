@@ -48,12 +48,12 @@ const ApiSutFactory = require('./ApiSutFactory');
 
         try{
           await assetApiInstance.getAssetById(assetToDeleteId);
-
-          expect().fail('No exception thrown');
         }
         catch(error) {
           expect(error.status).to.eql(404);
+          return
         }
+        expect().fail('Exception was not thrown');
       });
     });
     describe('getAssetById', function() {

@@ -46,12 +46,12 @@ const ApiSutFactory = require('./ApiSutFactory');
 
         try {
           await campaignApiInstance.getCampaignById(campaignToDeleteId);
-
-          expect().fail('No exception thrown');
         }
         catch (error) {
           expect(error.status).to.eql(400);
+          return
         }
+        expect().fail('Exception was not thrown');
       });
     });
     describe('getCampaignById', function() {

@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The Campaign model module.
 * @module Model/Campaign
@@ -37,12 +39,47 @@ module.exports = class Campaign{
 
     constructor(name, description, campaignCode, color, favorite) {
         
-
+        // verify the required parameter 'name' is set
+        if(name === undefined || name === null){
+            throw new InvalidModelException('"name" is a required property for Campaign and cannot be undefined or null');
+        }
+        if (name.length > 128) {
+            throw new InvalidModelException('invalid length for "name". It must be smaller than or equal to 128.');
+        } 
+        this['name'] = name;
+        
+        // verify the required parameter 'description' is set
+        if(description === undefined || description === null){
+            throw new InvalidModelException('"description" is a required property for Campaign and cannot be undefined or null');
+        }
+        if (description.length > 512) {
+            throw new InvalidModelException('invalid length for "description". It must be smaller than or equal to 512.');
+        } 
+        this['description'] = description;
+        
+        // verify the required parameter 'campaignCode' is set
+        if(campaignCode === undefined || campaignCode === null){
+            throw new InvalidModelException('"campaignCode" is a required property for Campaign and cannot be undefined or null');
+        }
+        if (campaignCode.length > 36) {
+            throw new InvalidModelException('invalid length for "campaignCode". It must be smaller than or equal to 36.');
+        } 
+        this['campaignCode'] = campaignCode;
+        
+        // verify the required parameter 'color' is set
+        if(color === undefined || color === null){
+            throw new InvalidModelException('"color" is a required property for Campaign and cannot be undefined or null');
+        }
+        this['color'] = color;
+        
+        // verify the required parameter 'favorite' is set
+        if(favorite === undefined || favorite === null){
+            throw new InvalidModelException('"favorite" is a required property for Campaign and cannot be undefined or null');
+        }
+        this['favorite'] = favorite;
         
         
-
-        this['name'] = name;this['description'] = description;this['campaignCode'] = campaignCode;this['color'] = color;this['favorite'] = favorite;
-
+        
         
     }
 

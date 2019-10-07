@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetQueueMetricsForSendDefinitionResponse model module.
 * @module Model/GetQueueMetricsForSendDefinitionResponse
@@ -32,12 +34,8 @@ module.exports = class GetQueueMetricsForSendDefinitionResponse{
 
     constructor() {
         
-
         
         
-
-        
-
         
     }
 

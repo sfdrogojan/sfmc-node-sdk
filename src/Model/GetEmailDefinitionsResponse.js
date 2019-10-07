@@ -19,6 +19,8 @@ const CreateEmailDefinitionRequest = require ('./CreateEmailDefinitionRequest');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The GetEmailDefinitionsResponse model module.
 * @module Model/GetEmailDefinitionsResponse
@@ -33,12 +35,10 @@ module.exports = class GetEmailDefinitionsResponse{
 
     constructor() {
         
-
         
         
-
         
-
+        
         
     }
 

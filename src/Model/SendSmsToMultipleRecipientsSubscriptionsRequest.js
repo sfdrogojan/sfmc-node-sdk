@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The SendSmsToMultipleRecipientsSubscriptionsRequest model module.
 * @module Model/SendSmsToMultipleRecipientsSubscriptionsRequest
@@ -32,12 +34,6 @@ module.exports = class SendSmsToMultipleRecipientsSubscriptionsRequest{
 
     constructor() {
         
-
-        
-        
-
-        
-
         
     }
 

@@ -18,6 +18,8 @@ const ApiClient = require ('../ApiClient');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The CreateSmsDefinitionSubscriptions model module.
 * @module Model/CreateSmsDefinitionSubscriptions
@@ -34,12 +36,19 @@ module.exports = class CreateSmsDefinitionSubscriptions{
 
     constructor(shortCode, countryCode) {
         
-
+        // verify the required parameter 'shortCode' is set
+        if(shortCode === undefined || shortCode === null){
+            throw new InvalidModelException('"shortCode" is a required property for CreateSmsDefinitionSubscriptions and cannot be undefined or null');
+        }
+        this['shortCode'] = shortCode;
+        
+        // verify the required parameter 'countryCode' is set
+        if(countryCode === undefined || countryCode === null){
+            throw new InvalidModelException('"countryCode" is a required property for CreateSmsDefinitionSubscriptions and cannot be undefined or null');
+        }
+        this['countryCode'] = countryCode;
         
         
-
-        this['shortCode'] = shortCode;this['countryCode'] = countryCode;
-
         
     }
 

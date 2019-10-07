@@ -19,6 +19,8 @@ const Attributes = require ('./Attributes');
 
 
 
+const InvalidModelException = require('../Exception/InvalidModelException');
+
 /**
 * The Recipient model module.
 * @module Model/Recipient
@@ -34,12 +36,14 @@ module.exports = class Recipient{
 
     constructor(contactKey) {
         
-
-        
-        
-
+        // verify the required parameter 'contactKey' is set
+        if(contactKey === undefined || contactKey === null){
+            throw new InvalidModelException('"contactKey" is a required property for Recipient and cannot be undefined or null');
+        }
         this['contactKey'] = contactKey;
-
+        
+        
+        
         
     }
 
