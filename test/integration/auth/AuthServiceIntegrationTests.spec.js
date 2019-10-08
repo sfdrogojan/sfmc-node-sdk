@@ -1,9 +1,9 @@
-const ConfigProvider = require('../ConfigProvider');
-const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
-const ApiClient = require('../../src/ApiClient');
-const RuntimeInformationProvider = require('../../src/RuntimeInformationProvider');
-const AuthService = require('../../src/Auth/AuthService');
-const CacheService = require('../../src/Auth/CacheService');
+const ConfigProvider = require('../../ConfigProvider');
+const ClientConfiguration = require('../../../src/Auth/ClientConfiguration');
+const ApiClient = require('../../../src/ApiClient');
+const RuntimeInformationProvider = require('../../../src/RuntimeInformationProvider');
+const AuthService = require('../../../src/Auth/AuthService');
+const CacheService = require('../../../src/Auth/CacheService');
 
 const expect = require('expect.js');
 const sinon = require('sinon');

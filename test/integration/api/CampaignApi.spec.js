@@ -3,10 +3,10 @@ const ApiSutFactory = require('./ApiSutFactory');
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD.
-    define(['expect.js', '../../src/index'], factory);
+    define(['expect.js', '../../../src'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require('../../src/index'));
+    factory(require('expect.js'), require('../../../src'));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.SalesforceMarketingCloud);
@@ -49,6 +49,7 @@ const ApiSutFactory = require('./ApiSutFactory');
         }
         catch (error) {
           expect(error.status).to.eql(400);
+
           return
         }
         expect().fail('Exception was not thrown');

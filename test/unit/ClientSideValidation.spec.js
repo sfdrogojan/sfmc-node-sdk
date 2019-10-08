@@ -1,5 +1,5 @@
-const Campaign = require('../src/Model/Campaign');
-const InvalidModelException = require('../src/Exception/InvalidModelException');
+const Campaign = require('../../src/Model/Campaign');
+const InvalidModelException = require('../../src/Exception/InvalidModelException');
 
 const expect = require('expect.js');
 
@@ -31,7 +31,10 @@ describe('Campaign', function () {
                     } catch (e) {
                         expect(e).to.be.an(InvalidModelException);
                         expect(e.message).to.eql(`"${requiredProperty}" is a required property for Campaign and cannot be undefined or null`);
+
+                        return
                     }
+                    expect().fail('Exception was not thrown');
                 })
             })
         });
@@ -43,6 +46,7 @@ describe('Campaign', function () {
             } catch (e) {
                 expect(e).to.be.an(InvalidModelException);
                 expect(e.message).to.eql('invalid length for "name". It must be smaller than or equal to 128.');
+
                 return
             }
             expect().fail('Exception was not thrown');
@@ -55,6 +59,7 @@ describe('Campaign', function () {
             } catch (e) {
                 expect(e).to.be.an(InvalidModelException);
                 expect(e.message).to.eql('invalid length for "description". It must be smaller than or equal to 512.');
+
                 return
             }
             expect().fail('Exception was not thrown');
@@ -67,6 +72,7 @@ describe('Campaign', function () {
             } catch (e) {
                 expect(e).to.be.an(InvalidModelException);
                 expect(e.message).to.eql('invalid length for "campaignCode". It must be smaller than or equal to 36.');
+
                 return
             }
             expect().fail('Exception was not thrown');

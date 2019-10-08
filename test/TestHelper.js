@@ -1,4 +1,4 @@
-const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
+const ClientConfiguration = require('../src/Auth/ClientConfiguration');
 
 class TestHelper {
     static createTokenResponseData() {

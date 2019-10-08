@@ -1,9 +1,9 @@
 const Client = require('../../src/Api/Client');
 const ConfigProvider = require('../ConfigProvider');
-const TestHelper = require('../auth/TestHelper');
+const TestHelper = require('../TestHelper');
 
 (function (root, factory) {
-    factory(require('expect.js'), require('../../src/index'));
+    factory(require('expect.js'), require('../../src'));
 }(this, function (expect, SalesforceMarketingCloud) {
     'use strict';
 
