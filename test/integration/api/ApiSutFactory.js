@@ -1,4 +1,4 @@
-const ConfigProvider = require('../ConfigProvider');
+const ConfigProvider = require('../../ConfigProvider');
 
 class ApiSutFactory{
     constructor(type){

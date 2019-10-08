@@ -1,7 +1,7 @@
-const CacheService = require('../../src/Auth/CacheService');
-const TestHelper = require('./TestHelper');
-const ApiClient = require('../../src/ApiClient');
-const AuthService = require('../../src/Auth/AuthService');
+const CacheService = require('../../../src/Auth/CacheService');
+const TestHelper = require('../../TestHelper');
+const ApiClient = require('../../../src/ApiClient');
+const AuthService = require('../../../src/Auth/AuthService');
 
 const expect = require('expect.js');
 const sinon = require('sinon');

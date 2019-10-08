@@ -1,5 +1,5 @@
-const TestHelper = require('../auth/TestHelper');
-const ApiExceptionFactory = require('../../src/Exception/ApiExceptionFactory');
+const TestHelper = require('../../TestHelper');
+const ApiExceptionFactory = require('../../../src/Exception/ApiExceptionFactory');
 
 const expect = require('expect.js');
 

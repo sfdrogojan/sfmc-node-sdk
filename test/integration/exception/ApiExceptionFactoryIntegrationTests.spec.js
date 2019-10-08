@@ -1,15 +1,15 @@
-const ConfigProvider = require('../ConfigProvider');
-const ClientConfiguration = require('../../src/Auth/ClientConfiguration');
-const ApiClient = require('../../src/ApiClient');
-const RuntimeInformationProvider = require('../../src/RuntimeInformationProvider');
-const AuthService = require('../../src/Auth/AuthService');
-const CacheService = require('../../src/Auth/CacheService');
-const AuthenticationFailureException = require('../../src/Exception/AuthenticationFailureException');
-const ServerUnreachableException = require('../../src/Exception/ServerUnreachableException');
-const BadRequestException = require('../../src/Exception/BadRequestException');
-const ResourceNotFoundException = require('../../src/Exception/ResourceNotFoundException');
+const ConfigProvider = require('../../ConfigProvider');
+const ClientConfiguration = require('../../../src/Auth/ClientConfiguration');
+const ApiClient = require('../../../src/ApiClient');
+const RuntimeInformationProvider = require('../../../src/RuntimeInformationProvider');
+const AuthService = require('../../../src/Auth/AuthService');
+const CacheService = require('../../../src/Auth/CacheService');
+const AuthenticationFailureException = require('../../../src/Exception/AuthenticationFailureException');
+const ServerUnreachableException = require('../../../src/Exception/ServerUnreachableException');
+const BadRequestException = require('../../../src/Exception/BadRequestException');
+const ResourceNotFoundException = require('../../../src/Exception/ResourceNotFoundException');
 const ApiSutFactory = require('../api/ApiSutFactory');
-const AssetApi = require('../../src/Api/AssetApi');
+const AssetApi = require('../../../src/Api/AssetApi');
 
 const expect = require('expect.js');
 
@@ -51,7 +51,10 @@ describe('ApiExceptionFactory', function () {
                 await authService.getTokenResponse();
             } catch (e) {
                 expect(e).to.be.an(AuthenticationFailureException);
+
+                return
             }
+            expect().fail('Exception was not thrown');
         });
         it('should return BadRequestException when number passed for clientId', async () => {
             let invalidClientSecretConfig = new ClientConfiguration(authBaseUrl, 3.141592, clientSecret, accountId, scope);
@@ -61,7 +64,10 @@ describe('ApiExceptionFactory', function () {
                 await authService.getTokenResponse();
             } catch (e) {
                 expect(e).to.be.an(BadRequestException);
+
+                return
             }
+            expect().fail('Exception was not thrown');
         });
         it('should return ServerUnreachableException for invalid authBaseUrl', async () => {
             let invalidClientSecretConfig = new ClientConfiguration('invalidAuthBaseUrl', clientId, clientSecret, accountId, scope);
@@ -71,7 +77,10 @@ describe('ApiExceptionFactory', function () {
                 await authService.getTokenResponse();
             } catch (e) {
                 expect(e).to.be.an(ServerUnreachableException);
+
+                return
             }
+            expect().fail('Exception was not thrown');
         });
         it('should return ResourceNotFoundException for GET on invalid asset id', async () => {
             try {
@@ -79,7 +88,10 @@ describe('ApiExceptionFactory', function () {
                 await assetApiInstance.getAssetById(randomInt);
             } catch (e) {
                 expect(e).to.be.an(ResourceNotFoundException);
+
+                return
             }
+            expect().fail('Exception was not thrown');
         });
     });
 });

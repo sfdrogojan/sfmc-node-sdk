@@ -1,13 +1,13 @@
 const ApiSutFactory = require('./ApiSutFactory');
-const ConfigProvider = require('../ConfigProvider');
+const ConfigProvider = require('../../ConfigProvider');
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD.
-    define(['expect.js', '../../src/index'], factory);
+    define(['expect.js', '../../../src'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require('expect.js'), require('../../src/index'));
+    factory(require('expect.js'), require('../../../src'));
   } else {
     // Browser globals (root is window)
     factory(root.expect, root.SalesforceMarketingCloud);
@@ -79,7 +79,6 @@ const ConfigProvider = require('../ConfigProvider');
         }
         catch (error) {
           expect(error.status).to.eql(404);
-          expect(error.response.body.message).to.eql('FuelRuntime_ObjectNotFound: Unable to find Definition NonExistingEmailDefinitionKey');
         }
       });
     });
@@ -130,7 +129,6 @@ const ConfigProvider = require('../ConfigProvider');
         }
         catch (error) {
           expect(error.status).to.eql(404);
-          expect(error.response.body.message).to.eql('FuelRuntime_ObjectNotFound: Unable to find Definition NonExistingSmsDefinitionKey');
         }
       });
     });
@@ -339,7 +337,7 @@ const ConfigProvider = require('../ConfigProvider');
       });
     });
     describe('sendEmailToMultipleRecipients', function() {
-      it('should call sendEmailToMultipleRecipients successfully', async ()=> {
+     it('should call sendEmailToMultipleRecipients successfully', async ()=> {
           let emailDefinition = await createEmailDefinitionObject();
           let createEmailDefinitionResult = await transactionalMessagingApiInstance.createEmailDefinition(emailDefinition);
           let recipient1 = new SalesforceMarketingCloud.Recipient(JOHN_DOE_GMAIL_COM);
